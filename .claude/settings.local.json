@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(claude --version)",
+      "Bash(claude remote-control:*)",
+      "Bash(npx create-next-app@14 . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack)",
+      "Bash(npx create-next-app@14 . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --yes)",
+      "Read(//c/Users/extra/Desktop/**)",
+      "Bash(npx create-next-app@14 checkjouwdomein-temp --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --yes)",
+      "Bash(cp -r \"C:\\\\Users\\\\extra\\\\Desktop\\\\checkjouwdomein-temp/.\" \"C:\\\\Users\\\\extra\\\\Desktop\\\\Checkjouwdomein.nl/\")",
+      "Bash(rm -rf \"C:\\\\Users\\\\extra\\\\Desktop\\\\checkjouwdomein-temp\")",
+      "Bash(npx shadcn@latest init --defaults)"
+    ]
+  }
+}
