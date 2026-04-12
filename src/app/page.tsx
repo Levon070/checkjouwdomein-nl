@@ -1,101 +1,137 @@
-import Image from "next/image";
+import SearchHero from '@/components/search/SearchHero';
+import FaqSection from '@/components/sections/FaqSection';
+import AdSenseUnit from '@/components/ads/AdSenseUnit';
+import { TLD_CONFIG, ORDERED_TLDS } from '@/lib/tlds';
+import Link from 'next/link';
 
-export default function Home() {
+const POPULAR_KEYWORDS = [
+  'webshop', 'restaurant', 'freelancer', 'portfolio', 'blog',
+  'consultant', 'fotografie', 'coaching', 'advocaat', 'bakkerij',
+];
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <SearchHero />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <div className="container mx-auto px-5 max-w-5xl space-y-16 pb-20 pt-12">
+
+        {/* AdSense */}
+        <AdSenseUnit slot="HOMEPAGE_TOP_SLOT" format="leaderboard" />
+
+        {/* Popular keywords */}
+        <section>
+          <p className="type-label mb-4">Populaire zoekopdrachten</p>
+          <div className="flex flex-wrap gap-2">
+            {POPULAR_KEYWORDS.map((kw) => (
+              <Link key={kw} href={`/zoek/${kw}`} className="chip-ghost">
+                {kw}
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* TLD grid — verbeterde opmaak */}
+        <section>
+          <p className="type-label mb-4">Beschikbare extensies</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {ORDERED_TLDS.map((tld) => {
+              const config = TLD_CONFIG[tld];
+              return (
+                <div
+                  key={tld}
+                  className="card p-4 flex flex-col gap-2"
+                >
+                  <div className="flex items-center justify-between">
+                    <span
+                      className="text-xl font-black"
+                      style={{
+                        color: 'var(--primary)',
+                        letterSpacing: '-0.02em',
+                      }}
+                    >
+                      {tld}
+                    </span>
+                    {config.flag && (
+                      <span className="text-lg" aria-hidden="true">{config.flag}</span>
+                    )}
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium" style={{ color: 'var(--text)' }}>
+                      {config.label}
+                    </p>
+                    <p className="text-xs mt-0.5" style={{ color: 'var(--text-subtle)' }}>
+                      {config.averagePrice}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* How it works */}
+        <section>
+          <p className="type-label text-center mb-2">Hoe het werkt</p>
+          <h2
+            className="type-heading text-center mb-10"
+            style={{ color: 'var(--text)' }}
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            In drie stappen naar jouw domein
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                num: '01',
+                title: 'Voer keywords in',
+                desc: 'Typ de naam van je bedrijf, merk of project in de zoekbalk.',
+              },
+              {
+                num: '02',
+                title: 'Wij checken alles',
+                desc: 'We genereren automatisch suggesties en controleren beschikbaarheid via RDAP.',
+              },
+              {
+                num: '03',
+                title: 'Registreer direct',
+                desc: 'Kies de beste naam en registreer bij de registrar van jouw keuze.',
+              },
+            ].map((item) => (
+              <div
+                key={item.num}
+                className="card p-6"
+              >
+                <div
+                  className="text-3xl font-black mb-3"
+                  style={{
+                    color: 'var(--primary-light)',
+                    WebkitTextStroke: '2px var(--primary)',
+                    letterSpacing: '-0.03em',
+                  }}
+                >
+                  {item.num}
+                </div>
+                <h3
+                  className="font-semibold text-base mb-2"
+                  style={{ color: 'var(--text)', letterSpacing: '-0.01em' }}
+                >
+                  {item.title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* AdSense mid */}
+        <AdSenseUnit slot="HOMEPAGE_MID_SLOT" format="responsive" />
+
+        {/* FAQ */}
+        <FaqSection />
+
+      </div>
+    </>
   );
 }

@@ -1,0 +1,102 @@
+'use client';
+
+import { useState, useCallback, useRef } from 'react';
+import { generateDomainSuggestions } from '@/lib/domain-generator';
+import { scoreDomain } from '@/lib/domain-scorer';
+import { DomainSuggestion, DomainStatus, TldKey } from '@/types';
+
+const CONCURRENT_CHECKS = 5;
+
+export function useDomainSearch() {
+  const [suggestions, setSuggestions] = useState<DomainSuggestion[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [checkedCount, setCheckedCount] = useState(0);
+  const [keyword, setKeyword] = useState('');
+  const abortRef = useRef<AbortController | null>(null);
+
+  const search = useCallback(async (kw: string) => {
+    if (abortRef.current) abortRef.current.abort();
+    abortRef.current = new AbortController();
+    const signal = abortRef.current.signal;
+
+    setIsLoading(true);
+    setCheckedCount(0);
+    setKeyword(kw);
+
+    const generated = generateDomainSuggestions(kw);
+
+    const initial: DomainSuggestion[] = generated.map((g) => {
+      const { score, breakdown } = scoreDomain(g.name, g.tld, kw);
+      return {
+        name: g.name,
+        tld: g.tld as TldKey,
+        full: g.full,
+        score,
+        scoreBreakdown: breakdown,
+        status: 'checking' as DomainStatus,
+      };
+    });
+
+    setSuggestions(initial);
+
+    const chunks = chunkArray(initial, CONCURRENT_CHECKS);
+
+    for (const chunk of chunks) {
+      if (signal.aborted) break;
+
+      await Promise.all(
+        chunk.map(async (s) => {
+          if (signal.aborted) return;
+          try {
+            const res = await fetch(
+              `/api/check-domain?name=${encodeURIComponent(s.name)}&tld=${encodeURIComponent(s.tld)}`,
+              { signal }
+            );
+            const data = await res.json();
+            setSuggestions((prev) =>
+              prev.map((item) =>
+                item.full === s.full ? { ...item, status: data.status as DomainStatus } : item
+              )
+            );
+          } catch {
+            if (!signal.aborted) {
+              setSuggestions((prev) =>
+                prev.map((item) =>
+                  item.full === s.full ? { ...item, status: 'error' as DomainStatus } : item
+                )
+              );
+            }
+          }
+          setCheckedCount((c) => c + 1);
+        })
+      );
+    }
+
+    setIsLoading(false);
+  }, []);
+
+  const availableResults = suggestions
+    .filter((s) => s.status === 'available')
+    .sort((a, b) => b.score - a.score);
+
+  const takenResults = suggestions.filter((s) => s.status === 'taken');
+  const checkingResults = suggestions.filter((s) => s.status === 'checking');
+
+  return {
+    suggestions,
+    availableResults,
+    takenResults,
+    checkingResults,
+    isLoading,
+    checkedCount,
+    total: suggestions.length,
+    keyword,
+    search,
+  };
+}
+
+function chunkArray<T>(arr: T[], size: number): T[][] {
+  const chunks: T[][] = [];
+  for (let i = 0; i < arr.length; i += size) chunks.push(arr.slice(i, i + size));
+  return chunks;
+}
