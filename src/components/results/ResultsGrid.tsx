@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import { useDomainSearch } from '@/hooks/useDomainSearch';
+import { useAiSuggestions } from '@/hooks/useAiSuggestions';
 import DomainCard from './DomainCard';
 import AdSenseUnit from '@/components/ads/AdSenseUnit';
 import { TldKey } from '@/types';
@@ -23,11 +24,16 @@ export default function ResultsGrid({ keyword }: Props) {
     checkSocial,
   } = useDomainSearch();
 
+  const { suggestions: aiSuggestions, isLoading: aiLoading, generate: generateAi } = useAiSuggestions();
+
   const [localTlds, setLocalTlds] = useState<TldKey[]>([...ORDERED_TLDS]);
 
   useEffect(() => {
-    if (keyword) search(keyword);
-  }, [keyword, search]);
+    if (keyword) {
+      search(keyword);
+      generateAi(keyword);
+    }
+  }, [keyword, search, generateAi]);
 
   function toggleTld(tld: TldKey) {
     const next = localTlds.includes(tld)
@@ -87,6 +93,74 @@ export default function ResultsGrid({ keyword }: Props) {
         </div>
       </div>
 
+      {/* AI Suggestions panel */}
+      {(aiLoading || aiSuggestions.length > 0) && (
+        <div
+          className="rounded-xl p-4"
+          style={{
+            background: 'linear-gradient(135deg, rgba(79,70,229,0.04) 0%, rgba(139,92,246,0.06) 100%)',
+            border: '1px solid rgba(79,70,229,0.15)',
+            boxShadow: 'var(--shadow-xs)',
+          }}
+        >
+          <div className="flex items-center gap-2 mb-3">
+            <span style={{ fontSize: '1rem' }}>✨</span>
+            <p className="text-xs font-semibold" style={{ color: 'var(--primary)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+              AI Suggesties
+            </p>
+            {aiLoading && (
+              <span
+                className="text-xs px-2 py-0.5 rounded-full animate-pulse"
+                style={{ background: 'rgba(79,70,229,0.1)', color: 'var(--primary)' }}
+              >
+                Bezig…
+              </span>
+            )}
+          </div>
+
+          {aiLoading && aiSuggestions.length === 0 && (
+            <div className="flex flex-wrap gap-2">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="skeleton h-8 w-24 rounded-lg" />
+              ))}
+            </div>
+          )}
+
+          {aiSuggestions.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {aiSuggestions.map((s) => (
+                <button
+                  key={s.name}
+                  title={s.rationale}
+                  onClick={() => search(s.name, localTlds)}
+                  className="group flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-150"
+                  style={{
+                    background: 'white',
+                    color: 'var(--text)',
+                    border: '1.5px solid rgba(79,70,229,0.2)',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(79,70,229,0.5)';
+                    (e.currentTarget as HTMLButtonElement).style.color = 'var(--primary)';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(79,70,229,0.2)';
+                    (e.currentTarget as HTMLButtonElement).style.color = 'var(--text)';
+                  }}
+                >
+                  {s.name}
+                </button>
+              ))}
+            </div>
+          )}
+
+          <p className="text-xs mt-3" style={{ color: 'var(--text-subtle)' }}>
+            Klik op een naam om de beschikbaarheid te checken
+          </p>
+        </div>
+      )}
+
       {/* Progress bar */}
       {isLoading && (
         <div className="space-y-2">
@@ -128,14 +202,14 @@ export default function ResultsGrid({ keyword }: Props) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {availableResults.map((s, i) => (
-              <>
-                <DomainCard key={s.full} suggestion={s} onCheckSocial={checkSocial} />
+              <Fragment key={s.full}>
+                <DomainCard suggestion={s} onCheckSocial={checkSocial} />
                 {i === 5 && (
-                  <div key="ad-infeed" className="md:col-span-2">
+                  <div className="md:col-span-2">
                     <AdSenseUnit slot="IN_FEED_AD_SLOT" format="responsive" />
                   </div>
                 )}
-              </>
+              </Fragment>
             ))}
           </div>
         </section>
