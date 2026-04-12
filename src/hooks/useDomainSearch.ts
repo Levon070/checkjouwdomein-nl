@@ -4,36 +4,42 @@ import { useState, useCallback, useRef } from 'react';
 import { generateDomainSuggestions } from '@/lib/domain-generator';
 import { scoreDomain } from '@/lib/domain-scorer';
 import { DomainSuggestion, DomainStatus, TldKey } from '@/types';
+import { ORDERED_TLDS } from '@/lib/tlds';
 
-const CONCURRENT_CHECKS = 5;
+const CONCURRENT_CHECKS = 12;
 
 export function useDomainSearch() {
   const [suggestions, setSuggestions] = useState<DomainSuggestion[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [checkedCount, setCheckedCount] = useState(0);
   const [keyword, setKeyword] = useState('');
+  const [selectedTlds, setSelectedTlds] = useState<TldKey[]>([...ORDERED_TLDS]);
   const abortRef = useRef<AbortController | null>(null);
 
-  const search = useCallback(async (kw: string) => {
+  const search = useCallback(async (kw: string, tlds?: TldKey[]) => {
     if (abortRef.current) abortRef.current.abort();
     abortRef.current = new AbortController();
     const signal = abortRef.current.signal;
+    const activeTlds = tlds ?? selectedTlds;
 
     setIsLoading(true);
     setCheckedCount(0);
     setKeyword(kw);
 
-    const generated = generateDomainSuggestions(kw);
+    const generated = generateDomainSuggestions(kw, activeTlds);
 
     const initial: DomainSuggestion[] = generated.map((g) => {
-      const { score, breakdown } = scoreDomain(g.name, g.tld, kw);
+      const { score, breakdown, pronunciationScore } = scoreDomain(g.name, g.tld, g.primaryKeyword);
       return {
         name: g.name,
         tld: g.tld as TldKey,
         full: g.full,
         score,
         scoreBreakdown: breakdown,
+        pronunciationScore,
         status: 'checking' as DomainStatus,
+        wasDropped: false,
+        socialHandleAvailable: null,
       };
     });
 
@@ -55,7 +61,13 @@ export function useDomainSearch() {
             const data = await res.json();
             setSuggestions((prev) =>
               prev.map((item) =>
-                item.full === s.full ? { ...item, status: data.status as DomainStatus } : item
+                item.full === s.full
+                  ? {
+                      ...item,
+                      status: data.status as DomainStatus,
+                      wasDropped: data.wasDropped ?? false,
+                    }
+                  : item
               )
             );
           } catch {
@@ -73,6 +85,33 @@ export function useDomainSearch() {
     }
 
     setIsLoading(false);
+  }, [selectedTlds]);
+
+  /** Fetch social media availability for a single domain name (lazy, on demand) */
+  const checkSocial = useCallback(async (name: string) => {
+    try {
+      const res = await fetch(`/api/check-social?handle=${encodeURIComponent(name)}`);
+      if (!res.ok) return null;
+      const data = await res.json();
+      setSuggestions((prev) =>
+        prev.map((item) =>
+          item.name === name
+            ? {
+                ...item,
+                socialHandleAvailable:
+                  data.instagram === 'available' || data.twitter === 'available',
+              }
+            : item
+        )
+      );
+      return data;
+    } catch {
+      return null;
+    }
+  }, []);
+
+  const updateSelectedTlds = useCallback((tlds: TldKey[]) => {
+    setSelectedTlds(tlds);
   }, []);
 
   const availableResults = suggestions
@@ -91,7 +130,10 @@ export function useDomainSearch() {
     checkedCount,
     total: suggestions.length,
     keyword,
+    selectedTlds,
+    updateSelectedTlds,
     search,
+    checkSocial,
   };
 }
 

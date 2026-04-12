@@ -7,6 +7,9 @@ export interface DomainSuggestion {
   score: number;
   scoreBreakdown: ScoreBreakdown;
   status: DomainStatus;
+  pronunciationScore?: number;
+  wasDropped?: boolean;
+  socialHandleAvailable?: boolean | null;
 }
 
 export type DomainStatus = 'available' | 'taken' | 'checking' | 'error';
@@ -17,6 +20,7 @@ export interface ScoreBreakdown {
   keywordScore: number;
   hyphenPenalty: number;
   numberPenalty: number;
+  pronunciationScore?: number;
 }
 
 export interface Registrar {

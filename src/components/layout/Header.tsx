@@ -25,13 +25,15 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-0.5">
+          <Link href="/bulk-check" className="link-nav">Bulk check</Link>
+          <Link href="/favorieten" className="link-nav">Favorieten ♡</Link>
           <Link href="/tld-gids" className="link-nav">TLD Gids</Link>
-          <Link href="/tips-domeinnaam" className="link-nav">Tips</Link>
           <Link href="/blog" className="link-nav">Blog</Link>
         </nav>
 
         <nav className="flex md:hidden items-center gap-1">
-          <Link href="/tld-gids" className="link-nav">TLDs</Link>
+          <Link href="/bulk-check" className="link-nav">Bulk</Link>
+          <Link href="/favorieten" className="link-nav">♡</Link>
           <Link href="/blog" className="link-nav">Blog</Link>
         </nav>
       </div>
