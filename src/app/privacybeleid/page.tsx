@@ -46,7 +46,7 @@ export default function PrivacybeleidPage() {
           <p>Wij verzamelen uitsluitend de volgende (geanonimiseerde) gegevens:</p>
           <ul className="mt-3 space-y-2 list-disc list-inside">
             <li><strong>Zoekopdrachten</strong>: de door jou ingevulde zoekwoorden om domeinnamen te checken. Deze worden niet gekoppeld aan een persoon.</li>
-            <li><strong>Paginabezoeken</strong>: geanonimiseerde statistieken over welke pagina's bezocht worden (via onze eigen analytics op basis van Upstash Redis). Geen cookies van derden voor analytics.</li>
+            <li><strong>Paginabezoeken</strong>: geanonimiseerde statistieken over welke pagina&apos;s bezocht worden (via onze eigen analytics op basis van Upstash Redis). Geen cookies van derden voor analytics.</li>
             <li><strong>Technische gegevens</strong>: IP-adres (geanonimiseerd na verwerking), browser-type en besturingssysteem — uitsluitend voor technisch beheer en misbruikpreventie.</li>
             <li><strong>Cookievoorkeur</strong>: jouw keuze in de cookiebanner wordt opgeslagen in <code>localStorage</code> op jouw eigen apparaat.</li>
             <li><strong>Waitlist-aanmeldingen</strong>: als je je aanmeldt voor de Pro-waitlist, slaan wij je e-mailadres op.</li>
