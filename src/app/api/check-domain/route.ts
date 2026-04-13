@@ -36,6 +36,28 @@ async function hasDnsRecords(domain: string): Promise<boolean> {
   }
 }
 
+/** Check A/AAAA records — if a domain resolves, it's definitely in use */
+async function hasARecords(domain: string): Promise<boolean> {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 3000);
+    const [resA, resAAAA] = await Promise.all([
+      fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=A`,
+        { headers: { Accept: 'application/dns-json' }, signal: controller.signal }),
+      fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=AAAA`,
+        { headers: { Accept: 'application/dns-json' }, signal: controller.signal }),
+    ]);
+    clearTimeout(timer);
+    const [dataA, dataAAAA] = await Promise.all([resA.json(), resAAAA.json()]);
+    return (
+      (dataA.Status === 0 && Array.isArray(dataA.Answer) && dataA.Answer.length > 0) ||
+      (dataAAAA.Status === 0 && Array.isArray(dataAAAA.Answer) && dataAAAA.Answer.length > 0)
+    );
+  } catch {
+    return false;
+  }
+}
+
 /** Check MX records — proxy for "actively used as email" */
 async function hasMxRecords(domain: string): Promise<boolean> {
   try {
@@ -117,11 +139,16 @@ export async function GET(request: NextRequest) {
   let wayback: { snapshots: number; firstYear: number; oldestUrl: string } | undefined;
 
   if (result.status === 'available') {
-    // Check for recently-dropped domain (has NS but no RDAP registration)
-    wasDropped = await hasDnsRecords(domain);
+    // Check DNS — if the domain has A/NS records it's still in use despite RDAP 404
+    const [hasNs, hasA] = await Promise.all([hasDnsRecords(domain), hasARecords(domain)]);
 
-    if (wasDropped) {
-      // For dropped domains: fetch Wayback data in parallel (non-blocking)
+    if (hasA) {
+      // Active website — treat as taken regardless of RDAP
+      result.status = 'taken';
+      hasMx = await hasMxRecords(domain);
+    } else if (hasNs) {
+      // Has nameservers but no A record — recently dropped, flag it
+      wasDropped = true;
       wayback = (await fetchWayback(domain)) ?? undefined;
     }
   } else if (result.status === 'taken') {
@@ -135,7 +162,7 @@ export async function GET(request: NextRequest) {
       headers: {
         'Cache-Control':
           result.status === 'available'
-            ? 's-maxage=300, stale-while-revalidate=60'
+            ? 's-maxage=60, stale-while-revalidate=30'
             : 's-maxage=3600, stale-while-revalidate=600',
       },
     }
