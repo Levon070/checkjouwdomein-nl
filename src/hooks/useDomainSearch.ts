@@ -5,6 +5,7 @@ import { generateDomainSuggestions, sanitizeKeyword } from '@/lib/domain-generat
 import { scoreDomain } from '@/lib/domain-scorer';
 import { DomainSuggestion, DomainStatus, TldKey } from '@/types';
 import { ORDERED_TLDS } from '@/lib/tlds';
+import { trackClientEvent } from '@/lib/analytics-client';
 
 const CONCURRENT_CHECKS = 12;
 
@@ -25,6 +26,8 @@ export function useDomainSearch() {
     setIsLoading(true);
     setCheckedCount(0);
     setKeyword(kw);
+
+    trackClientEvent('search', kw.slice(0, 100));
 
     const generated = generateDomainSuggestions(kw, activeTlds);
 

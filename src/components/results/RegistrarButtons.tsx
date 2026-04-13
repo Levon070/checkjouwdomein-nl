@@ -1,5 +1,8 @@
+'use client';
+
 import { TldKey } from '@/types';
 import { getRegistrarsForTld } from '@/lib/registrars';
+import { trackClientEvent } from '@/lib/analytics-client';
 
 interface Props {
   domain: string;
@@ -21,6 +24,7 @@ export default function RegistrarButtons({ domain, tld }: Props) {
             rel="noopener noreferrer sponsored"
             title={`Registreer ${domain} bij ${r.name}${price ? ` — ${price}` : ''}`}
             className="registrar-btn flex items-center gap-1"
+            onClick={() => trackClientEvent('clicks', r.id)}
           >
             <span>{r.name}</span>
             {price && (

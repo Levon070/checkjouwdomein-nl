@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
+import { headers } from 'next/headers';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import JsonLd from '@/components/seo/JsonLd';
@@ -55,6 +56,9 @@ const webAppSchema = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const pathname = headers().get('x-pathname') ?? '';
+  const isAdmin = pathname.startsWith('/admin');
+
   return (
     <html lang="nl" dir="ltr">
       <head>
@@ -64,17 +68,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={webAppSchema} />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <CookieBanner />
-        <Script
-          id="adsense"
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8874800268655239"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        {isAdmin ? (
+          children
+        ) : (
+          <>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+            <CookieBanner />
+            <Script
+              id="adsense"
+              async
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8874800268655239"
+              crossOrigin="anonymous"
+              strategy="afterInteractive"
+            />
+          </>
+        )}
       </body>
     </html>
   );
