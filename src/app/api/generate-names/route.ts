@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { unstable_cache } from 'next/cache';
-import Anthropic from '@anthropic-ai/sdk';
-
-const client = new Anthropic();
 
 const rateMap = new Map<string, { count: number; resetAt: number }>();
 function isRateLimited(ip: string): boolean {
@@ -28,6 +25,9 @@ async function fetchNames(
   keywords: string,
   location: string,
 ): Promise<GeneratedName[]> {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) throw new Error('GROQ_API_KEY not configured');
+
   const styleDesc: Record<string, string> = {
     professioneel:  'professioneel en zakelijk — vertrouwen en expertise uitstralen',
     speels:         'speels en vriendelijk — laagdrempelig, warm en benaderbaar',
@@ -65,14 +65,32 @@ Mix verplicht: samengestelde woorden, creatieve afkortingen, nieuwgevormde woord
 Geef terug als JSON — NIETS anders:
 {"names":[{"name":"naam","rationale":"1-zin NL uitleg waarom dit werkt voor ${sector}"},...]}`;
 
-  const res = await client.messages.create({
-    model: 'claude-haiku-4-5-20251001',
-    max_tokens: 900,
-    system: 'Je bent een expert brand naming consultant. Antwoord ALTIJD met geldige JSON en nooit iets anders.',
-    messages: [{ role: 'user', content: prompt }],
+  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: 'llama-3.3-70b-versatile',
+      max_tokens: 900,
+      temperature: 0.8,
+      response_format: { type: 'json_object' },
+      messages: [
+        { role: 'system', content: 'Je bent een expert brand naming consultant. Antwoord ALTIJD met geldige JSON en nooit iets anders.' },
+        { role: 'user', content: prompt },
+      ],
+    }),
   });
 
-  const text = res.content[0].type === 'text' ? res.content[0].text : '';
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Groq API error ${res.status}: ${err}`);
+  }
+
+  const data = await res.json();
+  const text = data.choices?.[0]?.message?.content ?? '';
+
   const match = text.match(/\{[\s\S]*\}/);
   if (!match) return [];
   let parsed: { names?: GeneratedName[] };
@@ -82,7 +100,6 @@ Geef terug als JSON — NIETS anders:
     return [];
   }
 
-  // Post-filter: strip any names that still have banned prefixes
   const BANNED_PREFIXES = ['mijn', 'jouw', 'uw', 'onze', 'de', 'het', 'top', 'best', 'super', 'mega', 'direct', 'online', 'goed', 'snel'];
   const BANNED_SUFFIXES = ['online', 'direct', 'info', 'dienst', 'service'];
   const filtered = (parsed.names ?? []).filter((n: GeneratedName) => {
@@ -115,7 +132,7 @@ export async function GET(request: NextRequest) {
 
   const getCached = unstable_cache(
     () => fetchNames(sector, style, maxLen, keywords, location),
-    ['generate-names-v2', sector, style, String(maxLen), keywords, location],
+    ['generate-names-v3', sector, style, String(maxLen), keywords, location],
     { revalidate: 3600 }
   );
 
