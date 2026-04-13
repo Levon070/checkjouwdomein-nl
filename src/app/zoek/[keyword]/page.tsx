@@ -4,12 +4,14 @@ import ResultsGrid from '@/components/results/ResultsGrid';
 import FaqSection from '@/components/sections/FaqSection';
 import AdSenseUnit from '@/components/ads/AdSenseUnit';
 import JsonLd from '@/components/seo/JsonLd';
+import ProWaitlist from '@/components/ui/ProWaitlist';
 import { checkDomainAvailability } from '@/lib/rdap-checker';
 
 export const revalidate = 86400;
 
 interface Props {
   params: Promise<{ keyword: string }>;
+  searchParams: Promise<{ loc?: string; ind?: string }>;
 }
 
 function parseKeyword(raw: string): { kw: string; city: string | null; display: string } {
@@ -92,8 +94,9 @@ export function generateStaticParams() {
   ];
 }
 
-export default async function ZoekPage({ params }: Props) {
+export default async function ZoekPage({ params, searchParams }: Props) {
   const { keyword } = await params;
+  const { loc, ind } = await searchParams;
   const raw = decodeURIComponent(keyword);
   const { kw, city } = parseKeyword(raw);
 
@@ -182,10 +185,38 @@ export default async function ZoekPage({ params }: Props) {
           </p>
         </div>
 
+        {/* Intent banner — only shown when AI extracted location/industry from a sentence */}
+        {(loc || ind) && (
+          <div
+            className="rounded-xl p-4 mb-6 flex items-center justify-between gap-4 flex-wrap"
+            style={{ background: 'rgba(79,70,229,0.05)', border: '1px solid rgba(79,70,229,0.15)' }}
+          >
+            <div>
+              <p className="text-sm font-semibold" style={{ color: 'var(--primary)' }}>
+                ✦ AI herkende{ind ? ` sector: ${ind}` : ''}{loc ? ` · locatie: ${loc}` : ''}
+              </p>
+              <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>
+                Wil je ook een creatieve merknaam laten bedenken?
+              </p>
+            </div>
+            <a
+              href={`/naam-generator?sector=${encodeURIComponent(ind ?? kw)}&location=${encodeURIComponent(loc ?? '')}`}
+              className="text-xs font-bold px-4 py-2 rounded-lg whitespace-nowrap"
+              style={{ background: 'var(--primary)', color: '#fff', textDecoration: 'none' }}
+            >
+              AI Naamgenerator →
+            </a>
+          </div>
+        )}
+
         <ResultsGrid keyword={city ? raw : kw} />
 
         <div className="mt-12">
           <AdSenseUnit slot="SEARCH_BOTTOM_SLOT" format="responsive" />
+        </div>
+
+        <div className="mt-12 mb-8">
+          <ProWaitlist context="search" />
         </div>
 
         <FaqSection />

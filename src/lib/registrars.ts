@@ -3,23 +3,31 @@ import { Registrar, RegistrarFeature, TldKey } from '@/types';
 // ─── AFFILIATE LINK BUILDERS ─────────────────────────────────────────────────
 // Vervang de placeholder IDs met jouw eigen affiliate-IDs.
 
+// UTM params zodat je in Google Analytics kunt zien hoeveel clicks naar elke registrar gaan.
+// Vervang later de ref= / a_aid= waarden met jouw eigen affiliate-ID's:
+//   TransIP partner: https://www.transip.nl/partner/
+//   Mijndomein affiliate: https://www.mijndomein.nl/affiliate/
+//   Antagonist reseller: https://www.antagonist.nl/reseller/
+//   Namecheap affiliate: https://www.namecheap.com/affiliates/
+const UTM = 'utm_source=checkjouwdomein&utm_medium=referral&utm_campaign=registreer';
+
 const buildTransipUrl = (domain: string) =>
-  `https://www.transip.nl/domein-registreren/?domain=${domain}`;
+  `https://www.transip.nl/domein-registreren/?domain=${domain}&${UTM}`;
 
 const buildMijndomeinUrl = (domain: string) =>
-  `https://www.mijndomein.nl/domeinnamen?search=${domain}`;
+  `https://www.mijndomein.nl/domeinnamen?search=${domain}&${UTM}`;
 
 const buildAntagonistUrl = (domain: string) =>
-  `https://www.antagonist.nl/domeinen.php?domain=${domain}`;
+  `https://www.antagonist.nl/domeinen.php?domain=${domain}&${UTM}`;
 
 const buildNamecheapUrl = (domain: string) =>
-  `https://www.namecheap.com/domains/registration/results/?domain=${domain}`;
+  `https://www.namecheap.com/domains/registration/results/?domain=${domain}&${UTM}`;
 
 const buildGodaddyUrl = (domain: string) =>
-  `https://www.godaddy.com/domainsearch/find?checkAvail=1&domainToCheck=${domain}`;
+  `https://www.godaddy.com/domainsearch/find?checkAvail=1&domainToCheck=${domain}&${UTM}`;
 
 const buildHostnetUrl = (domain: string) =>
-  `https://www.hostnet.nl/domeinnaam/?domain=${domain}`;
+  `https://www.hostnet.nl/domeinnaam/?domain=${domain}&${UTM}`;
 
 // ─── FEATURE TEMPLATES ───────────────────────────────────────────────────────
 

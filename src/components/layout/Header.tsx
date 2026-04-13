@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import WatchlistButton from '@/components/ui/WatchlistButton';
 import CartButton from '@/components/ui/CartButton';
+import FavoritesButton from '@/components/ui/FavoritesButton';
 
 export default function Header() {
   return (
@@ -33,6 +34,7 @@ export default function Header() {
           <Link href="/registrars" className="link-nav">Registrars</Link>
           <Link href="/bulk-check" className="link-nav">Bulk</Link>
           <Link href="/blog" className="link-nav">Blog</Link>
+          <FavoritesButton />
           <WatchlistButton />
           <CartButton />
         </nav>
@@ -40,8 +42,8 @@ export default function Header() {
         <nav className="flex md:hidden items-center gap-1">
           <Link href="/naam-generator" className="link-nav">✦</Link>
           <Link href="/merk-check" className="link-nav">Merk</Link>
-          <Link href="/portfolio" className="link-nav">Portfolio</Link>
           <Link href="/blog" className="link-nav">Blog</Link>
+          <FavoritesButton />
           <WatchlistButton />
           <CartButton />
         </nav>

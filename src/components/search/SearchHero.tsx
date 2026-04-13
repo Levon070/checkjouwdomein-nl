@@ -149,7 +149,12 @@ export default function SearchHero({ initialKeyword = '' }: Props) {
           setParsedIntent({ ...data, original: trimmed });
           saveRecentSearch(trimmed);
           setRecent(getRecentSearches());
-          router.push(`/zoek/${encodeURIComponent(data.keyword)}`);
+          // Pass location + industry as query params so the zoek page can suggest the naam-generator
+          const params = new URLSearchParams();
+          if (data.location) params.set('loc', data.location);
+          if (data.industry) params.set('ind', data.industry);
+          const qs = params.toString();
+          router.push(`/zoek/${encodeURIComponent(data.keyword)}${qs ? `?${qs}` : ''}`);
           setParsingIntent(false);
           return;
         }
