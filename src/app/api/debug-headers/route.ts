@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   const secret = process.env.ANALYTICS_SECRET;
-  const token = request.headers.get('x-debug-token');
+  const token = request.headers.get('x-debug-token') ?? request.nextUrl.searchParams.get('token');
   if (!secret || token !== secret) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   }
