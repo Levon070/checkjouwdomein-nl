@@ -357,22 +357,31 @@ export default function DomainCard({ suggestion, onCheckSocial }: Props) {
                   </span>
                   <div className="flex flex-wrap gap-2 mt-1">
                     <a
-                      href={`https://www.legaldesk.nl/bv-oprichten?utm_source=checkjouwdomein&utm_medium=referral&utm_campaign=kvk`}
+                      href="https://www.ligo.nl/bv-oprichten?utm_source=checkjouwdomein&utm_medium=referral"
                       target="_blank"
                       rel="noopener noreferrer sponsored"
                       className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-opacity hover:opacity-80"
                       style={{ background: 'rgba(79,70,229,0.07)', color: 'var(--primary)', border: '1px solid rgba(79,70,229,0.15)', textDecoration: 'none' }}
                     >
-                      🏢 BV oprichten via Legaldesk →
+                      🏢 BV oprichten via Ligo.nl →
                     </a>
                     <a
-                      href={`https://www.firm24.com/bv-oprichten?utm_source=checkjouwdomein&utm_medium=referral&utm_campaign=kvk`}
+                      href="https://www.moneybird.nl/?utm_source=checkjouwdomein&utm_medium=referral"
                       target="_blank"
                       rel="noopener noreferrer sponsored"
                       className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-opacity hover:opacity-80"
                       style={{ background: 'rgba(6,182,212,0.07)', color: '#0891B2', border: '1px solid rgba(6,182,212,0.15)', textDecoration: 'none' }}
                     >
-                      🏢 BV oprichten via Firm24 →
+                      📒 Boekhouding via Moneybird →
+                    </a>
+                    <a
+                      href="https://www.jortt.nl/?utm_source=checkjouwdomein&utm_medium=referral"
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-opacity hover:opacity-80"
+                      style={{ background: 'rgba(5,150,105,0.07)', color: 'var(--available)', border: '1px solid rgba(5,150,105,0.15)', textDecoration: 'none' }}
+                    >
+                      📒 Boekhouding via Jortt →
                     </a>
                   </div>
                 </div>
