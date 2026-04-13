@@ -31,6 +31,7 @@ export async function trackPageViewEdge(data: {
   path: string;
   referrer: string;
   country: string;
+  city: string;
   device: string;
   browser: string;
   hashedIp: string;
@@ -63,6 +64,10 @@ export async function trackPageViewEdge(data: {
   if (data.country) {
     cmds.push(['ZINCRBY', `country:${d}`, 1, data.country]);
     cmds.push(['EXPIRE', `country:${d}`, TTL]);
+  }
+  if (data.city) {
+    cmds.push(['ZINCRBY', `city:${d}`, 1, data.city]);
+    cmds.push(['EXPIRE', `city:${d}`, TTL]);
   }
   if (data.device) {
     cmds.push(['ZINCRBY', `device:${d}`, 1, data.device]);

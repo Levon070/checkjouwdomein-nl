@@ -114,6 +114,11 @@ export default async function DashboardPage({ searchParams }: Props) {
           <TopTable title="Referrers" entries={stats.topReferrers} formatMember={(m) => m || 'direct'} />
         </div>
 
+        {/* Steden */}
+        {stats.cities.length > 0 && (
+          <TopTable title="Steden (herkomst bezoekers)" entries={stats.cities} />
+        )}
+
         {/* Breakdown row */}
         <div className="grid md:grid-cols-3 gap-4">
           <BreakdownCard title="Apparaten" entries={stats.devices} />

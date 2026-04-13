@@ -42,8 +42,25 @@ async function recordPageView(request: NextRequest): Promise<void> {
     }
   }
 
-  // Country from Netlify / Cloudflare headers
-  const country = request.headers.get('x-nf-country') ?? request.headers.get('cf-ipcountry') ?? '';
+  // Geo data van Netlify (geen IP opslag nodig)
+  let country = '';
+  let city = '';
+  const geoHeader = request.headers.get('x-nf-geo');
+  if (geoHeader) {
+    try {
+      const geo = JSON.parse(geoHeader) as {
+        city?: string;
+        country?: { code?: string; name?: string };
+        subdivision?: { name?: string };
+      };
+      city = [geo.city, geo.subdivision?.name].filter(Boolean).join(', ');
+      country = geo.country?.name ?? geo.country?.code ?? '';
+    } catch {
+      country = request.headers.get('x-nf-country') ?? '';
+    }
+  } else {
+    country = request.headers.get('x-nf-country') ?? request.headers.get('cf-ipcountry') ?? '';
+  }
 
   // Hash IP for privacy
   const rawIp =
@@ -56,5 +73,5 @@ async function recordPageView(request: NextRequest): Promise<void> {
   const ua = request.headers.get('user-agent') ?? '';
   const { device, browser } = parseUserAgent(ua);
 
-  await trackPageViewEdge({ path, referrer, country, device, browser, hashedIp });
+  await trackPageViewEdge({ path, referrer, country, city, device, browser, hashedIp });
 }

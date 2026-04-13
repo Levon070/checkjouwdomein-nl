@@ -90,6 +90,7 @@ export interface DashboardStats {
   devices: ZEntry[];
   browsers: ZEntry[];
   countries: ZEntry[];
+  cities: ZEntry[];
   comparison: {
     prevPageviews: number;
     prevVisitors: number;
@@ -160,6 +161,7 @@ export async function getStats(days: number): Promise<DashboardStats> {
     devices: [],
     browsers: [],
     countries: [],
+    cities: [],
     comparison: { prevPageviews: 0, prevVisitors: 0, pageviewsChange: null, visitorsChange: null },
     hourlyData: Array.from({ length: 24 }, (_, i) => ({ hour: i.toString().padStart(2, '0'), count: 0 })),
     funnel: { visitors: 0, searches: 0, clicks: 0 },
@@ -171,7 +173,7 @@ export async function getStats(days: number): Promise<DashboardStats> {
     pvArr, uvArr,
     prevPvArr, prevUvArr,
     topPages, topSearches, topClicks, topReferrers,
-    devices, browsers, countries,
+    devices, browsers, countries, cities,
     hourEntries,
     searchTotal, clickTotal,
   ] = await Promise.all([
@@ -186,6 +188,7 @@ export async function getStats(days: number): Promise<DashboardStats> {
     mergeTopN(redis, dates.map((d) => `device:${d}`), 5),
     mergeTopN(redis, dates.map((d) => `browser:${d}`), 5),
     mergeTopN(redis, dates.map((d) => `country:${d}`), 10),
+    mergeTopN(redis, dates.map((d) => `city:${d}`), 20),
     mergeTopN(redis, dates.map((d) => `hours:${d}`), 24),
     totalScoreSum(redis, dates.map((d) => `search:${d}`)),
     totalScoreSum(redis, dates.map((d) => `clicks:${d}`)),
@@ -215,6 +218,7 @@ export async function getStats(days: number): Promise<DashboardStats> {
     devices,
     browsers,
     countries,
+    cities,
     comparison: {
       prevPageviews,
       prevVisitors,
