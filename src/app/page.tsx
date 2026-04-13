@@ -65,10 +65,18 @@ const POPULAR_KEYWORDS = [
 ];
 
 const BLOG_COVER_IMAGES: Record<string, string> = {
-  'beste-domeinnaam-kiezen': 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=600&auto=format&fit=crop&q=80',
-  'nl-vs-com-domein':        'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&auto=format&fit=crop&q=80',
-  'domeinnaam-tips-2026':    'https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=600&auto=format&fit=crop&q=80',
-  'wat-is-een-domein':       'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&auto=format&fit=crop&q=80',
+  'beste-domeinnaam-kiezen':          'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=600&auto=format&fit=crop&q=80',
+  'nl-vs-com-domein':                 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&auto=format&fit=crop&q=80',
+  'domeinnaam-tips-2026':             'https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=600&auto=format&fit=crop&q=80',
+  'wat-is-een-domein':                'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&auto=format&fit=crop&q=80',
+  'domeinnaam-beschikbaarheid-checken': 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80',
+  'be-domein-registreren':            'https://images.unsplash.com/photo-1491555103944-7c647fd857e6?w=600&auto=format&fit=crop&q=80',
+  'domeinnaam-beveiliging-tips':      'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=600&auto=format&fit=crop&q=80',
+  'domeinnaam-voor-zzp':              'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&auto=format&fit=crop&q=80',
+  'ai-domeinnaam-generator':          'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&auto=format&fit=crop&q=80',
+  'domeinnaam-voor-startup':          'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&auto=format&fit=crop&q=80',
+  'whois-opzoeken':                   'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&auto=format&fit=crop&q=80',
+  'domeinnaam-verlengen':             'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600&auto=format&fit=crop&q=80',
 };
 
 export default function HomePage() {
@@ -295,62 +303,6 @@ export default function HomePage() {
                 Start gratis check →
               </Link>
             </div>
-          </div>
-        </section>
-
-        {/* Testimonials */}
-        <section className="section-alt p-8 sm:p-12">
-          <p className="type-label text-center mb-2">Ervaringen</p>
-          <h2 className="type-heading text-center mb-10" style={{ color: 'var(--text)' }}>
-            Wat ondernemers zeggen
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&auto=format&fit=crop&crop=face&q=80',
-                name: 'Lisa van den Berg',
-                role: 'Eigenaar · BakkerijOnline.nl',
-                quote: 'In twee minuten had ik mijn .nl én .com geregistreerd. De EUIPO-check gaf me ook gelijk zekerheid over mijn merknaam.',
-                tld: '.nl',
-              },
-              {
-                photo: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&auto=format&fit=crop&crop=face&q=80',
-                name: 'Daan Visser',
-                role: 'Freelance developer',
-                quote: 'De AI naamgenerator gaf me 12 ideeën die ik zelf nooit had bedacht. Binnen 10 minuten had ik een domein geboekt.',
-                tld: '.io',
-              },
-              {
-                photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop&crop=face&q=80',
-                name: 'Sophie Martens',
-                role: 'Life coach · Antwerpen',
-                quote: 'Eindelijk een tool die ook .be checkt én laat zien of mijn naam al op Instagram vrij is. Absoluut aanrader!',
-                tld: '.be',
-              },
-            ].map((t) => (
-              <div key={t.name} className="card p-6 flex flex-col gap-4">
-                <div style={{ fontSize: '1.25rem', color: '#F59E0B', letterSpacing: '0.05em' }}>★★★★★</div>
-                <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--text-muted)' }}>
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div className="flex items-center gap-3 pt-2" style={{ borderTop: '1px solid var(--border)' }}>
-                  <Image
-                    src={t.photo}
-                    alt={t.name}
-                    width={44}
-                    height={44}
-                    style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, border: '2px solid var(--border)' }}
-                  />
-                  <div>
-                    <div className="text-sm font-semibold" style={{ color: 'var(--text)' }}>{t.name}</div>
-                    <div className="text-xs" style={{ color: 'var(--text-subtle)' }}>{t.role}</div>
-                  </div>
-                  <div className="ml-auto text-xs font-mono font-semibold px-2 py-1 rounded-md" style={{ background: 'var(--available-bg)', color: 'var(--available)' }}>
-                    {t.tld}
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </section>
 
