@@ -245,26 +245,42 @@ export default function PortfolioPage() {
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg)' }}>
       {/* Hero */}
-      <div className="text-center px-4 pt-14 pb-8">
-        <h1 className="text-3xl sm:text-4xl font-black mb-2" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
-          Mijn <span style={{ color: 'var(--primary)' }}>domeinportefeuille</span>
-        </h1>
-        <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-          Houd je domeinen bij — zonder account, volledig gratis
-        </p>
-      </div>
+      <section style={{ background: 'linear-gradient(160deg, #EEF2FF 0%, #F6F8FC 50%, #ECFEFF 100%)', borderBottom: '1px solid var(--border)', padding: '48px 0 40px' }}>
+        <div className="container mx-auto px-5 max-w-3xl">
+          <Link href="/" className="text-sm font-medium link-muted mb-5 inline-block">
+            ← Terug naar zoeken
+          </Link>
+          <div className="flex items-center gap-3 mb-3">
+            <span style={{ fontSize: 32 }}>🗂️</span>
+            <h1 className="type-heading" style={{ color: 'var(--text)' }}>
+              Mijn <span style={{ color: 'var(--primary)' }}>domeinportefeuille</span>
+            </h1>
+          </div>
+          <p className="text-sm mb-5" style={{ color: 'var(--text-muted)', maxWidth: 520 }}>
+            Houd al je domeinen bij op één plek — verloopdatums, kosten, bespaartips. Zonder account, volledig gratis en lokaal opgeslagen.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {['Geen account nodig', 'Verloopmeldingen', 'Bespaartips per domein', 'Gratis'].map(chip => (
+              <span key={chip} className="text-xs font-medium px-3 py-1 rounded-full" style={{ background: 'rgba(79,70,229,0.08)', color: 'var(--primary)', border: '1px solid rgba(79,70,229,0.12)' }}>
+                {chip}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <div className="container mx-auto px-4 max-w-3xl pb-20">
         {/* Stats row */}
         {domains.length > 0 && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             {[
-              { label: 'Domeinen', value: String(domains.length), color: 'var(--text)' },
-              { label: 'Jaarlijkse kosten', value: fmt(totalCost), color: 'var(--text)' },
-              { label: 'Verlopen ≤ 30 dgn', value: String(expiringSoon.length), color: expiringSoon.length > 0 ? '#EF4444' : 'var(--available)' },
-              { label: 'Potentiële besparing', value: totalSavings > 0 ? fmt(totalSavings) : '—', color: totalSavings > 0 ? 'var(--available)' : 'var(--text-subtle)' },
+              { label: 'Domeinen', value: String(domains.length), icon: '🌐', color: 'var(--primary)', bg: 'rgba(79,70,229,0.07)' },
+              { label: 'Jaarlijkse kosten', value: fmt(totalCost), icon: '💶', color: 'var(--text)', bg: 'var(--surface)' },
+              { label: 'Verlopen ≤ 30 dgn', value: String(expiringSoon.length), icon: '⏰', color: expiringSoon.length > 0 ? '#EF4444' : 'var(--available)', bg: expiringSoon.length > 0 ? 'rgba(239,68,68,0.06)' : 'rgba(5,150,105,0.06)' },
+              { label: 'Potentiële besparing', value: totalSavings > 0 ? fmt(totalSavings) : '—', icon: '💡', color: totalSavings > 0 ? 'var(--available)' : 'var(--text-subtle)', bg: totalSavings > 0 ? 'rgba(5,150,105,0.06)' : 'var(--surface)' },
             ].map(stat => (
-              <div key={stat.label} className="rounded-xl p-4 text-center" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+              <div key={stat.label} className="rounded-xl p-4 text-center" style={{ background: stat.bg, border: '1px solid var(--border)' }}>
+                <div className="text-xl mb-1">{stat.icon}</div>
                 <div className="text-lg font-black" style={{ color: stat.color }}>{stat.value}</div>
                 <div className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>{stat.label}</div>
               </div>
@@ -291,9 +307,11 @@ export default function PortfolioPage() {
 
         {/* Domain list */}
         {sorted.length === 0 ? (
-          <div className="text-center py-12" style={{ color: 'var(--text-muted)' }}>
-            <div className="text-4xl mb-3">🗂️</div>
-            <p className="text-sm">Nog geen domeinen toegevoegd. Begin hierboven.</p>
+          <div className="text-center py-16 rounded-2xl" style={{ border: '2px dashed var(--border)', color: 'var(--text-muted)' }}>
+            <div className="text-5xl mb-4">🌐</div>
+            <p className="text-base font-semibold mb-1" style={{ color: 'var(--text)' }}>Nog geen domeinen</p>
+            <p className="text-sm">Voeg je eerste domein toe via het formulier hierboven.</p>
+            <p className="text-xs mt-3" style={{ color: 'var(--text-subtle)' }}>Alles wordt lokaal opgeslagen — geen account nodig.</p>
           </div>
         ) : (
           <div className="space-y-3">

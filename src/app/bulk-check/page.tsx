@@ -74,17 +74,31 @@ export default function BulkCheckPage() {
   const taken = results.filter((r) => r.status === 'taken');
 
   return (
-    <div className="container mx-auto px-5 max-w-3xl py-12">
-      <Link href="/" className="text-sm font-medium link-muted mb-6 inline-block">
-        ← Terug naar zoeken
-      </Link>
+    <div>
+      {/* Hero */}
+      <section style={{ background: 'linear-gradient(160deg, #EEF2FF 0%, #F6F8FC 50%, #ECFEFF 100%)', borderBottom: '1px solid var(--border)', padding: '48px 0 40px' }}>
+        <div className="container mx-auto px-5 max-w-3xl">
+          <Link href="/" className="text-sm font-medium link-muted mb-5 inline-block">
+            ← Terug naar zoeken
+          </Link>
+          <div className="flex items-center gap-3 mb-3">
+            <span style={{ fontSize: 32 }}>📋</span>
+            <h1 className="type-heading" style={{ color: 'var(--text)' }}>Bulk domein check</h1>
+          </div>
+          <p className="text-sm mb-5" style={{ color: 'var(--text-muted)', maxWidth: 520 }}>
+            Plak een lijst met volledige domeinnamen (één per regel of gescheiden door komma&apos;s). Wij controleren ze allemaal tegelijk.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {['Max 50 domeinen', '8 tegelijk gecheckt', 'Gratis & zonder account', 'Exporteer resultaten'].map(chip => (
+              <span key={chip} className="text-xs font-medium px-3 py-1 rounded-full" style={{ background: 'rgba(79,70,229,0.08)', color: 'var(--primary)', border: '1px solid rgba(79,70,229,0.12)' }}>
+                {chip}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <h1 className="type-heading mb-2" style={{ color: 'var(--text)' }}>
-        Bulk domein check
-      </h1>
-      <p className="text-sm mb-8" style={{ color: 'var(--text-muted)' }}>
-        Plak een lijst met volledige domeinnamen (één per regel of gescheiden door komma&apos;s). Maximaal 50 per keer.
-      </p>
+    <div className="container mx-auto px-5 max-w-3xl py-10">
 
       <div className="space-y-4">
         <div
@@ -211,6 +225,27 @@ export default function BulkCheckPage() {
           )}
         </div>
       )}
+
+      {checkStatus === 'done' && results.length > 0 && (
+        <div
+          className="mt-6 flex flex-wrap gap-4 rounded-xl p-4"
+          style={{ background: 'var(--bg)', border: '1px solid var(--border)' }}
+        >
+          <div className="flex items-center gap-2">
+            <span style={{ fontSize: 18 }}>✅</span>
+            <span className="text-sm font-semibold" style={{ color: 'var(--available)' }}>{available.length} beschikbaar</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span style={{ fontSize: 18 }}>🔒</span>
+            <span className="text-sm font-semibold" style={{ color: 'var(--text-muted)' }}>{taken.length} bezet</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span style={{ fontSize: 18 }}>📊</span>
+            <span className="text-sm" style={{ color: 'var(--text-subtle)' }}>{results.length} totaal gecontroleerd</span>
+          </div>
+        </div>
+      )}
+    </div>
     </div>
   );
 }

@@ -28,6 +28,7 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-0.5">
+          <Link href="/" className="link-nav" aria-label="Home">🏠</Link>
           <Link href="/naam-generator" className="link-nav">Naamgenerator ✦</Link>
           <Link href="/merk-check" className="link-nav">Merkencheck</Link>
           <Link href="/portfolio" className="link-nav">Portfolio</Link>
@@ -40,6 +41,7 @@ export default function Header() {
         </nav>
 
         <nav className="flex md:hidden items-center gap-1">
+          <Link href="/" className="link-nav" aria-label="Home">🏠</Link>
           <Link href="/naam-generator" className="link-nav">✦</Link>
           <Link href="/merk-check" className="link-nav">Merk</Link>
           <Link href="/blog" className="link-nav">Blog</Link>

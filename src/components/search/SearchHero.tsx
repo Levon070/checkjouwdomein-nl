@@ -43,6 +43,7 @@ function BrowserMockup() {
   return (
     <div
       aria-hidden="true"
+      className="mockup-float"
       style={{
         width: 300,
         background: 'white',
@@ -50,7 +51,6 @@ function BrowserMockup() {
         boxShadow: '0 32px 80px rgba(0,0,0,0.14), 0 4px 20px rgba(0,0,0,0.08)',
         border: '1px solid rgba(0,0,0,0.07)',
         overflow: 'hidden',
-        transform: 'rotate(1deg)',
         userSelect: 'none',
       }}
     >
@@ -125,11 +125,18 @@ export default function SearchHero({ initialKeyword = '' }: Props) {
   const [parsedIntent, setParsedIntent] = useState<ParsedIntent | null>(null);
   const [parsingIntent, setParsingIntent] = useState(false);
   const [emptyError, setEmptyError] = useState(false);
+  const [shaking, setShaking] = useState(false);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setRecent(getRecentSearches());
+    // Subtle shake on page load
+    const t = setTimeout(() => {
+      setShaking(true);
+      setTimeout(() => setShaking(false), 600);
+    }, 600);
+    return () => clearTimeout(t);
   }, []);
 
   async function handleSubmit(e: FormEvent) {
@@ -267,7 +274,7 @@ export default function SearchHero({ initialKeyword = '' }: Props) {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="relative max-w-xl mx-auto xl:mx-0 mb-3">
+            <form onSubmit={handleSubmit} className="relative max-w-xl mx-auto xl:mx-0 mb-3" style={shaking ? { animation: 'shake 0.6s ease-in-out' } : {}}>
               <div
                 className="flex rounded-xl overflow-hidden bg-white transition-all duration-200"
                 style={{

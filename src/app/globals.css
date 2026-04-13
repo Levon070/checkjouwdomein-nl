@@ -200,6 +200,22 @@
 }
 
 /* ─── FLOATING DOMAIN PILLS (hero decoratie) ─────────────────────────────── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15%       { transform: translateX(-4px); }
+  30%       { transform: translateX(4px); }
+  45%       { transform: translateX(-3px); }
+  60%       { transform: translateX(3px); }
+  75%       { transform: translateX(-1px); }
+  90%       { transform: translateX(1px); }
+}
+@keyframes mockupFloat {
+  0%, 100% { transform: rotate(1deg) translateY(0px); }
+  50%       { transform: rotate(1deg) translateY(-8px); }
+}
+.mockup-float {
+  animation: mockupFloat 4s ease-in-out infinite;
+}
 @keyframes floatA {
   0%, 100% { transform: translateY(0px) rotate(var(--r, -6deg)); }
   50%       { transform: translateY(-10px) rotate(var(--r, -6deg)); }

@@ -66,7 +66,7 @@ Geef terug als JSON — NIETS anders:
 {"names":[{"name":"naam","rationale":"1-zin NL uitleg waarom dit werkt voor ${sector}"},...]}`;
 
   const res = await client.messages.create({
-    model: 'claude-haiku-4-5',
+    model: 'claude-haiku-4-5-20251001',
     max_tokens: 900,
     system: 'Je bent een expert brand naming consultant. Antwoord ALTIJD met geldige JSON en nooit iets anders.',
     messages: [{ role: 'user', content: prompt }],
@@ -75,7 +75,12 @@ Geef terug als JSON — NIETS anders:
   const text = res.content[0].type === 'text' ? res.content[0].text : '';
   const match = text.match(/\{[\s\S]*\}/);
   if (!match) return [];
-  const parsed = JSON.parse(match[0]);
+  let parsed: { names?: GeneratedName[] };
+  try {
+    parsed = JSON.parse(match[0]);
+  } catch {
+    return [];
+  }
 
   // Post-filter: strip any names that still have banned prefixes
   const BANNED_PREFIXES = ['mijn', 'jouw', 'uw', 'onze', 'de', 'het', 'top', 'best', 'super', 'mega', 'direct', 'online', 'goed', 'snel'];
@@ -114,6 +119,11 @@ export async function GET(request: NextRequest) {
     { revalidate: 3600 }
   );
 
-  const names = await getCached();
-  return NextResponse.json({ names });
+  try {
+    const names = await getCached();
+    return NextResponse.json({ names });
+  } catch (err) {
+    console.error('[generate-names] error:', err);
+    return NextResponse.json({ error: 'Genereren mislukt' }, { status: 500 });
+  }
 }
