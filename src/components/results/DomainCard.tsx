@@ -351,9 +351,31 @@ export default function DomainCard({ suggestion, onCheckSocial }: Props) {
                 </a>
               )}
               {kvkResult && kvkResult.found === false && (
-                <span className="text-xs" style={{ color: 'var(--available)' }}>
-                  ✓ Naam vrij in KVK
-                </span>
+                <div className="space-y-1.5">
+                  <span className="text-xs" style={{ color: 'var(--available)' }}>
+                    ✓ Naam vrij in KVK
+                  </span>
+                  <div className="flex flex-wrap gap-2 mt-1">
+                    <a
+                      href={`https://www.legaldesk.nl/bv-oprichten?utm_source=checkjouwdomein&utm_medium=referral&utm_campaign=kvk`}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-opacity hover:opacity-80"
+                      style={{ background: 'rgba(79,70,229,0.07)', color: 'var(--primary)', border: '1px solid rgba(79,70,229,0.15)', textDecoration: 'none' }}
+                    >
+                      🏢 BV oprichten via Legaldesk →
+                    </a>
+                    <a
+                      href={`https://www.firm24.com/bv-oprichten?utm_source=checkjouwdomein&utm_medium=referral&utm_campaign=kvk`}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-opacity hover:opacity-80"
+                      style={{ background: 'rgba(6,182,212,0.07)', color: '#0891B2', border: '1px solid rgba(6,182,212,0.15)', textDecoration: 'none' }}
+                    >
+                      🏢 BV oprichten via Firm24 →
+                    </a>
+                  </div>
+                </div>
               )}
               {kvkResult && kvkResult.found === null && (
                 <a
