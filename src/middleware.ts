@@ -11,10 +11,10 @@ export async function middleware(request: NextRequest) {
   // Fire-and-forget analytics (don't block the response)
   void recordPageView(request).catch(() => {});
 
-  // Pass pathname to root layout for conditional Header/Footer rendering
-  const response = NextResponse.next();
-  response.headers.set('x-pathname', request.nextUrl.pathname);
-  return response;
+  // Pass pathname as REQUEST header so Server Components (layout) can read it
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-pathname', request.nextUrl.pathname);
+  return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 async function recordPageView(request: NextRequest): Promise<void> {
