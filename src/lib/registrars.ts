@@ -29,9 +29,11 @@ const buildGodaddyUrl = (domain: string) =>
 const buildHostnetUrl = (domain: string) =>
   `https://www.hostnet.nl/domeinnaam/?domain=${domain}&${UTM}`;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const buildMijnhostUrl = (_domain: string) =>
   `https://mijn.host/internet/?tt=31112_1608295_508642_&r=`;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const buildTemblitUrl = (_domain: string) =>
   `https://deals.temblit.com/c?c=39506&m=2453521&a=508642&r=&u=`;
 
