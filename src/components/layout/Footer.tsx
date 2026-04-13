@@ -10,7 +10,7 @@ export default function Footer() {
       }}
     >
       <div className="container mx-auto px-5 py-12 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
           <div>
             <div
               className="text-base font-black mb-3"
@@ -48,6 +48,16 @@ export default function Footer() {
               <li><Link href="/tld-gids" className="link-muted">TLD Gids</Link></li>
               <li><Link href="/tips-domeinnaam" className="link-muted">Tips domeinnaam kiezen</Link></li>
               <li><Link href="/blog" className="link-muted">Blog</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold mb-4" style={{ color: 'var(--text)' }}>
+              Juridisch
+            </h3>
+            <ul className="space-y-2.5">
+              <li><Link href="/privacybeleid" className="link-muted">Privacybeleid</Link></li>
+              <li><Link href="/algemene-voorwaarden" className="link-muted">Algemene Voorwaarden</Link></li>
             </ul>
           </div>
         </div>

@@ -58,7 +58,8 @@ export default function CookieBanner() {
           <p style={{ fontSize: '0.825rem', color: '#5B6070', lineHeight: 1.55 }}>
             CheckJouwDomein.nl gebruikt functionele cookies en, zodra goedgekeurd, advertentiecookies via Google AdSense.
             Jouw gegevens worden nooit verkocht. Lees ons{' '}
-            <a href="/privacybeleid" style={{ color: '#4F46E5', textDecoration: 'underline' }}>privacybeleid</a>.
+            <a href="/privacybeleid" style={{ color: '#4F46E5', textDecoration: 'underline' }}>privacybeleid</a>{' '}
+            en <a href="/algemene-voorwaarden" style={{ color: '#4F46E5', textDecoration: 'underline' }}>algemene voorwaarden</a>.
           </p>
         </div>
       </div>
