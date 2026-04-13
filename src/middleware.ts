@@ -48,7 +48,9 @@ async function recordPageView(request: NextRequest): Promise<void> {
   const geoHeader = request.headers.get('x-nf-geo');
   if (geoHeader) {
     try {
-      const geo = JSON.parse(geoHeader) as {
+      // Netlify stuurt x-nf-geo als base64-encoded JSON
+      const decoded = atob(geoHeader);
+      const geo = JSON.parse(decoded) as {
         city?: string;
         country?: { code?: string; name?: string };
         subdivision?: { name?: string };
@@ -56,10 +58,10 @@ async function recordPageView(request: NextRequest): Promise<void> {
       city = [geo.city, geo.subdivision?.name].filter(Boolean).join(', ');
       country = geo.country?.name ?? geo.country?.code ?? '';
     } catch {
-      country = request.headers.get('x-nf-country') ?? '';
+      country = request.headers.get('x-country') ?? request.headers.get('x-nf-country') ?? '';
     }
   } else {
-    country = request.headers.get('x-nf-country') ?? request.headers.get('cf-ipcountry') ?? '';
+    country = request.headers.get('x-country') ?? request.headers.get('x-nf-country') ?? request.headers.get('cf-ipcountry') ?? '';
   }
 
   // Hash IP for privacy
