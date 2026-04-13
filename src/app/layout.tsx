@@ -57,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="nl" dir="ltr">
       <head>
+        <meta name="google-adsense-account" content="ca-pub-8874800268655239" />
         <link rel="alternate" hrefLang="nl" href="https://checkjouwdomein.nl" />
         <link rel="alternate" hrefLang="x-default" href="https://checkjouwdomein.nl" />
         <JsonLd data={webAppSchema} />
