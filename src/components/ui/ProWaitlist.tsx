@@ -93,11 +93,9 @@ export default function ProWaitlist({ compact = false, context = 'default' }: Pr
           <form
             name="pro-waitlist"
             method="POST"
-            data-netlify="true"
             onSubmit={handleSubmit}
             className="flex flex-col sm:flex-row gap-2 max-w-sm mx-auto"
           >
-            <input type="hidden" name="form-name" value="pro-waitlist" />
             <input
               type="email"
               name="email"
