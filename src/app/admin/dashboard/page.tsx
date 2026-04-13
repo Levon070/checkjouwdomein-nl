@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { getStats, type DashboardStats, type ZEntry } from '@/lib/analytics';
+import { getStats, type ZEntry } from '@/lib/analytics';
 import LiveCounter from '@/components/analytics/LiveCounter';
 import { DailyChart, HourlyChart, FunnelViz } from '@/components/analytics/DashboardCharts';
 
