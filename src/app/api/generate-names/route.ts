@@ -21,36 +21,54 @@ export interface GeneratedName {
   rationale: string;
 }
 
-async function fetchNames(sector: string, style: string, maxLen: number): Promise<GeneratedName[]> {
+async function fetchNames(
+  sector: string,
+  style: string,
+  maxLen: number,
+  keywords: string,
+  location: string,
+): Promise<GeneratedName[]> {
   const styleDesc: Record<string, string> = {
-    professioneel: 'professioneel en zakelijk — vertrouwen uitstralen',
-    speels:        'speels en vriendelijk — laagdrempelig en leuk',
-    modern:        'modern en tech-forward — strak en innovatief',
-    lokaal:        'lokaal en Nederlands — herkenbaar en vertrouwd',
-    internationaal:'internationaal — werkt in meerdere talen',
+    professioneel:  'professioneel en zakelijk — vertrouwen en expertise uitstralen',
+    speels:         'speels en vriendelijk — laagdrempelig, warm en benaderbaar',
+    modern:         'modern en tech-forward — strak, innovatief en schaalbaar',
+    lokaal:         'lokaal en Nederlands — herkenbaar, buurtgebonden en authentiek',
+    internationaal: 'internationaal — werkt in meerdere talen, geen typisch Nederlandse woorden',
   };
-  const styleLabel = styleDesc[style] ?? 'professioneel';
+  const styleLabel = styleDesc[style] ?? 'professioneel en zakelijk';
 
-  const prompt = `Bedenk 12 unieke merknamen (zonder extensie) voor een ${sector}-bedrijf.
+  const contextLines = [
+    keywords ? `Kernwoorden/USP van dit bedrijf: ${keywords}` : '',
+    location ? `Locatie/regio: ${location}` : '',
+  ].filter(Boolean).join('\n');
 
+  const prompt = `Je bent een expert brand naming consultant voor Nederlandse MKB-bedrijven.
+Bedenk 15 unieke, merkwaardige bedrijfsnamen (zonder domeinextensie) voor een ${sector}-bedrijf.
+
+${contextLines}
 Stijl: ${styleLabel}
-Maximale lengte: ${maxLen} tekens
-Taal: Nederlands of Engels, maar altijd uitsprekbaar voor Nederlanders
-Formaat: alleen lowercase letters a-z en eventueel één koppelteken
+Maximale naamlengte: ${maxLen} tekens
+Formaat: alleen lowercase letters a-z, eventueel één koppelteken — geen cijfers tenzij echt onderscheidend
 
-Eisen:
-- Memorabel en merkwaardig
-- Niet te generiek (geen "beste${sector}" of "${sector}online")
-- Mix van: woordcombinaties, samengestelde woorden, creatieve afkortingen
-- Vermijd cijfers tenzij ze echt passen bij het merk
+STRIKTE VERBODEN — genereer NOOIT namen die starten met:
+mijn, jouw, uw, onze, de, het, top, best, beste, super, mega, direct, online, goed, snel
 
-Geef terug als JSON — niets anders:
-{"names":[{"name":"naam","rationale":"1-zin uitleg waarom dit werkt voor ${sector}"},...]}`;
+STRIKTE VERBODEN — genereer NOOIT namen die eindigen op:
+online, direct, info, dienst, service
+
+GOEDE namen zijn: kort (≤12 tekens), memorabel, eigen karakter, makkelijk te spellen.
+Voorbeelden van GOEDE namen: boulangerie, verscraft, bakwise, panenco, ambachtco
+Voorbeelden van SLECHTE namen: mijnbakkerij, topbakker, bakkerijdirect, onlinebakker
+
+Mix verplicht: samengestelde woorden, creatieve afkortingen, nieuwgevormde woorden, of Nl/En-mix.
+
+Geef terug als JSON — NIETS anders:
+{"names":[{"name":"naam","rationale":"1-zin NL uitleg waarom dit werkt voor ${sector}"},...]}`;
 
   const res = await client.messages.create({
     model: 'claude-haiku-4-5',
-    max_tokens: 700,
-    system: 'Je bent een expert brand naming consultant voor Nederlandse bedrijven. Antwoord ALTIJD met geldige JSON en niets anders.',
+    max_tokens: 900,
+    system: 'Je bent een expert brand naming consultant. Antwoord ALTIJD met geldige JSON en nooit iets anders.',
     messages: [{ role: 'user', content: prompt }],
   });
 
@@ -58,7 +76,19 @@ Geef terug als JSON — niets anders:
   const match = text.match(/\{[\s\S]*\}/);
   if (!match) return [];
   const parsed = JSON.parse(match[0]);
-  return (parsed.names ?? []).slice(0, 12) as GeneratedName[];
+
+  // Post-filter: strip any names that still have banned prefixes
+  const BANNED_PREFIXES = ['mijn', 'jouw', 'uw', 'onze', 'de', 'het', 'top', 'best', 'super', 'mega', 'direct', 'online', 'goed', 'snel'];
+  const BANNED_SUFFIXES = ['online', 'direct', 'info', 'dienst', 'service'];
+  const filtered = (parsed.names ?? []).filter((n: GeneratedName) => {
+    const name = (n.name ?? '').toLowerCase();
+    if (!name || name.length < 3 || name.length > maxLen) return false;
+    if (BANNED_PREFIXES.some(p => name.startsWith(p) && name.length > p.length)) return false;
+    if (BANNED_SUFFIXES.some(s => name.endsWith(s))) return false;
+    return true;
+  });
+
+  return filtered.slice(0, 15) as GeneratedName[];
 }
 
 export async function GET(request: NextRequest) {
@@ -68,17 +98,19 @@ export async function GET(request: NextRequest) {
   }
 
   const { searchParams } = new URL(request.url);
-  const sector = searchParams.get('sector')?.trim().slice(0, 50) ?? '';
-  const style  = searchParams.get('style')?.trim() ?? 'professioneel';
-  const maxLen = Math.min(Number(searchParams.get('maxLen') ?? 15), 20);
+  const sector   = searchParams.get('sector')?.trim().slice(0, 60) ?? '';
+  const style    = searchParams.get('style')?.trim() ?? 'professioneel';
+  const maxLen   = Math.min(Number(searchParams.get('maxLen') ?? 15), 20);
+  const keywords = (searchParams.get('keywords') ?? '').trim().slice(0, 100);
+  const location = (searchParams.get('location') ?? '').trim().slice(0, 60);
 
   if (!sector || sector.length < 2) {
     return NextResponse.json({ error: 'Ongeldige sector' }, { status: 400 });
   }
 
   const getCached = unstable_cache(
-    () => fetchNames(sector, style, maxLen),
-    ['generate-names', sector, style, String(maxLen)],
+    () => fetchNames(sector, style, maxLen, keywords, location),
+    ['generate-names-v2', sector, style, String(maxLen), keywords, location],
     { revalidate: 3600 }
   );
 
