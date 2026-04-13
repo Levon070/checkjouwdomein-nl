@@ -20,8 +20,11 @@ export async function middleware(request: NextRequest) {
 async function recordPageView(request: NextRequest): Promise<void> {
   const url = request.nextUrl;
 
-  // Don't track admin pages or Next.js internals
+  // Don't track admin pages of jezelf als beheerder
   if (url.pathname.startsWith('/admin')) return;
+  const adminToken = request.cookies.get('admin_token')?.value;
+  const secret = process.env.ANALYTICS_SECRET;
+  if (secret && adminToken === secret) return;
 
   const path = url.pathname + (url.search ? url.search : '');
 
