@@ -124,6 +124,7 @@ export default function SearchHero({ initialKeyword = '' }: Props) {
   const [recent, setRecent] = useState<string[]>([]);
   const [parsedIntent, setParsedIntent] = useState<ParsedIntent | null>(null);
   const [parsingIntent, setParsingIntent] = useState(false);
+  const [emptyError, setEmptyError] = useState(false);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -134,7 +135,8 @@ export default function SearchHero({ initialKeyword = '' }: Props) {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const trimmed = value.trim();
-    if (!trimmed) return;
+    if (!trimmed) { setEmptyError(true); return; }
+    setEmptyError(false);
 
     if (trimmed.includes(' ') && !trimmed.includes(',') && process.env.NEXT_PUBLIC_HAS_AI === '1') {
       setParsingIntent(true);
@@ -269,7 +271,7 @@ export default function SearchHero({ initialKeyword = '' }: Props) {
               <div
                 className="flex rounded-xl overflow-hidden bg-white transition-all duration-200"
                 style={{
-                  border: focused ? '1.5px solid var(--primary)' : '1.5px solid var(--border)',
+                  border: emptyError ? '1.5px solid #DC2626' : focused ? '1.5px solid var(--primary)' : '1.5px solid var(--border)',
                   boxShadow: focused ? 'var(--shadow-input), var(--shadow-md)' : 'var(--shadow-md)',
                 }}
               >
@@ -277,7 +279,7 @@ export default function SearchHero({ initialKeyword = '' }: Props) {
                   ref={inputRef}
                   type="text"
                   value={value}
-                  onChange={(e) => setValue(e.target.value)}
+                  onChange={(e) => { setValue(e.target.value); if (emptyError) setEmptyError(false); }}
                   onFocus={() => setFocused(true)}
                   onBlur={() => setFocused(false)}
                   placeholder="bijv. bakker · of · ik wil een bakkerij in amsterdam"
@@ -291,9 +293,12 @@ export default function SearchHero({ initialKeyword = '' }: Props) {
                   </button>
                 </div>
               </div>
-              <p className="text-xs mt-2 text-left pl-1" style={{ color: 'var(--text-subtle)' }}>
-                Typ een zin zoals <em>&ldquo;ik wil een bakkerij in amsterdam&rdquo;</em> — wij extraheren het juiste trefwoord.
-              </p>
+              {emptyError
+                ? <p className="text-xs mt-2 text-left pl-1" style={{ color: '#DC2626' }}>Vul een domeinnaam of keyword in om te zoeken.</p>
+                : <p className="text-xs mt-2 text-left pl-1" style={{ color: 'var(--text-subtle)' }}>
+                    Typ een zin zoals <em>&ldquo;ik wil een bakkerij in amsterdam&rdquo;</em> — wij extraheren het juiste trefwoord.
+                  </p>
+              }
             </form>
 
             {recent.length > 0 && (

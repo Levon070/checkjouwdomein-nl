@@ -5,12 +5,12 @@ import { TldKey } from '@/types';
 import JsonLd from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = {
-  title: 'Beste Domein Registrar Nederland 2025 — Vergelijk Prijzen & Reviews',
+  title: 'Beste Domein Registrar Nederland 2026 — Vergelijk Prijzen & Reviews',
   description:
     'Vergelijk alle Nederlandse domein registrars: TransIP, Mijndomein, Antagonist, Hostnet, GoDaddy en Namecheap. Prijzen, features, klantenservice en eerlijke reviews.',
   alternates: { canonical: 'https://checkjouwdomein.nl/registrars' },
   openGraph: {
-    title: 'Beste Domein Registrar 2025 — Eerlijke Vergelijking',
+    title: 'Beste Domein Registrar 2026 — Eerlijke Vergelijking',
     description: 'Welke registrar is het goedkoopst voor jouw .nl, .com of .be domein? Wij vergelijken prijzen, verlengingskosten en features.',
   },
 };

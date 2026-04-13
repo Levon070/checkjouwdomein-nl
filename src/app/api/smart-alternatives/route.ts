@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const response = await client.messages.create({
-      model: 'claude-haiku-4-5',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 400,
       system: `Je bent een expert domeinnaam-adviseur voor Nederlandse bedrijven.
 Je antwoordt ALTIJD met geldige JSON en niets anders.`,
