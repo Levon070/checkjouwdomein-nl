@@ -20,11 +20,9 @@ export default function ProWaitlist() {
       <form
         name="pro-waitlist"
         method="POST"
-        data-netlify="true"
         className="flex flex-col sm:flex-row gap-2 max-w-sm mx-auto"
         action="/bedankt"
       >
-        <input type="hidden" name="form-name" value="pro-waitlist" />
         <input
           type="email"
           name="email"
