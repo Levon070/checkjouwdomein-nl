@@ -1,17 +1,16 @@
 import { TldKey } from '@/types';
 import { ORDERED_TLDS } from './tlds';
 
-const NL_PREFIXES = [
-  'mijn', 'de', 'het', 'jouw', 'uw', 'onze', 'pro', 'top', 'best',
-  'snel', 'slim', 'easy', 'super', 'mega', 'direct', 'online', 'goed',
-];
+// Only brandable/additive prefixes — generic ones (mijn, de, top, best, super…) are
+// intentionally excluded because they hurt domain quality scores.
+const NL_PREFIXES = ['pro', 'snel', 'slim', 'easy'];
 
 const NL_SUFFIXES = [
-  'online', 'direct', 'shop', 'dienst', 'hub', 'pro', 'plus',
+  'shop', 'dienst', 'hub', 'pro', 'plus',
   'groep', 'team', 'bureau', 'studio', 'centrum', 'punt',
 ];
 
-const EN_PREFIXES = ['get', 'use', 'try', 'my', 'the', 'best', 'top', 'pro', 'fast', 'smart'];
+const EN_PREFIXES = ['pro', 'fast', 'smart'];
 const EN_SUFFIXES = ['app', 'pro', 'hub', 'base', 'labs', 'co', 'spot', 'zone'];
 
 export interface GeneratedDomain {

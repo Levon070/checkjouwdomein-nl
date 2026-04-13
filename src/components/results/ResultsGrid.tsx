@@ -18,6 +18,9 @@ interface Props {
 export default function ResultsGrid({ keyword }: Props) {
   const {
     availableResults,
+    topResults,
+    goodResults,
+    moreResults,
     takenResults,
     isLoading,
     checkedCount,
@@ -338,22 +341,22 @@ export default function ResultsGrid({ keyword }: Props) {
         </section>
       )}
 
-      {/* Available domains */}
-      {availableResults.length > 0 && (
+      {/* Tier 1 — Beste keuze (score ≥ 80) */}
+      {topResults.length > 0 && (
         <section>
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-3">
             <span className="text-sm font-semibold" style={{ color: 'var(--available)' }}>
-              Beschikbare domeinen
+              Beste keuze
             </span>
             <span
               className="text-xs font-medium px-2 py-0.5 rounded-full"
-              style={{ background: 'rgba(5, 150, 105, 0.08)', color: 'var(--available)' }}
+              style={{ background: 'rgba(5,150,105,0.1)', color: 'var(--available)' }}
             >
-              {availableResults.length}
+              {topResults.length}
             </span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {availableResults.map((s, i) => (
+            {topResults.map((s, i) => (
               <Fragment key={s.full}>
                 <DomainCard suggestion={s} onCheckSocial={checkSocial} />
                 {i === 5 && (
@@ -365,6 +368,45 @@ export default function ResultsGrid({ keyword }: Props) {
             ))}
           </div>
         </section>
+      )}
+
+      {/* Tier 2 — Goed alternatief (score 60–79) */}
+      {goodResults.length > 0 && (
+        <section>
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-sm font-semibold" style={{ color: 'var(--text-muted)' }}>
+              Goed alternatief
+            </span>
+            <span
+              className="text-xs font-medium px-2 py-0.5 rounded-full"
+              style={{ background: 'rgba(0,0,0,0.05)', color: 'var(--text-muted)' }}
+            >
+              {goodResults.length}
+            </span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {goodResults.map((s) => (
+              <DomainCard key={s.full} suggestion={s} onCheckSocial={checkSocial} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Tier 3 — Meer opties (score < 60 or hyphenated, collapsed) */}
+      {moreResults.length > 0 && !isLoading && (
+        <details className="mt-1">
+          <summary
+            className="cursor-pointer text-sm font-medium select-none w-fit"
+            style={{ color: 'var(--text-subtle)' }}
+          >
+            Meer opties ({moreResults.length})
+          </summary>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+            {moreResults.map((s) => (
+              <DomainCard key={s.full} suggestion={s} onCheckSocial={checkSocial} />
+            ))}
+          </div>
+        </details>
       )}
 
       {/* Skeletons while loading */}

@@ -7,20 +7,39 @@ export interface ScoringResult {
   pronunciationScore: number;
 }
 
+// Prefixes that make a domain generic/low-quality (e.g. "mijnbakkerij", "topfotograaf")
+const GENERIC_PREFIXES = [
+  'mijn', 'jouw', 'uw', 'onze', 'de', 'het',
+  'top', 'best', 'super', 'mega', 'direct', 'online', 'goed',
+  'get', 'use', 'try', 'my', 'the', 'fast', 'smart',
+];
+
+function calcGenericPrefixPenalty(name: string): number {
+  for (const prefix of GENERIC_PREFIXES) {
+    if (name.startsWith(prefix) && name.length > prefix.length) {
+      return -30;
+    }
+  }
+  return 0;
+}
+
 export function scoreDomain(name: string, tld: TldKey, originalKeyword: string): ScoringResult {
   const pronunciationScore = calcPronunciationScore(name);
+
+  const genericPrefixPenalty = calcGenericPrefixPenalty(name);
 
   const breakdown: ScoreBreakdown = {
     lengthScore: calcLengthScore(name),
     tldScore: TLD_CONFIG[tld]?.scoreWeight ?? 0,
     keywordScore: calcKeywordScore(name, originalKeyword),
-    hyphenPenalty: name.includes('-') ? -10 : 0,
-    numberPenalty: /\d/.test(name) ? -5 : 0,
+    hyphenPenalty: name.includes('-') ? -15 : 0,
+    numberPenalty: /\d/.test(name) ? -8 : 0,
     pronunciationScore,
   };
 
-  // SEO bonus: short domains rank and convert better
-  const seoBonus = name.length <= 8 ? 5 : 0;
+  // SEO bonus: shorter domains rank and convert better
+  const nameLen = name.replace(/-/g, '').length;
+  const seoBonus = nameLen <= 6 ? 12 : nameLen <= 8 ? 6 : 0;
 
   const raw =
     breakdown.lengthScore +
@@ -28,7 +47,8 @@ export function scoreDomain(name: string, tld: TldKey, originalKeyword: string):
     breakdown.keywordScore +
     seoBonus +
     breakdown.hyphenPenalty +
-    breakdown.numberPenalty;
+    breakdown.numberPenalty +
+    genericPrefixPenalty;
 
   return { score: Math.max(0, Math.min(100, raw)), breakdown, pronunciationScore };
 }
@@ -47,14 +67,14 @@ function calcLengthScore(name: string): number {
 function calcKeywordScore(name: string, keyword: string): number {
   const clean = keyword.toLowerCase().replace(/[^a-z0-9]/g, '');
   const n = name.toLowerCase();
-  if (n === clean) return 40;
+  if (n === clean) return 45;
   if (n.startsWith(clean)) {
-    // Short suffixes (≤2 chars) like "nl", "co" add little value — penalise
+    // Short suffixes (≤2 chars) like "nl", "co" add little value
     const suffix = n.slice(clean.length);
-    return suffix.length <= 2 ? 10 : 25;
+    return suffix.length <= 2 ? 8 : 22;
   }
-  if (n.endsWith(clean)) return 20;
-  if (n.includes(clean)) return 15;
+  if (n.endsWith(clean)) return 15;
+  if (n.includes(clean)) return 10;
   return 0;
 }
 

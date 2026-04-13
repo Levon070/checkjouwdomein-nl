@@ -117,9 +117,20 @@ export function useDomainSearch() {
     setSelectedTlds(tlds);
   }, []);
 
+  // Quality-filtered available results (no hyphens, score >= 55)
   const availableResults = suggestions
-    .filter((s) => s.status === 'available')
+    .filter((s) => s.status === 'available' && !s.name.includes('-') && s.score >= 55)
     .sort((a, b) => b.score - a.score);
+
+  // Tier grouping for progressive disclosure
+  const topResults = availableResults.filter((s) => s.score >= 80);
+  const goodResults = availableResults.filter((s) => s.score >= 60 && s.score < 80);
+  const moreResults = [
+    ...availableResults.filter((s) => s.score < 60),
+    ...suggestions
+      .filter((s) => s.status === 'available' && s.name.includes('-'))
+      .sort((a, b) => b.score - a.score),
+  ];
 
   const takenResults = suggestions.filter((s) => s.status === 'taken');
   const checkingResults = suggestions.filter((s) => s.status === 'checking');
@@ -133,6 +144,9 @@ export function useDomainSearch() {
   return {
     suggestions,
     availableResults,
+    topResults,
+    goodResults,
+    moreResults,
     takenResults,
     checkingResults,
     isLoading,
