@@ -32,6 +32,9 @@ const buildHostnetUrl = (domain: string) =>
 const buildMijnhostUrl = (_domain: string) =>
   `https://mijn.host/internet/?tt=31112_1608295_508642_&r=`;
 
+const buildTemblitUrl = (_domain: string) =>
+  `https://deals.temblit.com/c?c=39506&m=2453521&a=508642&r=&u=`;
+
 // ─── FEATURE TEMPLATES ───────────────────────────────────────────────────────
 
 function features(config: {
@@ -400,6 +403,45 @@ export const REGISTRARS: Registrar[] = [
       autoRenew: true,
       transferLock: true,
       twoFactor: true,
+      support: 'Chat & e-mail (NL)',
+      apiAccess: false,
+      controlPanel: 'Eigen dashboard (NL)',
+    }),
+  },
+  {
+    id: 'temblit',
+    name: 'Temblit',
+    logoPath: '/registrars/temblit.svg',
+    baseUrl: 'https://temblit.com/nl',
+    affiliateUrl: buildTemblitUrl,
+    supportedTlds: ['.nl', '.com', '.net', '.be', '.org'],
+    priceIndicator: 'laag',
+    prices: {
+      '.nl': '±€3/jr',
+      '.com': '±€9/jr',
+      '.net': '±€10/jr',
+      '.be': '±€5/jr',
+      '.org': '±€10/jr',
+    },
+    detailedPrices: {
+      '.nl':  { firstYear: '€2,99', renewal: '€3,99', firstYearRaw: 2.99, renewalRaw: 3.99 },
+      '.com': { firstYear: '€8,99', renewal: '€9,99', firstYearRaw: 8.99, renewalRaw: 9.99 },
+      '.net': { firstYear: '€9,99', renewal: '€10,99', firstYearRaw: 9.99, renewalRaw: 10.99 },
+      '.be':  { firstYear: '€4,99', renewal: '€5,99', firstYearRaw: 4.99, renewalRaw: 5.99 },
+      '.org': { firstYear: '€9,99', renewal: '€10,99', firstYearRaw: 9.99, renewalRaw: 10.99 },
+    },
+    rating: 4.3,
+    reviewCount: 850,
+    highlight: 'Website + domein + hosting in één',
+    panelLanguage: 'nl',
+    features: features({
+      whoisPrivacy: true,
+      freeSsl: true,
+      emailForwarding: true,
+      dnsManagement: true,
+      autoRenew: true,
+      transferLock: true,
+      twoFactor: false,
       support: 'Chat & e-mail (NL)',
       apiAccess: false,
       controlPanel: 'Eigen dashboard (NL)',
