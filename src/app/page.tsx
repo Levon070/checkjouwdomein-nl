@@ -82,7 +82,7 @@ export default function HomePage() {
       <TrustBar />
 
       {/* ── Stats banner ─────────────────────────────────────────────────── */}
-      <div style={{ background: 'linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%)', padding: '28px 20px' }}>
+      <div style={{ background: 'linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%)', padding: '36px 20px' }}>
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
             {[
@@ -90,10 +90,21 @@ export default function HomePage() {
               { num: '50+',     label: 'extensies beschikbaar' },
               { num: '5',       label: 'registrars vergeleken' },
               { num: '100%',    label: 'gratis & open' },
-            ].map((s) => (
-              <div key={s.label}>
-                <div className="text-3xl font-black" style={{ letterSpacing: '-0.04em' }}>{s.num}</div>
-                <div className="text-sm mt-0.5" style={{ color: 'rgba(255,255,255,0.75)' }}>{s.label}</div>
+            ].map((s, i) => (
+              <div
+                key={s.label}
+                style={{
+                  animation: `fadeInUp 0.5s ease both`,
+                  animationDelay: `${i * 0.1}s`,
+                }}
+              >
+                <div
+                  className="text-4xl font-black"
+                  style={{ letterSpacing: '-0.04em', textShadow: '0 2px 12px rgba(0,0,0,0.15)' }}
+                >
+                  {s.num}
+                </div>
+                <div className="text-sm mt-1" style={{ color: 'rgba(255,255,255,0.8)' }}>{s.label}</div>
               </div>
             ))}
           </div>

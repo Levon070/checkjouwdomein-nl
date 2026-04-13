@@ -38,7 +38,7 @@ export default function WatchlistModal({ open, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-end sm:items-start justify-center p-4 sm:pt-20"
       style={{ background: 'rgba(0,0,0,0.4)' }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
@@ -52,10 +52,11 @@ export default function WatchlistModal({ open, onClose }: Props) {
           </h2>
           <button
             onClick={onClose}
-            className="w-7 h-7 flex items-center justify-center rounded-lg text-sm"
-            style={{ background: 'rgba(0,0,0,0.06)', color: 'var(--text-muted)' }}
+            className="w-9 h-9 flex items-center justify-center rounded-full text-base font-bold"
+            style={{ background: 'rgba(0,0,0,0.08)', color: 'var(--text)' }}
+            aria-label="Sluiten"
           >
-            ×
+            ✕
           </button>
         </div>
 
