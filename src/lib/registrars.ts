@@ -29,6 +29,9 @@ const buildGodaddyUrl = (domain: string) =>
 const buildHostnetUrl = (domain: string) =>
   `https://www.hostnet.nl/domeinnaam/?domain=${domain}&${UTM}`;
 
+const buildMijnhostUrl = (_domain: string) =>
+  `https://mijn.host/internet/?tt=31112_1608295_508642_&r=`;
+
 // ─── FEATURE TEMPLATES ───────────────────────────────────────────────────────
 
 function features(config: {
@@ -359,6 +362,47 @@ export const REGISTRARS: Registrar[] = [
       support: 'Telefoon & e-mail (NL)',
       apiAccess: false,
       controlPanel: 'DirectAdmin (NL)',
+    }),
+  },
+  {
+    id: 'mijnhost',
+    name: 'Mijn.host',
+    logoPath: '/registrars/mijnhost.svg',
+    baseUrl: 'https://mijn.host',
+    affiliateUrl: buildMijnhostUrl,
+    supportedTlds: ['.nl', '.com', '.net', '.be', '.org', '.io'],
+    priceIndicator: 'laag',
+    prices: {
+      '.nl': '±€2/jr',
+      '.com': '±€8/jr',
+      '.net': '±€10/jr',
+      '.be': '±€5/jr',
+      '.org': '±€10/jr',
+      '.io': '±€25/jr',
+    },
+    detailedPrices: {
+      '.nl':  { firstYear: '€1,99',  renewal: '€2,49',  firstYearRaw: 1.99,  renewalRaw: 2.49  },
+      '.com': { firstYear: '€7,99',  renewal: '€8,99',  firstYearRaw: 7.99,  renewalRaw: 8.99  },
+      '.net': { firstYear: '€9,99',  renewal: '€10,99', firstYearRaw: 9.99,  renewalRaw: 10.99 },
+      '.be':  { firstYear: '€4,99',  renewal: '€5,99',  firstYearRaw: 4.99,  renewalRaw: 5.99  },
+      '.org': { firstYear: '€9,99',  renewal: '€10,99', firstYearRaw: 9.99,  renewalRaw: 10.99 },
+      '.io':  { firstYear: '€24,99', renewal: '€27,99', firstYearRaw: 24.99, renewalRaw: 27.99 },
+    },
+    rating: 4.5,
+    reviewCount: 1200,
+    highlight: 'Scherpe prijs + gratis hosting',
+    panelLanguage: 'nl',
+    features: features({
+      whoisPrivacy: true,
+      freeSsl: true,
+      emailForwarding: true,
+      dnsManagement: true,
+      autoRenew: true,
+      transferLock: true,
+      twoFactor: true,
+      support: 'Chat & e-mail (NL)',
+      apiAccess: false,
+      controlPanel: 'Eigen dashboard (NL)',
     }),
   },
 ];
