@@ -184,7 +184,7 @@ export default function NaamGeneratorPage() {
           ✦ AI-aangedreven
         </div>
         <h1 className="text-3xl sm:text-4xl font-black mb-3" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
-          AI <span style={{ color: 'var(--primary)' }}>Naamgenerator</span>
+          AI <span className="gradient-text">Naamgenerator</span>
         </h1>
         <p className="text-base max-w-xl mx-auto mb-8" style={{ color: 'var(--text-muted)' }}>
           Nog geen naam? Vertel ons je sector en stijl — wij genereren 15 merkwaardige namen en checken direct .nl, .com én .eu.

@@ -84,7 +84,7 @@ export default function BlogPage() {
         style={{ background: 'linear-gradient(135deg, rgba(79,70,229,0.05) 0%, rgba(6,182,212,0.03) 100%)', borderBottom: '1px solid var(--border)' }}
       >
         <p className="type-label mb-2">Kennis & Advies</p>
-        <h1 className="type-heading mb-3" style={{ color: 'var(--text)' }}>Alles over domeinnamen</h1>
+        <h1 className="type-heading mb-3" style={{ color: 'var(--text)' }}>Alles over <span className="gradient-text">domeinnamen</span></h1>
         <p className="text-base max-w-lg mx-auto" style={{ color: 'var(--text-muted)' }}>
           Praktische tips, vergelijkingen en guides voor Nederlandse ondernemers.
         </p>

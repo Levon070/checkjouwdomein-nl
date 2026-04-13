@@ -83,7 +83,7 @@ export default function BulkCheckPage() {
           </Link>
           <div className="flex items-center gap-3 mb-3">
             <span style={{ fontSize: 32 }}>📋</span>
-            <h1 className="type-heading" style={{ color: 'var(--text)' }}>Bulk domein check</h1>
+            <h1 className="type-heading" style={{ color: 'var(--text)' }}>Bulk domein <span className="gradient-text">check</span></h1>
           </div>
           <p className="text-sm mb-5" style={{ color: 'var(--text-muted)', maxWidth: 520 }}>
             Plak een lijst met volledige domeinnamen (één per regel of gescheiden door komma&apos;s). Wij controleren ze allemaal tegelijk.

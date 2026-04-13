@@ -245,16 +245,7 @@ export default function SearchHero({ initialKeyword = '' }: Props) {
 
             <h1 className="type-display mb-4" style={{ color: 'var(--text)' }}>
               Vind de perfecte{' '}
-              <span
-                style={{
-                  background: 'linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                domeinnaam
-              </span>
+              <span className="gradient-text">domeinnaam</span>
             </h1>
 
             <p className="type-lead mb-8 mx-auto xl:mx-0 max-w-xl">

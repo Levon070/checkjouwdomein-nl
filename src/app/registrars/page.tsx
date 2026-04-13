@@ -168,7 +168,7 @@ export default function RegistrarsPage() {
           </span>
           <h1 className="type-display mb-4" style={{ color: 'var(--text)' }}>
             Beste domein registrar{' '}
-            <span style={{ background: 'linear-gradient(135deg, var(--primary), var(--accent))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            <span className="gradient-text">
               Nederland &amp; België
             </span>
           </h1>
@@ -456,6 +456,35 @@ export default function RegistrarsPage() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* VPN tip */}
+        <section
+          className="rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-5"
+          style={{
+            background: 'linear-gradient(135deg, rgba(6,182,212,0.05) 0%, rgba(79,70,229,0.04) 100%)',
+            border: '1px solid rgba(6,182,212,0.15)',
+          }}
+        >
+          <div className="text-3xl shrink-0">🔒</div>
+          <div className="flex-1 text-center sm:text-left">
+            <p className="font-semibold text-sm mb-1" style={{ color: 'var(--text)' }}>
+              Bescherm je online privacy — ook na registratie
+            </p>
+            <p className="text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              WHOIS-privacy verbergt je gegevens in het register, maar je internetverbinding zelf is nog steeds zichtbaar.
+              Met een VPN surf je anoniemer en veiliger, ook als je je domein beheert op openbare wifi.
+            </p>
+          </div>
+          <a
+            href="https://partner.vpnnederland.nl/c?c=38742&m=2378194&a=508642&r=&u="
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-xl whitespace-nowrap transition-colors"
+            style={{ background: 'rgba(6,182,212,0.1)', color: '#0891B2', border: '1px solid rgba(6,182,212,0.2)', textDecoration: 'none' }}
+          >
+            VPNnederland.nl →
+          </a>
         </section>
 
         {/* CTA */}

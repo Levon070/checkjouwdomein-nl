@@ -253,7 +253,7 @@ export default function PortfolioPage() {
           <div className="flex items-center gap-3 mb-3">
             <span style={{ fontSize: 32 }}>🗂️</span>
             <h1 className="type-heading" style={{ color: 'var(--text)' }}>
-              Mijn <span style={{ color: 'var(--primary)' }}>domeinportefeuille</span>
+              Mijn <span className="gradient-text">domeinportefeuille</span>
             </h1>
           </div>
           <p className="text-sm mb-5" style={{ color: 'var(--text-muted)', maxWidth: 520 }}>
