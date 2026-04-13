@@ -18,25 +18,68 @@ function isRateLimited(ip: string): boolean {
   return entry.count > MAX_REQUESTS_PER_MINUTE;
 }
 
-/** Check DNS records via Cloudflare DoH — used to detect recently-dropped domains */
+/** Check DNS NS records via Cloudflare DoH — used to detect recently-dropped domains */
 async function hasDnsRecords(domain: string): Promise<boolean> {
   try {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 3000);
     const res = await fetch(
       `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=NS`,
-      {
-        headers: { Accept: 'application/dns-json' },
-        signal: controller.signal,
-      }
+      { headers: { Accept: 'application/dns-json' }, signal: controller.signal }
     );
     clearTimeout(timer);
     if (!res.ok) return false;
     const data = await res.json();
-    // Status 0 = NOERROR with answers means active DNS
     return data.Status === 0 && Array.isArray(data.Answer) && data.Answer.length > 0;
   } catch {
     return false;
+  }
+}
+
+/** Check MX records — proxy for "actively used as email" */
+async function hasMxRecords(domain: string): Promise<boolean> {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 3000);
+    const res = await fetch(
+      `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=MX`,
+      { headers: { Accept: 'application/dns-json' }, signal: controller.signal }
+    );
+    clearTimeout(timer);
+    if (!res.ok) return false;
+    const data = await res.json();
+    return data.Status === 0 && Array.isArray(data.Answer) && data.Answer.length > 0;
+  } catch {
+    return false;
+  }
+}
+
+/** Fetch Wayback Machine archive info for dropped domains */
+async function fetchWayback(domain: string): Promise<{
+  snapshots: number;
+  firstYear: number;
+  oldestUrl: string;
+} | null> {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 4000);
+    const res = await fetch(
+      `https://web.archive.org/cdx/search/cdx?url=${encodeURIComponent(domain)}&output=json&limit=100&fl=timestamp&fastLatest=true`,
+      { signal: controller.signal }
+    );
+    clearTimeout(timer);
+    if (!res.ok) return null;
+    const rows = await res.json() as string[][];
+    // First row is the header ["timestamp"]
+    const dataRows = rows.slice(1);
+    if (dataRows.length === 0) return null;
+    const snapshots = dataRows.length;
+    const oldest = dataRows[dataRows.length - 1]?.[0] ?? '';
+    const firstYear = oldest.length >= 4 ? parseInt(oldest.slice(0, 4), 10) : new Date().getFullYear();
+    const oldestUrl = `https://web.archive.org/web/${oldest}/${domain}`;
+    return { snapshots, firstYear, oldestUrl };
+  } catch {
+    return null;
   }
 }
 
@@ -66,16 +109,28 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Ongeldige domeinnaam' }, { status: 400 });
   }
 
+  const domain = `${name}${tld}`;
   const result = await checkDomainAvailability(name, tld);
 
-  // For available domains: check if it has DNS records (= recently dropped)
   let wasDropped = false;
+  let hasMx: boolean | undefined;
+  let wayback: { snapshots: number; firstYear: number; oldestUrl: string } | undefined;
+
   if (result.status === 'available') {
-    wasDropped = await hasDnsRecords(`${name}${tld}`);
+    // Check for recently-dropped domain (has NS but no RDAP registration)
+    wasDropped = await hasDnsRecords(domain);
+
+    if (wasDropped) {
+      // For dropped domains: fetch Wayback data in parallel (non-blocking)
+      wayback = (await fetchWayback(domain)) ?? undefined;
+    }
+  } else if (result.status === 'taken') {
+    // For taken domains: check MX records to detect parked domains
+    hasMx = await hasMxRecords(domain);
   }
 
   return NextResponse.json(
-    { ...result, wasDropped },
+    { ...result, wasDropped, hasMx, wayback },
     {
       headers: {
         'Cache-Control':

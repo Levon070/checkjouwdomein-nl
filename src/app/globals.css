@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── UTILITIES ──────────────────────────────────────────────────────────── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
+
 /* ─── DESIGN TOKENS ──────────────────────────────────────────────────────── */
 :root {
   /* Fundament — koel wit, niet #fff */
@@ -181,13 +185,84 @@
 }
 .blob-hero-1 {
   width: 560px; height: 560px;
-  background: radial-gradient(circle, rgba(79,70,229,0.09) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(79,70,229,0.13) 0%, transparent 70%);
   top: -160px; right: -80px;
 }
 .blob-hero-2 {
   width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(6,182,212,0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(6,182,212,0.10) 0%, transparent 70%);
   bottom: -80px; left: -60px;
+}
+.blob-hero-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%);
+  top: 30%; left: 20%;
+}
+
+/* ─── FLOATING DOMAIN PILLS (hero decoratie) ─────────────────────────────── */
+@keyframes floatA {
+  0%, 100% { transform: translateY(0px) rotate(var(--r, -6deg)); }
+  50%       { transform: translateY(-10px) rotate(var(--r, -6deg)); }
+}
+@keyframes floatB {
+  0%, 100% { transform: translateY(0px) rotate(var(--r, 4deg)); }
+  50%       { transform: translateY(-8px) rotate(var(--r, 4deg)); }
+}
+@keyframes floatC {
+  0%, 100% { transform: translateY(0px) rotate(var(--r, 2deg)); }
+  50%       { transform: translateY(-12px) rotate(var(--r, 2deg)); }
+}
+.float-pill {
+  position: absolute;
+  pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+}
+.float-pill-available {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(5,150,105,0.25);
+  color: #059669;
+}
+.float-pill-checking {
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(79,70,229,0.2);
+  color: var(--primary);
+}
+
+/* ─── DOT GRID ───────────────────────────────────────────────────────────── */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(0,0,0,0.055) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ─── FEATURE CARD ───────────────────────────────────────────────────────── */
+.feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.feature-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: rgba(79,70,229,0.15);
+}
+
+/* ─── SECTION DIVIDER ────────────────────────────────────────────────────── */
+.section-alt {
+  background: linear-gradient(135deg, rgba(79,70,229,0.03) 0%, rgba(6,182,212,0.02) 100%);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
 }
 
 /* ─── INTERACTIVE UTILITIES ──────────────────────────────────────────────── */
@@ -274,6 +349,75 @@
 /* ─── PROGRESS BAR ───────────────────────────────────────────────────────── */
 .progress-glow {
   box-shadow: 0 0 8px rgba(79, 70, 229, 0.2);
+}
+
+/* ─── FADE IN UP (section entries) ──────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up {
+  animation: fadeInUp 0.5s ease both;
+}
+
+/* ─── STATS BANNER ───────────────────────────────────────────────────────── */
+.stats-banner {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  color: white;
+}
+
+/* ─── BLOG CARD ──────────────────────────────────────────────────────────── */
+.blog-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.blog-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+.blog-card img {
+  transition: transform 0.4s ease;
+}
+.blog-card:hover img {
+  transform: scale(1.04);
+}
+
+/* ─── GRADIENT BORDER CARD ───────────────────────────────────────────────── */
+.gradient-border {
+  position: relative;
+  border-radius: var(--radius-lg);
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(79,70,229,0.3), rgba(6,182,212,0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ─── SECTION ACCENT VARIANTS ────────────────────────────────────────────── */
+.section-indigo {
+  background: linear-gradient(135deg, rgba(79,70,229,0.05) 0%, rgba(79,70,229,0.02) 100%);
+  border: 1px solid rgba(79,70,229,0.10);
+  border-radius: var(--radius-xl);
+}
+.section-green {
+  background: linear-gradient(135deg, rgba(5,150,105,0.05) 0%, rgba(16,185,129,0.02) 100%);
+  border: 1px solid rgba(5,150,105,0.10);
+  border-radius: var(--radius-xl);
+}
+.section-amber {
+  background: linear-gradient(135deg, rgba(245,158,11,0.06) 0%, rgba(251,191,36,0.02) 100%);
+  border: 1px solid rgba(245,158,11,0.12);
+  border-radius: var(--radius-xl);
 }
 
 /* ─── REDUCE MOTION ──────────────────────────────────────────────────────── */

@@ -10,8 +10,18 @@ const POPULAR_KEYWORDS = [
 const BLOG_SLUGS = [
   'beste-domeinnaam-kiezen',
   'nl-vs-com-domein',
-  'domeinnaam-tips-2025',
+  'domeinnaam-tips-2026',
   'wat-is-een-domein',
+  'goedkoopste-domeinnaam-registreren',
+  'domeinnaam-voor-webshop',
+  'domeinnaam-verhuizen',
+  'subdomeinen-uitgelegd',
+  'domeinnaam-ideeën-genereren',
+  'ssl-certificaat-domeinnaam',
+  'domeinnaam-parkeren',
+  'domein-extensies-vergelijken',
+  'domeinnaam-verkopen',
+  'domeinnaam-en-hosting-verschil',
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -20,9 +30,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: base, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
+    { url: `${base}/naam-generator`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${base}/merk-check`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
     { url: `${base}/tld-gids`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${base}/tips-domeinnaam`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${base}/registrars`, lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
+    { url: `${base}/bulk-check`, lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
+    { url: `${base}/portfolio`, lastModified: now, changeFrequency: 'weekly', priority: 0.70 },
     { url: `${base}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${base}/favorieten`, lastModified: now, changeFrequency: 'never', priority: 0.3 },
   ];
 
   const keywordPages: MetadataRoute.Sitemap = POPULAR_KEYWORDS.map((kw) => ({

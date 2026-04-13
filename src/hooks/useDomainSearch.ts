@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
-import { generateDomainSuggestions } from '@/lib/domain-generator';
+import { generateDomainSuggestions, sanitizeKeyword } from '@/lib/domain-generator';
 import { scoreDomain } from '@/lib/domain-scorer';
 import { DomainSuggestion, DomainStatus, TldKey } from '@/types';
 import { ORDERED_TLDS } from '@/lib/tlds';
@@ -66,6 +66,9 @@ export function useDomainSearch() {
                       ...item,
                       status: data.status as DomainStatus,
                       wasDropped: data.wasDropped ?? false,
+                      expiresAt: data.expiresAt ?? undefined,
+                      hasMx: data.hasMx,
+                      wayback: data.wayback ?? undefined,
                     }
                   : item
               )
@@ -121,6 +124,12 @@ export function useDomainSearch() {
   const takenResults = suggestions.filter((s) => s.status === 'taken');
   const checkingResults = suggestions.filter((s) => s.status === 'checking');
 
+  const cleanKeyword = sanitizeKeyword(keyword);
+
+  const exactTakenTlds = suggestions
+    .filter((s) => s.name === cleanKeyword && s.status === 'taken')
+    .map((s) => s.tld);
+
   return {
     suggestions,
     availableResults,
@@ -134,6 +143,7 @@ export function useDomainSearch() {
     updateSelectedTlds,
     search,
     checkSocial,
+    exactTakenTlds,
   };
 }
 

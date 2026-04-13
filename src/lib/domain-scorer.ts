@@ -19,10 +19,14 @@ export function scoreDomain(name: string, tld: TldKey, originalKeyword: string):
     pronunciationScore,
   };
 
+  // SEO bonus: short domains rank and convert better
+  const seoBonus = name.length <= 8 ? 5 : 0;
+
   const raw =
     breakdown.lengthScore +
     breakdown.tldScore +
     breakdown.keywordScore +
+    seoBonus +
     breakdown.hyphenPenalty +
     breakdown.numberPenalty;
 
@@ -44,7 +48,11 @@ function calcKeywordScore(name: string, keyword: string): number {
   const clean = keyword.toLowerCase().replace(/[^a-z0-9]/g, '');
   const n = name.toLowerCase();
   if (n === clean) return 40;
-  if (n.startsWith(clean)) return 25;
+  if (n.startsWith(clean)) {
+    // Short suffixes (≤2 chars) like "nl", "co" add little value — penalise
+    const suffix = n.slice(clean.length);
+    return suffix.length <= 2 ? 10 : 25;
+  }
   if (n.endsWith(clean)) return 20;
   if (n.includes(clean)) return 15;
   return 0;

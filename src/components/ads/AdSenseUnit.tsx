@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface Props {
   slot: string;
@@ -15,11 +15,14 @@ declare global {
 }
 
 export default function AdSenseUnit({ slot, format = 'responsive', className }: Props) {
+  const pushed = useRef(false);
   useEffect(() => {
+    if (pushed.current) return;
+    pushed.current = true;
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch {
-      // AdSense not loaded
+      // AdSense not loaded yet — publisher ID not configured
     }
   }, []);
 

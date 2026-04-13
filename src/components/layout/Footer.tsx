@@ -52,6 +52,24 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Trust badges */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          {[
+            { icon: '✓', label: 'Real-time RDAP data' },
+            { icon: '✦', label: '100% Gratis' },
+            { icon: '🇳🇱', label: 'SIDN .nl data' },
+          ].map(({ icon, label }) => (
+            <span
+              key={label}
+              className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full"
+              style={{ background: 'rgba(79,70,229,0.06)', color: 'var(--text-muted)', border: '1px solid rgba(79,70,229,0.12)' }}
+            >
+              <span>{icon}</span>
+              {label}
+            </span>
+          ))}
+        </div>
+
         <div className="pt-6 space-y-2" style={{ borderTop: '1px solid var(--border)' }}>
           <p className="text-xs" style={{ color: 'var(--text-subtle)' }}>
             © {new Date().getFullYear()} CheckJouwDomein.nl — Gratis domein checker voor Nederland en België.

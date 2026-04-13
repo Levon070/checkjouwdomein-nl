@@ -23,17 +23,21 @@ export const metadata: Metadata = {
     'Controleer gratis of jouw domeinnaam beschikbaar is. Bekijk .nl, .com, .be en meer. Vergelijk prijzen bij TransIP, Mijndomein en andere registrars.',
   keywords: ['domein check', 'domeinnaam beschikbaar', 'domein registreren', 'domeinnaam zoeken', 'domein checker'],
   alternates: { canonical: 'https://checkjouwdomein.nl' },
+  icons: {
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    shortcut: '/favicon.svg',
+  },
   openGraph: {
     type: 'website',
     locale: 'nl_NL',
     siteName: 'CheckJouwDomein.nl',
-    images: [{ url: '/og-default.png', width: 1200, height: 630, alt: 'CheckJouwDomein.nl' }],
+    images: [{ url: '/api/og', width: 1200, height: 630, alt: 'CheckJouwDomein.nl — Gratis domeinnaam checker' }],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/og-default.png'],
+    images: ['/api/og'],
   },
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' } },
 };
 
 const webAppSchema = {

@@ -55,9 +55,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Ongeldig handle' }, { status: 400 });
   }
 
-  const [instagram, twitter] = await Promise.all([
+  const [instagram, twitter, tiktok] = await Promise.all([
     checkHandle(`https://www.instagram.com/${handle}/`),
     checkHandle(`https://x.com/${handle}`),
+    checkHandle(`https://www.tiktok.com/@${handle}`),
   ]);
 
   return NextResponse.json(
@@ -65,8 +66,10 @@ export async function GET(request: NextRequest) {
       handle,
       instagram,
       twitter,
+      tiktok,
       instagramUrl: `https://www.instagram.com/${handle}/`,
       twitterUrl: `https://x.com/${handle}`,
+      tiktokUrl: `https://www.tiktok.com/@${handle}`,
     },
     {
       headers: { 'Cache-Control': 's-maxage=3600' },

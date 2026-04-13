@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import WatchlistButton from '@/components/ui/WatchlistButton';
+import CartButton from '@/components/ui/CartButton';
 
 export default function Header() {
   return (
@@ -25,16 +27,23 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-0.5">
-          <Link href="/bulk-check" className="link-nav">Bulk check</Link>
-          <Link href="/favorieten" className="link-nav">Favorieten ♡</Link>
-          <Link href="/tld-gids" className="link-nav">TLD Gids</Link>
+          <Link href="/naam-generator" className="link-nav">Naamgenerator ✦</Link>
+          <Link href="/merk-check" className="link-nav">Merkencheck</Link>
+          <Link href="/portfolio" className="link-nav">Portfolio</Link>
+          <Link href="/registrars" className="link-nav">Registrars</Link>
+          <Link href="/bulk-check" className="link-nav">Bulk</Link>
           <Link href="/blog" className="link-nav">Blog</Link>
+          <WatchlistButton />
+          <CartButton />
         </nav>
 
         <nav className="flex md:hidden items-center gap-1">
-          <Link href="/bulk-check" className="link-nav">Bulk</Link>
-          <Link href="/favorieten" className="link-nav">♡</Link>
+          <Link href="/naam-generator" className="link-nav">✦</Link>
+          <Link href="/merk-check" className="link-nav">Merk</Link>
+          <Link href="/portfolio" className="link-nav">Portfolio</Link>
           <Link href="/blog" className="link-nav">Blog</Link>
+          <WatchlistButton />
+          <CartButton />
         </nav>
       </div>
     </header>

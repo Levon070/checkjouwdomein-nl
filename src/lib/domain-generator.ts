@@ -7,12 +7,12 @@ const NL_PREFIXES = [
 ];
 
 const NL_SUFFIXES = [
-  'online', 'direct', 'nu', 'shop', 'dienst', 'hub', 'pro', 'plus',
-  'groep', 'team', 'bureau', 'studio', 'centrum', 'punt', 'nl',
+  'online', 'direct', 'shop', 'dienst', 'hub', 'pro', 'plus',
+  'groep', 'team', 'bureau', 'studio', 'centrum', 'punt',
 ];
 
-const EN_PREFIXES = ['get', 'use', 'try', 'go', 'my', 'the', 'best', 'top', 'pro', 'ez', 'fast', 'smart'];
-const EN_SUFFIXES = ['app', 'hq', 'pro', 'hub', 'base', 'labs', 'co', 'spot', 'zone'];
+const EN_PREFIXES = ['get', 'use', 'try', 'my', 'the', 'best', 'top', 'pro', 'fast', 'smart'];
+const EN_SUFFIXES = ['app', 'pro', 'hub', 'base', 'labs', 'co', 'spot', 'zone'];
 
 export interface GeneratedDomain {
   name: string;
@@ -51,39 +51,38 @@ function generateSingleKeyword(clean: string, tlds: TldKey[]): GeneratedDomain[]
   names.add(clean);
 
   for (const prefix of NL_PREFIXES) {
-    names.add(`${prefix}${clean}`);
-    if (clean.length >= 4) names.add(`${prefix}-${clean}`);
-  }
-
-  for (const suffix of NL_SUFFIXES) {
-    names.add(`${clean}${suffix}`);
-    if (clean.length >= 4) names.add(`${clean}-${suffix}`);
-  }
-
-  for (const prefix of EN_PREFIXES) {
-    names.add(`${prefix}${clean}`);
-  }
-  for (const suffix of EN_SUFFIXES) {
-    names.add(`${clean}${suffix}`);
-  }
-
-  if (clean.length > 6) {
-    const abbr = abbreviate(clean);
-    if (abbr) {
-      names.add(abbr);
-      names.add(`${abbr}nl`);
+    const candidate = `${prefix}${clean}`;
+    if (passesQualityGate(candidate)) names.add(candidate);
+    if (clean.length >= 4) {
+      const hyphenated = `${prefix}-${clean}`;
+      if (passesQualityGate(hyphenated)) names.add(hyphenated);
     }
   }
 
-  const vowelDrop = dropVowels(clean);
-  if (vowelDrop && vowelDrop.length >= 4 && vowelDrop !== clean) {
-    names.add(vowelDrop);
+  for (const suffix of NL_SUFFIXES) {
+    const candidate = `${clean}${suffix}`;
+    if (passesQualityGate(candidate)) names.add(candidate);
+    if (clean.length >= 4) {
+      const hyphenated = `${clean}-${suffix}`;
+      if (passesQualityGate(hyphenated)) names.add(hyphenated);
+    }
+  }
+
+  for (const prefix of EN_PREFIXES) {
+    const candidate = `${prefix}${clean}`;
+    if (passesQualityGate(candidate)) names.add(candidate);
+  }
+  for (const suffix of EN_SUFFIXES) {
+    const candidate = `${clean}${suffix}`;
+    if (passesQualityGate(candidate)) names.add(candidate);
   }
 
   const words = clean.split('-');
   if (words.length > 1) {
-    names.add(words.join(''));
-    names.add(words[0] + words[words.length - 1]);
+    const joined = words.join('');
+    if (passesQualityGate(joined)) names.add(joined);
+    const firstLast = words[0] + words[words.length - 1];
+    if (firstLast !== joined && passesQualityGate(firstLast)) names.add(firstLast);
   }
 
   const sorted = Array.from(names).sort((a, b) => {
@@ -111,15 +110,19 @@ function generateMultiKeyword(keywords: string[], tlds: TldKey[]): GeneratedDoma
   for (let i = 0; i < keywords.length; i++) {
     for (let j = 0; j < keywords.length; j++) {
       if (i === j) continue;
-      names.add(`${keywords[i]}${keywords[j]}`);
-      names.add(`${keywords[i]}-${keywords[j]}`);
+      const joined = `${keywords[i]}${keywords[j]}`;
+      const hyphenated = `${keywords[i]}-${keywords[j]}`;
+      if (passesQualityGate(joined)) names.add(joined);
+      if (passesQualityGate(hyphenated)) names.add(hyphenated);
     }
   }
 
   // All keywords joined
   if (keywords.length >= 3) {
-    names.add(keywords.join(''));
-    names.add(keywords.join('-'));
+    const joined = keywords.join('');
+    const hyphenated = keywords.join('-');
+    if (passesQualityGate(joined)) names.add(joined);
+    if (passesQualityGate(hyphenated)) names.add(hyphenated);
   }
 
   // Each keyword individually
@@ -129,17 +132,12 @@ function generateMultiKeyword(keywords: string[], tlds: TldKey[]): GeneratedDoma
 
   // Primary keyword with prefixes/suffixes
   for (const prefix of NL_PREFIXES.slice(0, 6)) {
-    names.add(`${prefix}${primary}`);
+    const candidate = `${prefix}${primary}`;
+    if (passesQualityGate(candidate)) names.add(candidate);
   }
   for (const suffix of NL_SUFFIXES.slice(0, 6)) {
-    names.add(`${primary}${suffix}`);
-  }
-
-  // Abbreviation of combination
-  const combined = keywords.join('');
-  if (combined.length > 6) {
-    const abbr = abbreviate(combined);
-    if (abbr) names.add(abbr);
+    const candidate = `${primary}${suffix}`;
+    if (passesQualityGate(candidate)) names.add(candidate);
   }
 
   const sorted = Array.from(names).sort((a, b) => {
@@ -173,20 +171,20 @@ export function sanitizeKeyword(kw: string): string {
     .replace(/^-|-$/g, '');
 }
 
+function passesQualityGate(name: string): boolean {
+  const letters = name.replace(/-/g, '');
+  const vowelCount = (letters.match(/[aeiou]/g) ?? []).length;
+  if (vowelCount < 2) return false;
+  if (name.endsWith('nl')) return false;
+  if (name.length > 15) return false;
+  return true;
+}
+
 function isValidDomainName(name: string): boolean {
   if (name.length < 2 || name.length > 63) return false;
   if (name.startsWith('-') || name.endsWith('-')) return false;
   if (!/^[a-z0-9-]+$/.test(name)) return false;
   return true;
-}
-
-function abbreviate(word: string): string | null {
-  const consonants = word.replace(/[aeiou]/g, '');
-  return consonants.length >= 3 ? consonants.slice(0, 5) : null;
-}
-
-function dropVowels(word: string): string {
-  return word[0] + word.slice(1).replace(/[aeiou]/g, '');
 }
 
 function deriveStrategy(name: string, original: string): string {

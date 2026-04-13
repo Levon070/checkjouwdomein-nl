@@ -4,42 +4,109 @@ import ResultsGrid from '@/components/results/ResultsGrid';
 import FaqSection from '@/components/sections/FaqSection';
 import AdSenseUnit from '@/components/ads/AdSenseUnit';
 import JsonLd from '@/components/seo/JsonLd';
+import { checkDomainAvailability } from '@/lib/rdap-checker';
+
+export const revalidate = 86400;
 
 interface Props {
   params: Promise<{ keyword: string }>;
 }
 
+function parseKeyword(raw: string): { kw: string; city: string | null; display: string } {
+  // Detect "bakkerij-amsterdam" pattern
+  const cityList = [
+    'amsterdam', 'rotterdam', 'den-haag', 'utrecht', 'eindhoven',
+    'groningen', 'tilburg', 'almere', 'breda', 'nijmegen',
+    'antwerpen', 'gent', 'brussel',
+  ];
+  for (const city of cityList) {
+    if (raw.endsWith(`-${city}`)) {
+      const kw = raw.slice(0, -(city.length + 1));
+      const cityDisplay = city.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      return { kw, city: cityDisplay, display: `${kw} ${cityDisplay}` };
+    }
+  }
+  return { kw: raw, city: null, display: raw };
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { keyword } = await params;
-  const kw = decodeURIComponent(keyword);
-  const cap = kw.charAt(0).toUpperCase() + kw.slice(1);
+  const raw = decodeURIComponent(keyword);
+  const { kw, city, display } = parseKeyword(raw);
+  const cap = display.charAt(0).toUpperCase() + display.slice(1);
+
+  const title = city
+    ? `${cap} domeinnaam — Check beschikbaarheid voor jouw ${kw} in ${city}`
+    : `${cap} domein beschikbaar? Check alle opties`;
+
+  const description = city
+    ? `Op zoek naar een domeinnaam voor je ${kw} in ${city}? Controleer ${kw}${city.toLowerCase().replace(' ', '')}.nl en meer. Direct registreren, gratis check.`
+    : `Controleer welke domeinnamen met "${kw}" nog beschikbaar zijn. Vergelijk .nl, .com, .be en meer. Direct registreren via TransIP, Mijndomein en andere registrars.`;
 
   return {
-    title: `${cap} domein beschikbaar? Check alle opties`,
-    description: `Controleer welke domeinnamen met "${kw}" nog beschikbaar zijn. Vergelijk .nl, .com, .be en meer. Direct registreren via TransIP, Mijndomein en andere registrars.`,
-    alternates: {
-      canonical: `https://checkjouwdomein.nl/zoek/${keyword}`,
-    },
+    title,
+    description,
+    alternates: { canonical: `https://checkjouwdomein.nl/zoek/${keyword}` },
     openGraph: {
-      title: `${cap} domein beschikbaar? — CheckJouwDomein.nl`,
-      description: `Vind de perfecte domeinnaam voor "${kw}". Bekijk alle beschikbare extensies en vergelijk registrars.`,
+      title: `${cap} domein — CheckJouwDomein.nl`,
+      description,
     },
   };
 }
 
 export function generateStaticParams() {
-  const keywords = [
+  const baseKeywords = [
     'webshop', 'restaurant', 'freelancer', 'consultant', 'fotografie',
     'blog', 'portfolio', 'startup', 'app', 'coaching', 'advocaat',
     'tandarts', 'kapper', 'bakkerij', 'boekhouder', 'bv', 'architect',
     'schilder', 'loodgieter', 'elektricien',
+    'fysiotherapeut', 'huisarts', 'psycholoog', 'dierenarts', 'masseur',
+    'personal-trainer', 'yoga', 'coach',
+    'catering', 'snackbar', 'lunchroom', 'sushi',
+    'bezorging', 'accountant', 'notaris', 'recruiter', 'makelaar',
+    'vastgoed', 'aannemer', 'timmerman', 'dakdekker', 'glazenwasser',
+    'bloemist', 'kledingwinkel', 'boekenwinkel', 'cadeauwinkel', 'schoenenwinkel',
+    'webdesigner', 'copywriter', 'developer', 'ict', 'podcast',
+    'grafisch-ontwerper', 'vertaler',
   ];
-  return keywords.map((keyword) => ({ keyword }));
+
+  // Stad × keyword combinaties — targets long-tail zoekverkeer
+  const cities = [
+    'amsterdam', 'rotterdam', 'den-haag', 'utrecht', 'eindhoven',
+    'groningen', 'tilburg', 'almere', 'breda', 'nijmegen',
+    // België
+    'antwerpen', 'gent', 'brussel',
+  ];
+  const cityKeywords = [
+    'bakkerij', 'restaurant', 'kapper', 'tandarts', 'fysiotherapeut',
+    'webdesigner', 'accountant', 'makelaar', 'coach', 'advocaat',
+  ];
+
+  const cityParams = cities.flatMap((city) =>
+    cityKeywords.map((kw) => ({ keyword: `${kw}-${city}` }))
+  );
+
+  return [
+    ...baseKeywords.map((keyword) => ({ keyword })),
+    ...cityParams,
+  ];
 }
 
 export default async function ZoekPage({ params }: Props) {
   const { keyword } = await params;
-  const kw = decodeURIComponent(keyword);
+  const raw = decodeURIComponent(keyword);
+  const { kw, city } = parseKeyword(raw);
+
+  // Server-side RDAP pre-check — always in HTML for Google indexing
+  // Use the full slug as the domain name (e.g. "bakkerij-amsterdam")
+  const domainName = raw.replace(/\s+/g, '-').toLowerCase();
+  const [nlResult, comResult] = await Promise.allSettled([
+    checkDomainAvailability(domainName, '.nl'),
+    checkDomainAvailability(domainName, '.com'),
+  ]);
+
+  const nlStatus = nlResult.status === 'fulfilled' ? nlResult.value.status : null;
+  const comStatus = comResult.status === 'fulfilled' ? comResult.value.status : null;
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -50,6 +117,18 @@ export default async function ZoekPage({ params }: Props) {
     ],
   };
 
+  function statusColor(s: string | null) {
+    if (s === 'available') return 'var(--available)';
+    if (s === 'taken') return 'var(--taken)';
+    return 'var(--text-subtle)';
+  }
+
+  function statusLabel(s: string | null) {
+    if (s === 'available') return 'Beschikbaar';
+    if (s === 'taken') return 'Bezet';
+    return 'Onbekend';
+  }
+
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
@@ -59,16 +138,51 @@ export default async function ZoekPage({ params }: Props) {
         <AdSenseUnit slot="SEARCH_TOP_SLOT" format="leaderboard" />
 
         <div className="my-6">
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-bold" style={{ color: 'var(--text)' }}>
             Domeinnamen voor{' '}
-            <span className="text-blue-600">&ldquo;{kw}&rdquo;</span>
+            <span style={{ color: 'var(--primary)' }}>&ldquo;{kw}{city ? ` ${city}` : ''}&rdquo;</span>
           </h1>
-          <p className="text-gray-500 text-sm mt-1">
-            We controleren de beschikbaarheid van alle suggesties. Beschikbare domeinen verschijnen bovenaan.
+
+          {/* Server-rendered availability pills */}
+          {(nlStatus || comStatus) && (
+            <div className="flex flex-wrap gap-2 mt-3">
+              {nlStatus && (
+                <span
+                  className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full"
+                  style={{
+                    background: nlStatus === 'available' ? 'rgba(5,150,105,0.08)' : 'rgba(220,38,38,0.07)',
+                    color: statusColor(nlStatus),
+                    border: `1px solid ${nlStatus === 'available' ? 'rgba(5,150,105,0.2)' : 'rgba(220,38,38,0.18)'}`,
+                  }}
+                >
+                  {kw}.nl — {statusLabel(nlStatus)}
+                </span>
+              )}
+              {comStatus && (
+                <span
+                  className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full"
+                  style={{
+                    background: comStatus === 'available' ? 'rgba(5,150,105,0.08)' : 'rgba(220,38,38,0.07)',
+                    color: statusColor(comStatus),
+                    border: `1px solid ${comStatus === 'available' ? 'rgba(5,150,105,0.2)' : 'rgba(220,38,38,0.18)'}`,
+                  }}
+                >
+                  {kw}.com — {statusLabel(comStatus)}
+                </span>
+              )}
+            </div>
+          )}
+
+          {/* Static SEO paragraph */}
+          <p className="text-sm mt-3" style={{ color: 'var(--text-muted)' }}>
+            Op zoek naar een domeinnaam voor je <strong>{kw}</strong>
+            {city && <> in <strong>{city}</strong></>}? Wij controleren real-time alle beschikbare opties voor{' '}
+            <strong>{domainName}.nl</strong>, <strong>{domainName}.com</strong> en meer extensies.
+            Vergelijk prijzen bij TransIP, Mijndomein, Hostnet en andere Nederlandse registrars — direct registreren zonder account.
           </p>
         </div>
 
-        <ResultsGrid keyword={kw} />
+        <ResultsGrid keyword={city ? raw : kw} />
 
         <div className="mt-12">
           <AdSenseUnit slot="SEARCH_BOTTOM_SLOT" format="responsive" />
