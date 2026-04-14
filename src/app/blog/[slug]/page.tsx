@@ -52,7 +52,7 @@ export default async function BlogPostPage({ params }: Props) {
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
-    author: { '@type': 'Person', name: post.author ?? 'Redactie CheckJouwDomein.nl' },
+    author: { '@type': 'Person', name: post.author ?? 'Redactie CheckJouwDomein.nl', url: 'https://checkjouwdomein.nl/over-ons' },
     ...(post.image ? { image: post.image } : {}),
     publisher: {
       '@type': 'Organization',

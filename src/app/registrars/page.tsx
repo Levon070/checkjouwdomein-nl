@@ -144,6 +144,30 @@ export default function RegistrarsPage() {
           text: 'Ja, je kunt een domein altijd overdragen (transferen) naar een andere registrar. Dit duurt meestal 5-7 dagen voor .com domeinen en is gratis of kost een kleine vergoeding. Voor .nl domeinen gaat dit via de SIDN en duurt het doorgaans 1-3 dagen.',
         },
       },
+      {
+        '@type': 'Question',
+        name: 'Wat kost een domeinnaam gemiddeld per jaar in Nederland?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Een .nl domeinnaam kost gemiddeld €3 tot €8 per jaar bij de goedkoopste registrars. Met WHOIS-privacy en SSL erbij betaal je €8 tot €20 per jaar. Vergelijk altijd de verlengingsprijs voor de echte totaalkosten over meerdere jaren.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Welke registrar heeft de beste klantenservice in het Nederlands?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Antagonist biedt de beste klantenservice: telefoon, chat én e-mail in het Nederlands. TransIP heeft goede chat en e-mail support. Hostnet biedt ook telefonische ondersteuning maar is duurder.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Moet ik meerdere extensies van mijn domeinnaam registreren?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Voor een Nederlands bedrijf is .nl de primaire keuze. Registreer ook .com als je naam populair is — om te voorkomen dat concurrenten die inpikken. .be is relevant bij activiteiten in België. Meer extensies dan nodig kopen is zelden zinvol.',
+        },
+      },
     ],
   };
 
@@ -297,6 +321,12 @@ export default function RegistrarsPage() {
             >
               ⚠️ ↻ = verlengingsprijs. Let op: sommige registrars hanteren een lage introprijs maar een veel hogere verlengingsprijs.
             </div>
+            <div
+              className="px-5 py-2 text-xs"
+              style={{ background: 'rgba(79,70,229,0.04)', borderTop: '1px solid var(--border)', color: 'var(--text-subtle)' }}
+            >
+              Prijzen gecontroleerd op 14 april 2026 · Wijzigingen voorbehouden
+            </div>
           </div>
         </section>
 
@@ -448,6 +478,18 @@ export default function RegistrarsPage() {
               {
                 q: 'Waarom is GoDaddy goedkoop maar toch niet aanbevolen?',
                 a: 'GoDaddy biedt vaak lage introductiekorting (soms €1,99 voor het eerste jaar), maar de verlengingsprijs kan 4-6× hoger zijn. Daarnaast kost WHOIS-privacy extra en is er geen gratis SSL. Voor Nederlanders is TransIP of Antagonist vaak een betere keuze.',
+              },
+              {
+                q: 'Wat kost een domeinnaam gemiddeld per jaar in Nederland?',
+                a: 'Een .nl domeinnaam kost gemiddeld €3 tot €8 per jaar bij de goedkoopste registrars. Met WHOIS-privacy en SSL erbij betaal je €8 tot €20 per jaar. Vergelijk altijd de verlengingsprijs (niet alleen de introductiekorting) voor de echte totaalkosten.',
+              },
+              {
+                q: 'Welke registrar heeft de beste klantenservice in het Nederlands?',
+                a: 'Antagonist biedt de beste klantenservice: telefoon, chat én e-mail — allemaal in het Nederlands. TransIP heeft goede chat en e-mail support, maar geen telefonische lijn. Voor Nederlandstalige support is Hostnet ook een solide keuze, al is het de duurste registrar.',
+              },
+              {
+                q: 'Moet ik meerdere extensies van mijn domeinnaam registreren?',
+                a: 'Dat hangt af van je situatie. Voor een Nederlands bedrijf is in ieder geval .nl verplicht. Registreer ook .com als je naam makkelijk te typen is — dat voorkomt dat een concurrent jouw bezoekers opvangt. .be is relevant als je actief bent in België. Meer extensies kopen dan nodig is zelden zinvol.',
               },
             ].map(({ q, a }) => (
               <div key={q} className="card p-5">

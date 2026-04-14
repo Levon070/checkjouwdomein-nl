@@ -28,7 +28,7 @@ Cijfers zorgen voor verwarring: bedoel je "4" of "vier"?
 ## 3. Kies .nl voor de Nederlandse markt
 
 Als je je richt op Nederlandse klanten, kies dan voor .nl. Het geeft vertrouwen en Google
-geeft .nl-domeinen een voordeel in de Nederlandse zoekresultaten.
+geeft .nl-domeinen een voordeel in de Nederlandse zoekresultaten. Het <a href="https://www.sidn.nl" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">.nl-register wordt beheerd door SIDN</a>, de stichting die kwaliteits- en veiligheidsstandaarden voor .nl bewaakt.
 
 ## 4. Vermijd merknamen van anderen
 
@@ -64,7 +64,7 @@ Test je favorieten door de naam hardop te zeggen aan iemand die hem nog niet ken
 
 Een van de meest voorkomende fouten is kiezen voor een naam die te lang is. Alles boven de 20 tekens wordt zelden goed onthouden. Een andere valkuil is een naam die moeilijk te spellen is — denk aan woorden met dubbele letters, ongebruikelijke combinaties of vreemde klanken.
 
-Ook gevaarlijk: een naam kiezen die te sterk lijkt op die van een bekende concurrent. Dit kan leiden tot verwarring bij klanten én juridische problemen als de concurrent een merk heeft geregistreerd. Controleer altijd via EUIPO of Benelux Merkenbureau of de naam vrij is.
+Ook gevaarlijk: een naam kiezen die te sterk lijkt op die van een bekende concurrent. Dit kan leiden tot verwarring bij klanten én juridische problemen als de concurrent een merk heeft geregistreerd. Controleer altijd via <a href="https://euipo.europa.eu" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">EUIPO</a> of Benelux Merkenbureau of de naam vrij is.
 
 Koppeltekens zijn een derde veelgemaakte fout. Mijn-bakker.nl ziet er minder professioneel uit dan mijnbakker.nl, en bij mondelinge communicatie geef je altijd aan "met koppelteken" — wat al aangeeft dat het onhandig is.
 
@@ -115,7 +115,7 @@ De eeuwige vraag: moet je kiezen voor .nl of .com? Het antwoord hangt af van jou
 **Voordelen .nl:**
 - Goedkoper dan .com (gemiddeld €6–10/jaar)
 - Sterk vertrouwenssignaal voor Nederlandse bezoekers
-- SIDN (beheerder .nl) heeft strikte kwaliteitsregels
+- <a href="https://www.sidn.nl" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">SIDN</a> (beheerder .nl) heeft strikte kwaliteitsregels
 
 ## Kies .com als...
 
@@ -125,7 +125,7 @@ De eeuwige vraag: moet je kiezen voor .nl of .com? Het antwoord hangt af van jou
 - De .nl-variant al bezet is
 
 **Voordelen .com:**
-- Meest herkenbare extensie wereldwijd
+- Meest herkenbare extensie wereldwijd (beheerd door <a href="https://www.verisign.com/en_US/domain-names/com/index.xhtml" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">Verisign</a>, de wereldwijde .com registry)
 - Geen geografische beperking
 - Beter voor internationale SEO
 
@@ -387,6 +387,83 @@ Voor de gemiddelde Nederlandse ondernemer is **Antagonist** of **TransIP** de be
 solide prijs, goede Nederlandse service en geen verborgen kosten.
 
 Gebruik onze vergelijkingstool om direct te zien welke registrar vandaag het gunstigst is voor jouw domeinnaam.
+
+## Wat zijn de verborgen kosten van een domeinnaam?
+
+De registratieprijs is maar het begin. Dit zijn de extra kosten waar veel mensen niet bij stilstaan:
+
+- **WHOIS-privacy:** Beschermt je naam en adres in het publieke domeinregister. Gratis bij TransIP, Antagonist en Namecheap — maar €3–€10/jaar extra bij GoDaddy.
+- **SSL-certificaat:** Verplicht voor een veilige website (https://). Gratis via Let's Encrypt, maar sommige registrars rekenen €10–€50/jaar voor een managed SSL.
+- **E-mailhosting:** Wil je een @jouwdomein.nl e-mailadres? Dat kost extra: €1–€5/maand bij de meeste registrars.
+- **Automatisch verlengen:** Vergeet je je domein te verlengen, dan kan iemand anders het inpikken. Stel automatisch verlengen altijd in.
+- **Domein privacy protection:** Verschilt van WHOIS-privacy bij sommige registrars — lees altijd de kleine lettertjes.
+
+Tel je alles op, dan ligt de echte jaarprijs voor een .nl domein met basis-features tussen €8 en €25 per jaar — afhankelijk van je registrar.
+
+## Aanbeveling per situatie
+
+Niet elke registrar is voor iedereen de beste keuze. Dit zijn onze aanbevelingen per situatie:
+
+**Voor een webshop (.nl):**
+Kies TransIP of Antagonist. Beide bieden gratis WHOIS-privacy, stabiele prijzen en goede klantenservice. TransIP heeft bovendien een krachtige API als je later wilt automatiseren.
+
+**Voor een internationaal bedrijf (.com):**
+Namecheap is de goedkoopste .com registrar ter wereld (vaak onder €10/jaar inclusief WHOIS-privacy). Het paneel is Engelstalig maar overzichtelijk.
+
+**Voor een startende ZZP'er (laagste kosten):**
+Mijn.host biedt de laagste .nl prijs (€2,49/jaar verlenging). Geen franjes, maar als je alleen een adres wilt, is het voldoende.
+
+**Voor een Belgisch bedrijf (.be):**
+DNS.be is de officiële registry voor .be domeinen. Via Antagonist of TransIP registreer je een .be domein tegen een eerlijke prijs met Nederlandse klantenservice.
+
+**Als klantenservice belangrijk is:**
+Antagonist is de enige registrar in onze vergelijking met telefonische support — naast chat en e-mail. Bij problemen ben je snel geholpen.
+
+## Introductieprijs vs. verlengingsprijs: de grote valkuil
+
+De grootste fout die mensen maken bij het kiezen van een registrar? Ze kijken alleen naar de introductieprijs.
+
+GoDaddy adverteert soms met .nl domeinen voor €1,99 in het eerste jaar. Maar de verlengingsprijs? Die ligt op €9,99 — bijna vijf keer zo hoog. Na twee jaar ben je dus duurder uit dan bij TransIP of Antagonist.
+
+Kijk altijd naar de **verlengingsprijs** als maatstaf voor de werkelijke kosten. In onze <a href="/registrars" style="color:var(--primary)">registrar vergelijking</a> tonen we beide prijzen transparant naast elkaar.
+
+Registrars met de meest eerlijke verlengingsprijzen (2026):
+- Antagonist: identiek aan de introprijs
+- TransIP: stabiele prijzen zonder verrassingen
+- Mijn.host: laagste totaalprijs over 3 jaar
+
+## Hoe registreer je de goedkoopste domeinnaam stap voor stap?
+
+Volg deze stappen om de laagste prijs te betalen:
+
+**Stap 1: Controleer beschikbaarheid**
+Gebruik onze gratis checker hierboven. Je ziet direct of jouw gewenste naam beschikbaar is en wat hij kost bij de verschillende registrars.
+
+**Stap 2: Vergelijk niet alleen de prijs**
+Bekijk ook: WHOIS-privacy inbegrepen? Nederlandstalige klantenservice? Automatische verlenging beschikbaar?
+
+**Stap 3: Kies op basis van totaalkosten**
+Bereken de prijs over 3 jaar (introprijs + 2× verlengingsprijs) om registrars eerlijk te vergelijken.
+
+**Stap 4: Registreer en stel automatisch verlengen in**
+Na registratie: ga direct naar je accountinstellingen en activeer automatisch verlengen. Zo voorkom je dat je je domein verliest als je het vergeet.
+
+**Stap 5: Voeg WHOIS-privacy toe (als niet inbegrepen)**
+Check of WHOIS-privacy al is ingeschakeld. Zo niet, activeer het — ook als het een kleine extra kost. Je persoonlijke gegevens zijn het waard om te beschermen.
+
+## Veelgestelde vragen over domeinnaam registratiekosten
+
+## Wat kost een .nl domeinnaam gemiddeld per jaar?
+
+Een .nl domeinnaam kost gemiddeld €3 tot €8 per jaar bij de goedkoopste registrars. Met WHOIS-privacy en eventuele SSL ligt de totaalprijs op €8 tot €20 per jaar. Let altijd op de verlengingsprijs, niet de introductiekorting.
+
+## Is het goedkoper om bij een buitenlandse registrar te registreren?
+
+Voor .nl domeinen: nee. .nl domeinen worden beheerd door SIDN (Stichting Internet Domeinregistratie Nederland) en de prijs verschilt nauwelijks per registrar. De waarde zit in de service, features en betrouwbaarheid — niet in een verschil van een paar cent.
+
+## Kan ik mijn domein later overdragen naar een goedkopere registrar?
+
+Ja. Een domaintransfer is mogelijk en duurt voor .nl 1–3 werkdagen. Je verliest hierbij geen website of e-mail, maar je moet wel wachten op het einde van de eerste registratieperiode (of een klein bedrag betalen voor vervroegde transfer).
 
 ## Meer lezen
 
@@ -1114,7 +1191,7 @@ Vergelijkende prijzen:
 
 ## DNS.be: de beheerder van .be
 
-.be domeinen worden beheerd door **DNS.be**, de Belgische tegenhanger van het Nederlandse SIDN.
+.be domeinen worden beheerd door <a href="https://www.dns.be" target="_blank" rel="noopener noreferrer" style="color:var(--primary)"><strong>DNS.be</strong></a>, de Belgische tegenhanger van het Nederlandse SIDN.
 DNS.be hanteert strenge kwaliteitsstandaarden voor registrars.
 
 ## Wanneer kies je voor .be?
@@ -1205,7 +1282,8 @@ je website en je online identiteit. Hier zijn de belangrijkste beveiligingsmaatr
 ## 1. Transferlock activeren
 
 Een transferlock (ook wel domeinslot of EPP-lock) voorkomt dat jouw domein zonder jouw toestemming
-wordt overgedragen naar een andere registrar.
+wordt overgedragen naar een andere registrar. De transferlock is een standaard beveiligingsmaatregel
+die is vastgelegd in de beleidsregels van <a href="https://www.icann.org" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">ICANN</a>, de internationale organisatie die de domeinnaamruimte beheert.
 
 **Altijd inschakelen.** Bij de meeste registrars staat dit standaard aan, maar check dit expliciet.
 
