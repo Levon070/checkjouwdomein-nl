@@ -3,6 +3,12 @@
 import { useState, FormEvent, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { sanitizeKeyword } from '@/lib/domain-generator';
+import { FlipWords } from '@/components/text/FlipWords';
+import { ShiningText } from '@/components/text/ShiningText';
+import { Typewriter } from '@/components/text/Typewriter';
+import { GridHeroBackground } from '@/components/ui/GridHeroBackground';
+import { ShinyButton } from '@/components/ui/ShinyButton';
+import { StatusBadge } from '@/components/ui/StatusBadge';
 
 interface ParsedIntent {
   keyword: string;
@@ -200,8 +206,8 @@ export default function SearchHero({ initialKeyword = '' }: Props) {
         paddingBottom: '72px',
       }}
     >
-      {/* Background textures */}
-      <div className="dot-grid" aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.4 }} />
+      {/* Animated grid background */}
+      <GridHeroBackground />
       <div className="ambient-blob blob-hero-1" aria-hidden="true" />
       <div className="ambient-blob blob-hero-2" aria-hidden="true" />
       <div className="ambient-blob blob-hero-3" aria-hidden="true" />
@@ -244,12 +250,27 @@ export default function SearchHero({ initialKeyword = '' }: Props) {
             </div>
 
             <h1 className="type-display mb-4" style={{ color: 'var(--text)' }}>
-              Vind de perfecte{' '}
-              <span className="gradient-text">domeinnaam</span>
+              Vind de{' '}
+              <FlipWords
+                words={['perfecte', 'beschikbare', 'goedkoopste']}
+                duration={2600}
+              />{' '}
+              <ShiningText>domeinnaam</ShiningText>
             </h1>
 
-            <p className="type-lead mb-8 mx-auto xl:mx-0 max-w-xl">
+            <p className="type-lead mb-4 mx-auto xl:mx-0 max-w-xl">
               Voer één of meerdere keywords in, gescheiden door een komma — wij combineren ze slim en tonen alle beschikbare domeinen.
+            </p>
+
+            <p className="text-sm mb-4 mx-auto xl:mx-0 max-w-xl" style={{ color: 'var(--text-muted)' }}>
+              Checkt:{' '}
+              <Typewriter
+                strings={['.nl domeinen', '.com domeinen', '.be domeinen', '.eu domeinen', '.io domeinen', '.shop domeinen', '.online domeinen']}
+                typeSpeed={70}
+                deleteSpeed={35}
+                delayAfterType={1600}
+                className="font-mono font-semibold"
+              />
             </p>
 
             {parsedIntent && (
@@ -286,9 +307,13 @@ export default function SearchHero({ initialKeyword = '' }: Props) {
                   style={{ color: 'var(--text)' }}
                 />
                 <div className="p-1.5">
-                  <button type="submit" className="btn-primary h-full" disabled={parsingIntent}>
+                  <ShinyButton
+                    type="submit"
+                    disabled={parsingIntent}
+                    className="h-full px-5 py-3 text-sm font-semibold"
+                  >
                     {parsingIntent ? 'Analyseren…' : 'Zoeken →'}
-                  </button>
+                  </ShinyButton>
                 </div>
               </div>
               {emptyError
@@ -321,10 +346,10 @@ export default function SearchHero({ initialKeyword = '' }: Props) {
             </div>
 
             {/* Stats row */}
-            <div className="flex flex-wrap justify-center xl:justify-start gap-x-6 gap-y-2 text-xs" style={{ color: 'var(--text-subtle)' }}>
-              <span className="flex items-center gap-1.5"><span style={{ color: '#059669' }}>✓</span> Real-time RDAP-check</span>
-              <span className="flex items-center gap-1.5"><span style={{ color: '#059669' }}>✓</span> EUIPO merkencheck</span>
-              <span className="flex items-center gap-1.5"><span style={{ color: '#059669' }}>✓</span> 5 registrars vergeleken</span>
+            <div className="flex flex-wrap justify-center xl:justify-start gap-2">
+              <StatusBadge status="available" label="Real-time RDAP" size="sm" />
+              <StatusBadge status="available" label="EUIPO merkencheck" size="sm" />
+              <StatusBadge status="available" label="5 registrars vergeleken" size="sm" />
             </div>
           </div>
 

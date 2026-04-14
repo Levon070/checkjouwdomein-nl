@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { REGISTRARS } from '@/lib/registrars';
 import { TldKey } from '@/types';
 import JsonLd from '@/components/seo/JsonLd';
+import RegistrarPricingCards from '@/components/sections/RegistrarPricingCards';
+import { GridHeroBackground } from '@/components/ui/GridHeroBackground';
 
 export const metadata: Metadata = {
   title: 'Beste Domein Registrar Nederland 2026 — Vergelijk Prijzen & Reviews',
@@ -178,12 +180,15 @@ export default function RegistrarsPage() {
       {/* Hero */}
       <section
         style={{
+          position: 'relative',
+          overflow: 'hidden',
           background: 'linear-gradient(160deg, #EEF2FF 0%, #F6F8FC 50%, #ECFEFF 100%)',
           paddingTop: 64,
           paddingBottom: 56,
         }}
       >
-        <div className="container mx-auto px-5 max-w-4xl text-center">
+        <GridHeroBackground />
+        <div className="container mx-auto px-5 max-w-4xl text-center" style={{ position: 'relative' }}>
           <span
             className="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-full mb-5"
             style={{ background: 'rgba(79,70,229,0.08)', color: 'var(--primary)', border: '1px solid rgba(79,70,229,0.15)' }}
@@ -204,52 +209,13 @@ export default function RegistrarsPage() {
 
       <div className="container mx-auto px-5 max-w-5xl py-12 space-y-16">
 
-        {/* Quick verdict cards */}
+        {/* Quick verdict cards — Animated pricing cards */}
         <section>
-          <p className="type-label mb-6">Onze aanbevelingen</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              { id: 'transip', badge: '🏆 Beste algeheel', color: 'var(--primary)' },
-              { id: 'mijndomein', badge: '💸 Goedkoopste .nl', color: 'var(--available)' },
-              { id: 'antagonist', badge: '🎧 Beste service', color: '#D97706' },
-            ].map(({ id, badge, color }) => {
-              const r = REGISTRARS.find((reg) => reg.id === id)!;
-              const nlPrice = r.detailedPrices['.nl'];
-              return (
-                <div
-                  key={id}
-                  className="card p-5"
-                  style={{ border: `2px solid ${color}20` }}
-                >
-                  <span
-                    className="inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-3"
-                    style={{ background: `${color}15`, color }}
-                  >
-                    {badge}
-                  </span>
-                  <h3 className="font-bold text-base mb-1" style={{ color: 'var(--text)' }}>{r.name}</h3>
-                  <div className="flex items-center gap-1.5 mb-3">
-                    <Stars rating={r.rating} />
-                    <span className="text-xs" style={{ color: 'var(--text-subtle)' }}>{r.rating}/5</span>
-                  </div>
-                  {nlPrice && (
-                    <p className="text-xs mb-3" style={{ color: 'var(--text-muted)' }}>
-                      .nl: <strong>{nlPrice.firstYear}</strong>/jr · verlenging {nlPrice.renewal}
-                    </p>
-                  )}
-                  <a
-                    href={r.affiliateUrl('jouwdomein.nl')}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors"
-                    style={{ background: `${color}12`, color, textDecoration: 'none' }}
-                  >
-                    Bezoek {r.name} →
-                  </a>
-                </div>
-              );
-            })}
-          </div>
+          <p className="type-label mb-2">Onze aanbevelingen</p>
+          <h2 className="type-heading mb-10" style={{ color: 'var(--text)' }}>
+            Top 3 registrars voor Nederland
+          </h2>
+          <RegistrarPricingCards />
         </section>
 
         {/* Price comparison table */}

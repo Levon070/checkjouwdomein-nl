@@ -1,13 +1,19 @@
 import Image from 'next/image';
 import SearchHero from '@/components/search/SearchHero';
 import TrustBar from '@/components/ui/TrustBar';
-import ProWaitlist from '@/components/ui/ProWaitlist';
 import FaqSection from '@/components/sections/FaqSection';
+import StatsSection from '@/components/sections/StatsSection';
+import CtaSection from '@/components/sections/CtaSection';
+import BentoFeaturesGrid from '@/components/sections/BentoFeaturesGrid';
 import AdSenseUnit from '@/components/ads/AdSenseUnit';
 import { TLD_CONFIG, ORDERED_TLDS } from '@/lib/tlds';
 import { BLOG_POSTS } from '@/lib/blog-content';
 import JsonLd from '@/components/seo/JsonLd';
 import Link from 'next/link';
+import { ScrollReveal } from '@/components/text/ScrollReveal';
+import { AnimatedUnderline } from '@/components/text/AnimatedUnderline';
+import { TextScramble } from '@/components/text/TextScramble';
+import { Marquee } from '@/components/ui/Marquee';
 
 const websiteSchema = {
   '@context': 'https://schema.org',
@@ -89,35 +95,21 @@ export default function HomePage() {
       <SearchHero />
       <TrustBar />
 
-      {/* ── Stats banner ─────────────────────────────────────────────────── */}
-      <div style={{ background: 'linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%)', padding: '36px 20px' }}>
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
-            {[
-              { num: '12.000+', label: 'domeinen gecheckt' },
-              { num: '50+',     label: 'extensies beschikbaar' },
-              { num: '5',       label: 'registrars vergeleken' },
-              { num: '100%',    label: 'gratis & open' },
-            ].map((s, i) => (
-              <div
-                key={s.label}
-                style={{
-                  animation: `fadeInUp 0.5s ease both`,
-                  animationDelay: `${i * 0.1}s`,
-                }}
-              >
-                <div
-                  className="text-4xl font-black"
-                  style={{ letterSpacing: '-0.04em', textShadow: '0 2px 12px rgba(0,0,0,0.15)' }}
-                >
-                  {s.num}
-                </div>
-                <div className="text-sm mt-1" style={{ color: 'rgba(255,255,255,0.8)' }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* ── TLD Marquee strip ────────────────────────────────────────────── */}
+      <div style={{ background: 'var(--bg-card)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '12px 0' }}>
+        <Marquee
+          speed={40}
+          separator={<span style={{ color: 'var(--border)', margin: '0 8px' }}>·</span>}
+          items={ORDERED_TLDS.map((tld) => (
+            <span key={tld} className="text-sm font-bold px-3" style={{ color: 'var(--primary)', letterSpacing: '-0.01em' }}>
+              {tld}
+            </span>
+          ))}
+        />
       </div>
+
+      {/* ── Stats banner ─────────────────────────────────────────────────── */}
+      <StatsSection />
 
       <div className="container mx-auto px-5 max-w-6xl space-y-16 pb-20 pt-12">
 
@@ -162,10 +154,12 @@ export default function HomePage() {
 
         {/* How it works */}
         <section className="section-alt p-8 sm:p-12">
-          <p className="type-label text-center mb-2">Hoe het werkt</p>
-          <h2 className="type-heading text-center mb-10" style={{ color: 'var(--text)' }}>
-            In drie stappen naar jouw domein
-          </h2>
+          <ScrollReveal>
+            <p className="type-label text-center mb-2">Hoe het werkt</p>
+            <h2 className="type-heading text-center mb-10" style={{ color: 'var(--text)' }}>
+              In drie stappen naar jouw domein
+            </h2>
+          </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
@@ -228,30 +222,15 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Features showcase */}
+        {/* Features showcase — Bento Grid */}
         <section>
-          <p className="type-label text-center mb-2">Waarom CheckJouwDomein.nl</p>
-          <h2 className="type-heading text-center mb-10" style={{ color: 'var(--text)' }}>
-            Meer dan een domeincheck
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              { icon: '🌐', title: 'Real-time RDAP', desc: 'Directe beschikbaarheidscheck via officiële SIDN-, Verisign- en DNS.be-registers. Geen verouderde data.', accent: 'rgba(79,70,229,0.06)', iconBg: 'rgba(79,70,229,0.10)', border: 'rgba(79,70,229,0.12)' },
-              { icon: '🏛️', title: 'EUIPO Merkencheck', desc: 'Uniek in Nederland: controleer of jouw merknaam al geregistreerd is als Europees handelsmerk.', accent: 'rgba(245,158,11,0.06)', iconBg: 'rgba(245,158,11,0.12)', border: 'rgba(245,158,11,0.15)' },
-              { icon: '🛒', title: 'Domeinwinkelmand', desc: 'Selecteer meerdere domeinen tegelijk en zie direct bij welke registrar je het goedkoopst uitbent.', accent: 'rgba(5,150,105,0.06)', iconBg: 'rgba(5,150,105,0.10)', border: 'rgba(5,150,105,0.12)' },
-              { icon: '✦', title: 'AI Naamgenerator', desc: 'Nog geen naam? Onze AI genereert 12 merknamen op basis van je sector en stijl — en checkt direct de beschikbaarheid.', accent: 'rgba(99,102,241,0.06)', iconBg: 'rgba(99,102,241,0.10)', border: 'rgba(99,102,241,0.12)' },
-              { icon: '💼', title: 'KVK Handelsnaam', desc: 'Check of je bedrijfsnaam al in gebruik is bij de Kamer van Koophandel — in één klik, naast de domeincheck.', accent: 'rgba(6,182,212,0.06)', iconBg: 'rgba(6,182,212,0.10)', border: 'rgba(6,182,212,0.12)' },
-              { icon: '📊', title: 'Domeinportefeuille', desc: 'Houd al je domeinen bij op één plek. Zie wanneer ze verlopen, vergelijk verlengingsprijzen en bespaar geld.', accent: 'rgba(16,185,129,0.06)', iconBg: 'rgba(16,185,129,0.10)', border: 'rgba(16,185,129,0.12)' },
-            ].map((f) => (
-              <div key={f.title} className="feature-card" style={{ background: f.accent, borderColor: f.border }}>
-                <div style={{ width: 52, height: 52, borderRadius: 14, background: f.iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', marginBottom: 14 }}>
-                  {f.icon}
-                </div>
-                <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--text)' }}>{f.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>{f.desc}</p>
-              </div>
-            ))}
-          </div>
+          <ScrollReveal delay={0.05}>
+            <p className="type-label text-center mb-2">Waarom CheckJouwDomein.nl</p>
+            <h2 className="type-heading text-center mb-10" style={{ color: 'var(--text)' }}>
+              <AnimatedUnderline color="var(--accent)">Meer dan een domeincheck</AnimatedUnderline>
+            </h2>
+          </ScrollReveal>
+          <BentoFeaturesGrid />
         </section>
 
         {/* Over ons strip */}
@@ -294,7 +273,9 @@ export default function HomePage() {
                   { num: '100%', label: 'gratis' },
                 ].map((s) => (
                   <div key={s.label} className="text-center p-3 rounded-xl" style={{ background: 'var(--bg)', border: '1px solid var(--border)' }}>
-                    <div className="text-xl font-black" style={{ color: 'var(--primary)', letterSpacing: '-0.03em' }}>{s.num}</div>
+                    <div className="text-xl font-black" style={{ color: 'var(--primary)', letterSpacing: '-0.03em' }}>
+                      <TextScramble text={s.num} trigger="hover" scrambleChars="0123456789+%K" className="not-italic" />
+                    </div>
                     <div className="text-xs" style={{ color: 'var(--text-subtle)' }}>{s.label}</div>
                   </div>
                 ))}
@@ -309,10 +290,12 @@ export default function HomePage() {
         {/* Blog preview */}
         <section>
           <div className="flex items-end justify-between mb-6">
-            <div>
+            <ScrollReveal direction="left">
               <p className="type-label mb-1">Van ons blog</p>
-              <h2 className="type-heading" style={{ color: 'var(--text)' }}>Tips & advies</h2>
-            </div>
+              <h2 className="type-heading" style={{ color: 'var(--text)' }}>
+                <AnimatedUnderline>Tips &amp; advies</AnimatedUnderline>
+              </h2>
+            </ScrollReveal>
             <Link href="/blog" className="text-sm font-semibold hidden sm:block" style={{ color: 'var(--primary)' }}>
               Alle artikelen →
             </Link>
@@ -367,8 +350,8 @@ export default function HomePage() {
         {/* FAQ */}
         <FaqSection />
 
-        {/* Pro waitlist */}
-        <ProWaitlist />
+        {/* CTA — Pro waitlist */}
+        <CtaSection />
 
       </div>
     </>

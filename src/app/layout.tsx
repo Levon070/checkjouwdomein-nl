@@ -7,6 +7,7 @@ import Footer from '@/components/layout/Footer';
 import JsonLd from '@/components/seo/JsonLd';
 import CookieBanner from '@/components/ui/CookieBanner';
 import AnalyticsProvider from '@/components/analytics/AnalyticsProvider';
+import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter' });
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
             <CookieBanner />
             <AnalyticsProvider />
+            <Toaster />
             <Script
               id="adsense"
               async

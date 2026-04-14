@@ -5,6 +5,9 @@ import Link from 'next/link';
 import { getRegistrarsForTld } from '@/lib/registrars';
 import { TldKey } from '@/types';
 import { ORDERED_TLDS } from '@/lib/tlds';
+import { GridHeroBackground } from '@/components/ui/GridHeroBackground';
+import { ShinyButton } from '@/components/ui/ShinyButton';
+import { StatusBadge } from '@/components/ui/StatusBadge';
 
 type CheckStatus = 'idle' | 'checking' | 'done';
 type DomainResult = { full: string; name: string; tld: TldKey; status: 'available' | 'taken' | 'error' };
@@ -76,8 +79,9 @@ export default function BulkCheckPage() {
   return (
     <div>
       {/* Hero */}
-      <section style={{ background: 'linear-gradient(160deg, #EEF2FF 0%, #F6F8FC 50%, #ECFEFF 100%)', borderBottom: '1px solid var(--border)', padding: '48px 0 40px' }}>
-        <div className="container mx-auto px-5 max-w-3xl">
+      <section style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(160deg, #EEF2FF 0%, #F6F8FC 50%, #ECFEFF 100%)', borderBottom: '1px solid var(--border)', padding: '48px 0 40px' }}>
+        <GridHeroBackground />
+        <div className="container mx-auto px-5 max-w-3xl" style={{ position: 'relative' }}>
           <Link href="/" className="text-sm font-medium link-muted mb-5 inline-block">
             ← Terug naar zoeken
           </Link>
@@ -115,16 +119,15 @@ export default function BulkCheckPage() {
           />
         </div>
 
-        <button
+        <ShinyButton
           onClick={handleCheck}
           disabled={checkStatus === 'checking' || !input.trim()}
-          className="btn-primary px-8 py-3 text-sm rounded-xl"
-          style={{ opacity: checkStatus === 'checking' || !input.trim() ? 0.6 : 1 }}
+          className="px-8 py-3 text-sm font-semibold"
         >
           {checkStatus === 'checking'
             ? `Controleren… ${progress.done}/${progress.total}`
             : 'Controleer beschikbaarheid'}
-        </button>
+        </ShinyButton>
 
         {checkStatus === 'checking' && (
           <div
@@ -204,9 +207,7 @@ export default function BulkCheckPage() {
                     <span className="domain-name text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
                       {r.name}<span>{r.tld}</span>
                     </span>
-                    <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: 'rgba(239,68,68,0.08)', color: '#EF4444' }}>
-                      Bezet
-                    </span>
+                    <StatusBadge status="taken" size="sm" />
                   </div>
                 ))}
               </div>

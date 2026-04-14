@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { REGISTRARS } from '@/lib/registrars';
 import type { TldKey } from '@/types';
+import { GridHeroBackground } from '@/components/ui/GridHeroBackground';
+import { ShinyButton } from '@/components/ui/ShinyButton';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -156,7 +158,8 @@ function MerkCheckContent() {
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg)' }}>
       {/* Hero */}
-      <div className="text-center px-4 pt-16 pb-10" style={{ background: 'linear-gradient(135deg, rgba(79,70,229,0.06) 0%, rgba(99,102,241,0.03) 100%)', borderBottom: '1px solid var(--border)' }}>
+      <div className="text-center px-4 pt-16 pb-10" style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, rgba(79,70,229,0.06) 0%, rgba(99,102,241,0.03) 100%)', borderBottom: '1px solid var(--border)' }}>
+        <GridHeroBackground />
         <div className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full mb-5"
           style={{ background: 'rgba(79,70,229,0.08)', color: 'var(--primary)', border: '1px solid rgba(79,70,229,0.15)' }}>
           ✦ Uniek in Nederland &amp; België
@@ -181,14 +184,13 @@ function MerkCheckContent() {
             className="flex-1 px-4 py-3 rounded-xl text-base"
             style={{ border: '1.5px solid var(--border)', background: 'var(--surface)', color: 'var(--text)', outline: 'none' }}
           />
-          <button
+          <ShinyButton
             onClick={handleCheck}
             disabled={checkStatus === 'checking' || !input.trim()}
-            className="px-6 py-3 rounded-xl font-bold text-sm transition-opacity"
-            style={{ background: 'var(--primary)', color: '#fff', opacity: checkStatus === 'checking' || !input.trim() ? 0.6 : 1 }}
+            className="px-6 py-3 font-bold text-sm"
           >
             {checkStatus === 'checking' ? 'Checken…' : 'Check merk →'}
-          </button>
+          </ShinyButton>
         </div>
 
         {/* Checking skeleton */}

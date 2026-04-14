@@ -4,6 +4,9 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { scoreDomain } from '@/lib/domain-scorer';
 import { TldKey } from '@/types';
+import { GridHeroBackground } from '@/components/ui/GridHeroBackground';
+import { ShinyButton } from '@/components/ui/ShinyButton';
+import { SpotlightCard } from '@/components/ui/SpotlightCard';
 
 interface GeneratedName { name: string; rationale: string }
 type DomainStatus = 'idle' | 'available' | 'taken' | 'checking' | 'unknown';
@@ -178,7 +181,8 @@ export default function NaamGeneratorPage() {
     <div className="min-h-screen" style={{ background: 'var(--bg)' }}>
       {/* Hero */}
       <div className="text-center px-4 pt-16 pb-10"
-        style={{ background: 'linear-gradient(135deg, rgba(79,70,229,0.06) 0%, rgba(16,185,129,0.03) 100%)', borderBottom: '1px solid var(--border)' }}>
+        style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, rgba(79,70,229,0.06) 0%, rgba(16,185,129,0.03) 100%)', borderBottom: '1px solid var(--border)' }}>
+        <GridHeroBackground />
         <div className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full mb-5"
           style={{ background: 'rgba(79,70,229,0.08)', color: 'var(--primary)', border: '1px solid rgba(79,70,229,0.15)' }}>
           ✦ AI-aangedreven
@@ -304,13 +308,13 @@ export default function NaamGeneratorPage() {
             </div>
           </div>
 
-          <button
+          <ShinyButton
             onClick={() => handleGenerate()}
             disabled={generating || !sector.trim()}
-            className="w-full py-3 rounded-xl font-bold text-sm transition-opacity"
-            style={{ background: 'var(--primary)', color: '#fff', opacity: generating || !sector.trim() ? 0.6 : 1 }}>
+            className="w-full py-3 font-bold text-sm"
+          >
             {generating ? 'AI genereert namen…' : '✦ Genereer 15 merknamen →'}
-          </button>
+          </ShinyButton>
         </div>
 
         {error && (
@@ -484,19 +488,18 @@ export default function NaamGeneratorPage() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
-              { icon: '✂️', title: 'Houd het kort',         desc: 'Maximaal 12 tekens — makkelijker te onthouden en te typen.' },
-              { icon: '🔤', title: 'Geen koppeltekens',     desc: 'Vermijd streepjes en cijfers; die zorgen voor verwarring bij mondeling doorgeven.' },
-              { icon: '🌍', title: 'Registreer .nl én .com',desc: 'Registreer beide als ze beschikbaar zijn — voorkomt verwarring bij bezoekers.' },
-              { icon: '™️', title: 'Check het merkenregister', desc: 'Zorg dat de naam niet als Europees merk geregistreerd is via de EUIPO-check.' },
+              { icon: '✂️', title: 'Houd het kort',         desc: 'Maximaal 12 tekens — makkelijker te onthouden en te typen.',          accent: 'rgba(79,70,229,0.08)'  },
+              { icon: '🔤', title: 'Geen koppeltekens',     desc: 'Vermijd streepjes en cijfers; die zorgen voor verwarring bij mondeling doorgeven.', accent: 'rgba(6,182,212,0.06)' },
+              { icon: '🌍', title: 'Registreer .nl én .com',desc: 'Registreer beide als ze beschikbaar zijn — voorkomt verwarring bij bezoekers.', accent: 'rgba(5,150,105,0.06)' },
+              { icon: '™️', title: 'Check het merkenregister', desc: 'Zorg dat de naam niet als Europees merk geregistreerd is via de EUIPO-check.', accent: 'rgba(245,158,11,0.06)' },
             ].map(tip => (
-              <div key={tip.title} className="flex gap-3 rounded-xl p-4"
-                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+              <SpotlightCard key={tip.title} className="flex gap-3 rounded-xl p-4" style={{ background: tip.accent, border: '1px solid var(--border)' }} spotlightColor="rgba(79,70,229,0.10)">
                 <span className="text-xl shrink-0">{tip.icon}</span>
                 <div>
                   <div className="text-sm font-semibold mb-0.5" style={{ color: 'var(--text)' }}>{tip.title}</div>
                   <div className="text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>{tip.desc}</div>
                 </div>
-              </div>
+              </SpotlightCard>
             ))}
           </div>
         </div>
