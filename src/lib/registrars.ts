@@ -37,6 +37,10 @@ const buildMijnhostUrl = (_domain: string) =>
 const buildTemblitUrl = (_domain: string) =>
   `https://deals.temblit.com/c?c=39506&m=2453521&a=508642&r=&u=`;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const buildStratoUrl = (_domain: string) =>
+  `https://acn.strato.nl/aff_c?offer_id=5&aff_id=1400`;
+
 // ─── FEATURE TEMPLATES ───────────────────────────────────────────────────────
 
 function features(config: {
@@ -397,6 +401,7 @@ export const REGISTRARS: Registrar[] = [
     reviewCount: 1200,
     highlight: 'Scherpe prijs + gratis hosting',
     panelLanguage: 'nl',
+    sponsored: true,
     features: features({
       whoisPrivacy: true,
       freeSsl: true,
@@ -436,6 +441,7 @@ export const REGISTRARS: Registrar[] = [
     reviewCount: 850,
     highlight: 'Website + domein + hosting in één',
     panelLanguage: 'nl',
+    sponsored: true,
     features: features({
       whoisPrivacy: true,
       freeSsl: true,
@@ -445,6 +451,48 @@ export const REGISTRARS: Registrar[] = [
       transferLock: true,
       twoFactor: false,
       support: 'Chat & e-mail (NL)',
+      apiAccess: false,
+      controlPanel: 'Eigen dashboard (NL)',
+    }),
+  },
+  {
+    id: 'strato',
+    name: 'STRATO',
+    logoPath: '/registrars/strato.svg',
+    baseUrl: 'https://www.strato.nl',
+    affiliateUrl: buildStratoUrl,
+    supportedTlds: ['.nl', '.com', '.net', '.be', '.org', '.io'],
+    priceIndicator: 'laag',
+    prices: {
+      '.nl': '±€2/jr',
+      '.com': '±€9/jr',
+      '.net': '±€10/jr',
+      '.be': '±€5/jr',
+      '.org': '±€10/jr',
+      '.io': '±€30/jr',
+    },
+    detailedPrices: {
+      '.nl':  { firstYear: '€1,99',  renewal: '€2,99',  firstYearRaw: 1.99,  renewalRaw: 2.99  },
+      '.com': { firstYear: '€8,99',  renewal: '€9,99',  firstYearRaw: 8.99,  renewalRaw: 9.99  },
+      '.net': { firstYear: '€9,99',  renewal: '€10,99', firstYearRaw: 9.99,  renewalRaw: 10.99 },
+      '.be':  { firstYear: '€4,99',  renewal: '€5,99',  firstYearRaw: 4.99,  renewalRaw: 5.99  },
+      '.org': { firstYear: '€9,99',  renewal: '€10,99', firstYearRaw: 9.99,  renewalRaw: 10.99 },
+      '.io':  { firstYear: '€29,99', renewal: '€32,99', firstYearRaw: 29.99, renewalRaw: 32.99 },
+    },
+    rating: 4.2,
+    reviewCount: 6500,
+    highlight: 'Scherpe prijs + gratis SSL & e-mail',
+    panelLanguage: 'nl',
+    sponsored: true,
+    features: features({
+      whoisPrivacy: false,
+      freeSsl: true,
+      emailForwarding: true,
+      dnsManagement: true,
+      autoRenew: true,
+      transferLock: true,
+      twoFactor: false,
+      support: 'Telefoon & e-mail (NL)',
       apiAccess: false,
       controlPanel: 'Eigen dashboard (NL)',
     }),
