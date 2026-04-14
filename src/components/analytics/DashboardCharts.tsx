@@ -3,7 +3,7 @@
 import {
   AreaChart, Area, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip,
-  ResponsiveContainer,
+  ResponsiveContainer, Cell,
 } from 'recharts';
 import { DashboardStats } from '@/lib/analytics';
 
@@ -56,6 +56,7 @@ export function DailyChart({
           contentStyle={TOOLTIP_STYLE}
           labelStyle={{ color: '#94a3b8', marginBottom: 4 }}
           itemStyle={{ color: '#e2e8f0' }}
+          isAnimationActive={false}
         />
         <Area
           type="monotone"
@@ -67,6 +68,7 @@ export function DailyChart({
           strokeWidth={1.5}
           dot={false}
           activeDot={false}
+          isAnimationActive={false}
         />
         <Area
           type="monotone"
@@ -77,6 +79,7 @@ export function DailyChart({
           strokeWidth={2}
           dot={false}
           activeDot={{ r: 4, fill: '#3b82f6', stroke: '#1e3a5f', strokeWidth: 2 }}
+          isAnimationActive={false}
         />
       </AreaChart>
     </ResponsiveContainer>
@@ -86,6 +89,7 @@ export function DailyChart({
 // ── Hourly distribution chart ────────────────────────────────────────────────
 
 export function HourlyChart({ data }: { data: DashboardStats['hourlyData'] }) {
+  const maxCount = Math.max(...data.map((d) => d.count), 1);
   return (
     <ResponsiveContainer width="100%" height={150}>
       <BarChart data={data} margin={{ top: 4, right: 4, left: -28, bottom: 0 }}>
@@ -103,14 +107,48 @@ export function HourlyChart({ data }: { data: DashboardStats['hourlyData'] }) {
           labelStyle={{ color: '#94a3b8', marginBottom: 4 }}
           formatter={(v) => [v, 'Weergaven']}
           cursor={{ fill: 'rgba(99,102,241,0.08)' }}
+          isAnimationActive={false}
         />
-        <Bar
-          dataKey="count"
-          name="Weergaven"
-          fill="#6366f1"
-          radius={[3, 3, 0, 0]}
-          opacity={0.8}
+        <Bar dataKey="count" name="Weergaven" radius={[3, 3, 0, 0]} isAnimationActive={false}>
+          {data.map((entry, i) => (
+            <Cell
+              key={i}
+              fill={entry.count === maxCount ? '#818cf8' : '#6366f1'}
+              opacity={entry.count === 0 ? 0.2 : 0.8}
+            />
+          ))}
+        </Bar>
+      </BarChart>
+    </ResponsiveContainer>
+  );
+}
+
+// ── Day-of-week chart ────────────────────────────────────────────────────────
+
+export function DowChart({ data }: { data: DashboardStats['dowData'] }) {
+  const maxCount = Math.max(...data.map((d) => d.count), 1);
+  return (
+    <ResponsiveContainer width="100%" height={120}>
+      <BarChart data={data} margin={{ top: 4, right: 4, left: -28, bottom: 0 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke={GRID} vertical={false} />
+        <XAxis dataKey="day" tick={TICK} tickLine={false} axisLine={false} />
+        <YAxis tick={TICK} tickLine={false} axisLine={false} />
+        <Tooltip
+          contentStyle={TOOLTIP_STYLE}
+          labelStyle={{ color: '#94a3b8', marginBottom: 4 }}
+          formatter={(v) => [v, 'Weergaven']}
+          cursor={{ fill: 'rgba(16,185,129,0.08)' }}
+          isAnimationActive={false}
         />
+        <Bar dataKey="count" name="Weergaven" radius={[3, 3, 0, 0]} isAnimationActive={false}>
+          {data.map((entry, i) => (
+            <Cell
+              key={i}
+              fill={entry.count === maxCount ? '#34d399' : '#10b981'}
+              opacity={entry.count === 0 ? 0.2 : 0.75}
+            />
+          ))}
+        </Bar>
       </BarChart>
     </ResponsiveContainer>
   );

@@ -3,32 +3,55 @@ import { parseUserAgent } from '@/lib/ua-parser';
 import { hashIpEdge, trackPageViewEdge } from '@/lib/analytics-edge';
 
 export const config = {
-  // Match all routes (including admin) to set x-pathname header, but skip internals/static
   matcher: ['/((?!api|_next/static|_next/image|favicon|robots|sitemap|og|icons|images).*)'],
 };
 
-export async function middleware(request: NextRequest) {
-  // Fire-and-forget analytics (don't block the response)
-  void recordPageView(request).catch(() => {});
+const RV_COOKIE = 'cjd_rv'; // returning visitor cookie
 
-  // Pass pathname as REQUEST header so Server Components (layout) can read it
+export async function middleware(request: NextRequest) {
+  // Detect returning visitor before building response
+  const isReturning = request.cookies.has(RV_COOKIE);
+
+  // Pass pathname as REQUEST header so Server Components can read it
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-pathname', request.nextUrl.pathname);
-  return NextResponse.next({ request: { headers: requestHeaders } });
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
+
+  // Set returning visitor cookie if first visit (1 year)
+  if (!isReturning) {
+    response.cookies.set(RV_COOKIE, '1', {
+      httpOnly: true,
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 24 * 365,
+      path: '/',
+    });
+  }
+
+  // Fire-and-forget analytics (non-blocking)
+  void recordPageView(request, isReturning).catch(() => {});
+
+  return response;
 }
 
-async function recordPageView(request: NextRequest): Promise<void> {
+async function recordPageView(request: NextRequest, isReturning: boolean): Promise<void> {
   const url = request.nextUrl;
 
-  // Don't track admin pages of jezelf als beheerder
+  // Don't track admin pages
   if (url.pathname.startsWith('/admin')) return;
+
+  // Don't track logged-in admins
   const adminToken = request.cookies.get('admin_token')?.value;
   const secret = process.env.ANALYTICS_SECRET;
   if (secret && adminToken === secret) return;
 
   const path = url.pathname + (url.search ? url.search : '');
 
-  // Extract referrer domain (external only)
+  // UTM parameters
+  const utmSource = url.searchParams.get('utm_source') ?? undefined;
+  const utmMedium = url.searchParams.get('utm_medium') ?? undefined;
+  const utmCampaign = url.searchParams.get('utm_campaign') ?? undefined;
+
+  // Referrer (external only)
   const rawRef = request.headers.get('referer') ?? '';
   let referrer = '';
   if (rawRef) {
@@ -42,13 +65,12 @@ async function recordPageView(request: NextRequest): Promise<void> {
     }
   }
 
-  // Geo data van Netlify (geen IP opslag nodig)
+  // Geo data via Netlify headers
   let country = '';
   let city = '';
   const geoHeader = request.headers.get('x-nf-geo');
   if (geoHeader) {
     try {
-      // Netlify stuurt x-nf-geo als base64-encoded JSON
       const decoded = atob(geoHeader);
       const geo = JSON.parse(decoded) as {
         city?: string;
@@ -61,7 +83,11 @@ async function recordPageView(request: NextRequest): Promise<void> {
       country = request.headers.get('x-country') ?? request.headers.get('x-nf-country') ?? '';
     }
   } else {
-    country = request.headers.get('x-country') ?? request.headers.get('x-nf-country') ?? request.headers.get('cf-ipcountry') ?? '';
+    country =
+      request.headers.get('x-country') ??
+      request.headers.get('x-nf-country') ??
+      request.headers.get('cf-ipcountry') ??
+      '';
   }
 
   // Hash IP for privacy
@@ -71,9 +97,22 @@ async function recordPageView(request: NextRequest): Promise<void> {
     'unknown';
   const hashedIp = await hashIpEdge(rawIp);
 
-  // User-agent → device + browser
+  // User-agent → device + browser + OS
   const ua = request.headers.get('user-agent') ?? '';
-  const { device, browser } = parseUserAgent(ua);
+  const { device, browser, os } = parseUserAgent(ua);
 
-  await trackPageViewEdge({ path, referrer, country, city, device, browser, hashedIp });
+  await trackPageViewEdge({
+    path,
+    referrer,
+    country,
+    city,
+    device,
+    browser,
+    os,
+    hashedIp,
+    isReturning,
+    utmSource,
+    utmMedium,
+    utmCampaign,
+  });
 }

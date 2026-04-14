@@ -34,28 +34,45 @@ export async function trackPageViewEdge(data: {
   city: string;
   device: string;
   browser: string;
+  os: string;
   hashedIp: string;
+  isReturning: boolean;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
 }): Promise<void> {
   const d = todayKey();
-
   const hour = new Date().getUTCHours().toString().padStart(2, '0');
+  const dayOfWeek = new Date().getUTCDay().toString(); // 0=Sun … 6=Sat
   const fiveMinAgo = Date.now() - 5 * 60 * 1000;
 
   const cmds: (string | number)[][] = [
+    // Core
     ['INCR', `pv:${d}`],
     ['EXPIRE', `pv:${d}`, TTL],
     ['PFADD', `uv:${d}`, data.hashedIp],
     ['EXPIRE', `uv:${d}`, TTL],
     ['ZINCRBY', `pages:${d}`, 1, data.path || '/'],
     ['EXPIRE', `pages:${d}`, TTL],
-    // Hour-of-day tracking
+    // Time buckets
     ['ZINCRBY', `hours:${d}`, 1, hour],
     ['EXPIRE', `hours:${d}`, TTL],
-    // Live visitor tracking (sorted set: member=hashedIp, score=timestamp)
+    ['ZINCRBY', `dow:${d}`, 1, dayOfWeek],
+    ['EXPIRE', `dow:${d}`, TTL],
+    // Live visitors
     ['ZREMRANGEBYSCORE', 'live_visitors', 0, fiveMinAgo],
     ['ZADD', 'live_visitors', Date.now(), data.hashedIp],
     ['EXPIRE', 'live_visitors', 3600],
+    // New vs returning
+    ['ZINCRBY', `visitor_type:${d}`, 1, data.isReturning ? 'returning' : 'new'],
+    ['EXPIRE', `visitor_type:${d}`, TTL],
   ];
+
+  // Landing page tracking (no internal referrer = entry point)
+  if (!data.referrer) {
+    cmds.push(['ZINCRBY', `landing:${d}`, 1, data.path || '/']);
+    cmds.push(['EXPIRE', `landing:${d}`, TTL]);
+  }
 
   if (data.referrer) {
     cmds.push(['ZINCRBY', `ref:${d}`, 1, data.referrer]);
@@ -76,6 +93,24 @@ export async function trackPageViewEdge(data: {
   if (data.browser) {
     cmds.push(['ZINCRBY', `browser:${d}`, 1, data.browser]);
     cmds.push(['EXPIRE', `browser:${d}`, TTL]);
+  }
+  if (data.os) {
+    cmds.push(['ZINCRBY', `os:${d}`, 1, data.os]);
+    cmds.push(['EXPIRE', `os:${d}`, TTL]);
+  }
+
+  // UTM parameters
+  if (data.utmSource) {
+    cmds.push(['ZINCRBY', `utm_source:${d}`, 1, data.utmSource]);
+    cmds.push(['EXPIRE', `utm_source:${d}`, TTL]);
+  }
+  if (data.utmMedium) {
+    cmds.push(['ZINCRBY', `utm_medium:${d}`, 1, data.utmMedium]);
+    cmds.push(['EXPIRE', `utm_medium:${d}`, TTL]);
+  }
+  if (data.utmCampaign) {
+    cmds.push(['ZINCRBY', `utm_campaign:${d}`, 1, data.utmCampaign]);
+    cmds.push(['EXPIRE', `utm_campaign:${d}`, TTL]);
   }
 
   await upstashPipeline(cmds);

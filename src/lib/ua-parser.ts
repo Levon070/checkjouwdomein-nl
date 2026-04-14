@@ -1,4 +1,4 @@
-export function parseUserAgent(ua: string): { device: string; browser: string } {
+export function parseUserAgent(ua: string): { device: string; browser: string; os: string } {
   const s = ua.toLowerCase();
 
   // Device
@@ -18,5 +18,14 @@ export function parseUserAgent(ua: string): { device: string; browser: string } 
   else if (s.includes('chrome/')) browser = 'Chrome';
   else if (s.includes('safari/')) browser = 'Safari';
 
-  return { device, browser };
+  // OS
+  let os = 'other';
+  if (s.includes('windows')) os = 'Windows';
+  else if (s.includes('iphone') || s.includes('ipad') || s.includes('ipod')) os = 'iOS';
+  else if (s.includes('mac os x') || s.includes('macos')) os = 'macOS';
+  else if (s.includes('android')) os = 'Android';
+  else if (s.includes('linux')) os = 'Linux';
+  else if (s.includes('cros')) os = 'ChromeOS';
+
+  return { device, browser, os };
 }

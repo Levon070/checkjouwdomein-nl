@@ -27,43 +27,6 @@ function dateRange(days: number, offsetDays = 0): string[] {
   return out;
 }
 
-export async function hashIp(ip: string): Promise<string> {
-  const data = new TextEncoder().encode(ip + (process.env.ANALYTICS_SECRET ?? 'cjd-salt'));
-  const buf = await crypto.subtle.digest('SHA-256', data);
-  return Array.from(new Uint8Array(buf))
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('')
-    .slice(0, 16);
-}
-
-export async function trackPageView(data: {
-  path: string;
-  referrer: string;
-  country: string;
-  device: string;
-  browser: string;
-  hashedIp: string;
-}): Promise<void> {
-  const redis = getRedis();
-  if (!redis) return;
-  const d = toDateStr(new Date());
-  const TTL = 90 * 24 * 3600;
-  const cmds: Promise<unknown>[] = [
-    redis.incr(`pv:${d}`).then(() => redis.expire(`pv:${d}`, TTL)),
-    redis.pfadd(`uv:${d}`, data.hashedIp).then(() => redis.expire(`uv:${d}`, TTL)),
-    redis.zincrby(`pages:${d}`, 1, data.path || '/').then(() => redis.expire(`pages:${d}`, TTL)),
-  ];
-  if (data.referrer)
-    cmds.push(redis.zincrby(`ref:${d}`, 1, data.referrer).then(() => redis.expire(`ref:${d}`, TTL)));
-  if (data.country)
-    cmds.push(redis.zincrby(`country:${d}`, 1, data.country).then(() => redis.expire(`country:${d}`, TTL)));
-  if (data.device)
-    cmds.push(redis.zincrby(`device:${d}`, 1, data.device).then(() => redis.expire(`device:${d}`, TTL)));
-  if (data.browser)
-    cmds.push(redis.zincrby(`browser:${d}`, 1, data.browser).then(() => redis.expire(`browser:${d}`, TTL)));
-  await Promise.all(cmds);
-}
-
 export async function trackEvent(name: string, value: string): Promise<void> {
   const redis = getRedis();
   if (!redis) return;
@@ -84,13 +47,21 @@ export interface DashboardStats {
   dailyData: Array<{ date: string; views: number; visitors: number }>;
   previousDailyData: Array<{ date: string; views: number; visitors: number }>;
   topPages: ZEntry[];
+  topLandingPages: ZEntry[];
   topSearches: ZEntry[];
   topClicks: ZEntry[];
   topReferrers: ZEntry[];
+  topExtensions: ZEntry[];
   devices: ZEntry[];
   browsers: ZEntry[];
+  os: ZEntry[];
   countries: ZEntry[];
   cities: ZEntry[];
+  visitorTypes: ZEntry[];
+  utmSources: ZEntry[];
+  utmMediums: ZEntry[];
+  utmCampaigns: ZEntry[];
+  dowData: Array<{ day: string; count: number }>;
   comparison: {
     prevPageviews: number;
     prevVisitors: number;
@@ -99,6 +70,8 @@ export interface DashboardStats {
   };
   hourlyData: Array<{ hour: string; count: number }>;
   funnel: { visitors: number; searches: number; clicks: number };
+  conversionRate: number;
+  scrollDepth: ZEntry[];
 }
 
 function parseZRange(raw: unknown[]): ZEntry[] {
@@ -144,6 +117,8 @@ export async function getLiveCount(): Promise<number> {
   return redis.zcard('live_visitors');
 }
 
+const DOW_LABELS = ['Zo', 'Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za'];
+
 export async function getStats(days: number): Promise<DashboardStats> {
   const redis = getRedis();
   const dates = dateRange(days);
@@ -155,16 +130,29 @@ export async function getStats(days: number): Promise<DashboardStats> {
     dailyData: dates.map((d) => ({ date: d, views: 0, visitors: 0 })),
     previousDailyData: prevDates.map((d) => ({ date: d, views: 0, visitors: 0 })),
     topPages: [],
+    topLandingPages: [],
     topSearches: [],
     topClicks: [],
     topReferrers: [],
+    topExtensions: [],
     devices: [],
     browsers: [],
+    os: [],
     countries: [],
     cities: [],
+    visitorTypes: [],
+    utmSources: [],
+    utmMediums: [],
+    utmCampaigns: [],
+    dowData: DOW_LABELS.map((day) => ({ day, count: 0 })),
     comparison: { prevPageviews: 0, prevVisitors: 0, pageviewsChange: null, visitorsChange: null },
-    hourlyData: Array.from({ length: 24 }, (_, i) => ({ hour: i.toString().padStart(2, '0'), count: 0 })),
+    hourlyData: Array.from({ length: 24 }, (_, i) => ({
+      hour: i.toString().padStart(2, '0') + ':00',
+      count: 0,
+    })),
     funnel: { visitors: 0, searches: 0, clicks: 0 },
+    conversionRate: 0,
+    scrollDepth: [],
   };
 
   if (!redis) return empty;
@@ -172,9 +160,13 @@ export async function getStats(days: number): Promise<DashboardStats> {
   const [
     pvArr, uvArr,
     prevPvArr, prevUvArr,
-    topPages, topSearches, topClicks, topReferrers,
-    devices, browsers, countries, cities,
-    hourEntries,
+    topPages, topLandingPages,
+    topSearches, topClicks, topReferrers, topExtensions,
+    devices, browsers, os, countries, cities,
+    visitorTypes,
+    utmSources, utmMediums, utmCampaigns,
+    hourEntries, dowEntries,
+    scrollDepth,
     searchTotal, clickTotal,
   ] = await Promise.all([
     Promise.all(dates.map((d) => redis.get<number>(`pv:${d}`))),
@@ -182,14 +174,23 @@ export async function getStats(days: number): Promise<DashboardStats> {
     Promise.all(prevDates.map((d) => redis.get<number>(`pv:${d}`))),
     Promise.all(prevDates.map((d) => redis.pfcount(`uv:${d}`))),
     mergeTopN(redis, dates.map((d) => `pages:${d}`), 10),
+    mergeTopN(redis, dates.map((d) => `landing:${d}`), 10),
     mergeTopN(redis, dates.map((d) => `search:${d}`), 10),
     mergeTopN(redis, dates.map((d) => `clicks:${d}`), 10),
     mergeTopN(redis, dates.map((d) => `ref:${d}`), 10),
+    mergeTopN(redis, dates.map((d) => `ext:${d}`), 10),
     mergeTopN(redis, dates.map((d) => `device:${d}`), 5),
     mergeTopN(redis, dates.map((d) => `browser:${d}`), 5),
+    mergeTopN(redis, dates.map((d) => `os:${d}`), 6),
     mergeTopN(redis, dates.map((d) => `country:${d}`), 10),
     mergeTopN(redis, dates.map((d) => `city:${d}`), 20),
+    mergeTopN(redis, dates.map((d) => `visitor_type:${d}`), 2),
+    mergeTopN(redis, dates.map((d) => `utm_source:${d}`), 10),
+    mergeTopN(redis, dates.map((d) => `utm_medium:${d}`), 10),
+    mergeTopN(redis, dates.map((d) => `utm_campaign:${d}`), 10),
     mergeTopN(redis, dates.map((d) => `hours:${d}`), 24),
+    mergeTopN(redis, dates.map((d) => `dow:${d}`), 7),
+    mergeTopN(redis, dates.map((d) => `scroll:${d}`), 4),
     totalScoreSum(redis, dates.map((d) => `search:${d}`)),
     totalScoreSum(redis, dates.map((d) => `clicks:${d}`)),
   ]);
@@ -206,26 +207,56 @@ export async function getStats(days: number): Promise<DashboardStats> {
     return { hour: `${h}:00`, count: hourMap.get(h) ?? 0 };
   });
 
+  // Build day-of-week array
+  const dowMap = new Map(dowEntries.map((e) => [e.member, e.score]));
+  const dowData = DOW_LABELS.map((day, i) => ({
+    day,
+    count: dowMap.get(String(i)) ?? 0,
+  }));
+
+  const conversionRate =
+    uniqueVisitors > 0 ? Math.round((searchTotal / uniqueVisitors) * 100) : 0;
+
   return {
     totalPageviews,
     uniqueVisitors,
     dailyData: dates.map((date, i) => ({ date, views: pvArr[i] ?? 0, visitors: uvArr[i] ?? 0 })),
-    previousDailyData: prevDates.map((date, i) => ({ date, views: prevPvArr[i] ?? 0, visitors: prevUvArr[i] ?? 0 })),
+    previousDailyData: prevDates.map((date, i) => ({
+      date,
+      views: prevPvArr[i] ?? 0,
+      visitors: prevUvArr[i] ?? 0,
+    })),
     topPages,
+    topLandingPages,
     topSearches,
     topClicks,
     topReferrers,
+    topExtensions,
     devices,
     browsers,
+    os,
     countries,
     cities,
+    visitorTypes,
+    utmSources,
+    utmMediums,
+    utmCampaigns,
+    dowData,
     comparison: {
       prevPageviews,
       prevVisitors,
-      pageviewsChange: prevPageviews > 0 ? Math.round(((totalPageviews - prevPageviews) / prevPageviews) * 100) : null,
-      visitorsChange: prevVisitors > 0 ? Math.round(((uniqueVisitors - prevVisitors) / prevVisitors) * 100) : null,
+      pageviewsChange:
+        prevPageviews > 0
+          ? Math.round(((totalPageviews - prevPageviews) / prevPageviews) * 100)
+          : null,
+      visitorsChange:
+        prevVisitors > 0
+          ? Math.round(((uniqueVisitors - prevVisitors) / prevVisitors) * 100)
+          : null,
     },
     hourlyData,
     funnel: { visitors: uniqueVisitors, searches: searchTotal, clicks: clickTotal },
+    conversionRate,
+    scrollDepth,
   };
 }
