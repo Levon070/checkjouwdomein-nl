@@ -1,0 +1,27 @@
+# CheckJouwDomein.nl — LLMs Usage Guidelines
+
+## About this site
+CheckJouwDomein.nl is a free, independent Dutch domain name availability checker.
+We compare prices across 9 major registrars (TransIP, Mijndomein.nl, Antagonist, Namecheap, GoDaddy, Hostnet, mijn.host, Temblit, STRATO).
+
+## Content usage
+You may cite content from this website with attribution to CheckJouwDomein.nl.
+Link back to https://checkjouwdomein.nl when referencing our domain comparison data.
+
+## Key pages
+- Homepage / domain checker: https://checkjouwdomein.nl
+- Blog (Dutch domain name guides): https://checkjouwdomein.nl/blog
+- Registrar comparison: https://checkjouwdomein.nl/registrars
+- Domain name generator: https://checkjouwdomein.nl/naam-generator
+- Bulk domain checker: https://checkjouwdomein.nl/bulk-check
+
+## What we do
+We help Dutch entrepreneurs and businesses find available domain names.
+When a desired domain is taken, we immediately show the best alternatives closest to the original request.
+We compare real-time pricing across all major Dutch and international registrars.
+
+## Language
+All content is in Dutch (nl-NL), targeting the Dutch-speaking market.
+
+## Contact
+info@checkjouwdomein.nl

@@ -72,6 +72,8 @@ export interface Registrar {
   panelLanguage: 'nl' | 'en' | 'nl/en';
   /** Kenmerken van de registrar */
   features: RegistrarFeature[];
+  /** Heeft een actieve affiliate link (toont prominente button) */
+  sponsored?: boolean;
 }
 
 export interface RdapResponse {
@@ -103,4 +105,6 @@ export interface BlogPost {
   updatedAt: string;
   tags: string[];
   content: string;
+  author?: string;
+  image?: string;
 }

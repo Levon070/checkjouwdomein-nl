@@ -9,6 +9,8 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: '2026-01-15',
     updatedAt: '2026-04-01',
     tags: ['domeinnaam', 'tips', 'beginners'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&auto=format&fit=crop',
     content: `
 Een domeinnaam is je digitale adres. Het is het eerste wat mensen zien en onthouden van jouw website.
 Hier zijn de belangrijkste regels voor het kiezen van de perfecte domeinnaam:
@@ -41,6 +43,53 @@ Consistentie in je naam is belangrijk voor herkenbaarheid.
 
 Voer jouw keywords in onze zoekbalk in en ontdek direct welke domeinen nog beschikbaar zijn.
 Onze score-indicator helpt je de beste keuze te maken.
+
+## Waarom is een goede domeinnaam zo belangrijk voor SEO?
+
+Een domeinnaam speelt een directe rol in je vindbaarheid via zoekmachines. Google gebruikt de inhoud van je domeinnaam als een van de signalen om te bepalen waar je website over gaat. Een domein als "fietsenreparatieamsterdam.nl" zal bij relevante zoekopdrachten eerder opvallen dan een generieke naam.
+
+Korte domeinnamen krijgen bovendien meer directe bezoekers: mensen die de URL al kennen, typen hem simpelweg in. Hoe makkelijker te onthouden, hoe meer terugkerend verkeer je opbouwt zonder dat je hiervoor betaalt aan advertenties.
+
+Daarnaast versterkt een duidelijke, betrouwbare domeinnaam de klikratio (CTR) in de zoekresultaten. Als jouw URL herkenbaar en logisch is, klikken mensen eerder — wat Google weer ziet als een positief signaal voor je ranking.
+
+## Hoe kies je tussen meerdere beschikbare opties?
+
+Gebruik de domeinscore in onze checker als startpunt: wij beoordelen beschikbare namen op lengte, leesbaarheid en extensie. Maar er zijn ook menselijke factoren die meetellen. Stel jezelf de vraag: kun je de naam makkelijk uitspreken aan de telefoon zonder hem te hoeven spellen?
+
+Kijk ook naar klankbaarheid — klinkt de naam prettig en professioneel? En naar spelbaarheid — als je hem hoort, weet je dan hoe je hem schrijft? Namen die worden misgespeld, leiden tot verloren bezoekers die op het verkeerde adres terechtkomen.
+
+Test je favorieten door de naam hardop te zeggen aan iemand die hem nog niet kent. Vraag hen hem op te schrijven. Als ze fouten maken, is de naam misschien toch niet de juiste keuze.
+
+## Veelgemaakte fouten bij het kiezen van een domeinnaam
+
+Een van de meest voorkomende fouten is kiezen voor een naam die te lang is. Alles boven de 20 tekens wordt zelden goed onthouden. Een andere valkuil is een naam die moeilijk te spellen is — denk aan woorden met dubbele letters, ongebruikelijke combinaties of vreemde klanken.
+
+Ook gevaarlijk: een naam kiezen die te sterk lijkt op die van een bekende concurrent. Dit kan leiden tot verwarring bij klanten én juridische problemen als de concurrent een merk heeft geregistreerd. Controleer altijd via EUIPO of Benelux Merkenbureau of de naam vrij is.
+
+Koppeltekens zijn een derde veelgemaakte fout. Mijn-bakker.nl ziet er minder professioneel uit dan mijnbakker.nl, en bij mondelinge communicatie geef je altijd aan "met koppelteken" — wat al aangeeft dat het onhandig is.
+
+## Wat als jouw ideale domeinnaam al bezet is?
+
+Raak niet ontmoedigd als jouw eerste keuze niet beschikbaar is. Probeer eerst de andere extensie: is naam.nl bezet, controleer dan naam.com — en omgekeerd. Onze checker toont direct alle beschikbare extensies naast elkaar, zodat je snel alternatieven ziet.
+
+Een andere strategie is een synoniem of een lichte aanpassing: voeg een lidwoord toe ("de", "het"), een geografische aanduiding ("amsterdam", "rotterdam") of een branchewoord. Zo wordt fietsenwinkel.nl misschien jouwfietsenwinkel.nl of fietswinkeldordrecht.nl.
+
+Wil je absoluut de exacte naam hebben? Dan kun je proberen hem te kopen van de huidige eigenaar via een domeinmakelaar. Goede domeinen hebben een marktwaarde die soms in de duizenden euro's loopt, maar voor een unieke merknaam kan dat een goede investering zijn.
+
+## Hoe bescherm je jouw domeinnaam?
+
+Zodra je een domeinnaam registreert, is het verstandig ook vergelijkbare varianten vast te leggen. Registreer naast naam.nl ook naam.com en eventueel naam.be. Zo voorkom je dat concurrenten of merkenkrakers dezelfde naam onder een andere extensie registreren en van jouw naamsbekendheid profiteren.
+
+Zet altijd de transferlock aan in het configuratiepaneel van je registrar. Deze instelling voorkomt dat je domein onbedoeld of zonder jouw toestemming wordt overgedragen naar een andere partij. Bij de meeste registrars staat dit standaard aan, maar check het expliciet na registratie.
+
+Stel ook automatische verlenging in. Veel domeinnamen gaan verloren doordat de eigenaar de verlengingsdatum vergeet. Een domeinnaam die verloopt, is vaak binnen uren door iemand anders geregistreerd — en terugkrijgen is kostbaar en tijdrovend.
+
+## Meer lezen
+
+- [Controleer direct of jouw domeinnaam beschikbaar is](/)
+- [.nl of .com? Lees het vergelijkingsartikel](/blog/nl-vs-com-domein)
+- [Gebruik onze gratis AI-naamgenerator](/naam-generator)
+- [Alle domeinextensies vergeleken](/blog/domein-extensies-vergelijken)
     `.trim(),
   },
   {
@@ -51,6 +100,8 @@ Onze score-indicator helpt je de beste keuze te maken.
     publishedAt: '2026-02-01',
     updatedAt: '2026-04-01',
     tags: ['.nl', '.com', 'extensies'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop',
     content: `
 De eeuwige vraag: moet je kiezen voor .nl of .com? Het antwoord hangt af van jouw doelgroep en ambities.
 
@@ -87,6 +138,43 @@ Redirect de .com naar de .nl (of andersom). Zo bescherm je je merk en mis je gee
 
 Overweeg ook .be (voor Belgische markt), .eu (voor Europese markt) of moderne extensies
 zoals .shop voor webshops of .io voor tech-startups.
+
+## Wat zegt Google over .nl vs .com voor SEO?
+
+Google behandelt ccTLD's (country code Top-Level Domains) zoals .nl als een sterk geografisch signaal. Een .nl-domein vertelt Google automatisch dat jouw website primair bedoeld is voor bezoekers in Nederland. Dit geeft je een voordeel in de Nederlandse zoekresultaten, maar betekent tegelijk dat je website minder zichtbaar zal zijn in andere landen.
+
+Een .com-domein is in de ogen van Google "neutraal" — het heeft geen geografische voorkeur. Als je via Google Search Console jouw doelland instelt op Nederland, kun je dit gedeeltelijk compenseren. Maar voor puur Nederlandse ondernemers die lokale klanten willen bereiken, geeft een .nl-domein nog steeds de meeste SEO-voordelen zonder extra configuratie.
+
+## Wat kost een .nl domein vs een .com domein?
+
+In 2026 kost een .nl-domein gemiddeld tussen de €6 en €10 per jaar bij de meeste Nederlandse registrars. Een .com-domein ligt iets hoger: gemiddeld €10 tot €14 per jaar. Het prijsverschil is klein, maar op lange termijn telt het mee, zeker als je meerdere domeinen beheert.
+
+Let op verlengingsprijzen: sommige aanbieders lokken klanten met een laag eerste jaar tarief en verhogen daarna fors. Controleer altijd de verlengingsprijs voordat je een registrar kiest. Onze vergelijkingstool toont zowel registratie- als verlengingstarieven naast elkaar.
+
+## Wanneer kies je voor een andere extensie?
+
+Naast .nl en .com zijn er meerdere extensies die zinvol kunnen zijn, afhankelijk van je branche of doelgroep. Een .eu-domein is geschikt als je je richt op de Europese markt als geheel en nog geen sterke voorkeur hebt voor één land. Het geeft vertrouwen bij Europese consumenten.
+
+Voor webshops is .shop een populaire keuze geworden: het is direct beschrijvend en vertelt bezoekers wat ze kunnen verwachten. Tech-startups kiezen vaak voor .io, dat is uitgegroeid tot een herkenbaar signaal voor innovatieve online producten. Voor lokale Belgische activiteiten is .be de meest logische keuze. Denk goed na over welk signaal jij wilt afgeven aan jouw doelgroep.
+
+## Hoe controleer je of jouw gewenste .nl of .com beschikbaar is?
+
+Onze domeinchecker gebruikt het RDAP-protocol (Registration Data Access Protocol) om real-time te controleren of een domein beschikbaar is. RDAP is de moderne opvolger van het oudere WHOIS-systeem en geeft snellere en meer gestructureerde resultaten.
+
+Voer gewoon jouw gewenste naam in de zoekbalk in en onze tool controleert automatisch de beschikbaarheid van .nl, .com en tientallen andere extensies tegelijk. Je ziet in één oogopslag wat vrij is en wat al bezet is, inclusief een domeinscore die aangeeft hoe sterk de naam is.
+
+## Praktische tip: registreer beide extensies
+
+Als je een sterk merk wilt bouwen, is het verstandig om zowel naam.nl als naam.com te registreren. Dit kost je jaarlijks minder dan €25 extra, maar beschermt je merk tegen merkenkrapers die jouw naam onder een andere extensie willen registreren om verkeer af te vangen.
+
+Stel een redirect in van de extensie die je niet primair gebruikt naar je hoofddomein. Zo verlies je geen bezoekers die per ongeluk de verkeerde extensie intypen, en versterkt de doorverwijzing ook licht je SEO-signalen. Grote merken doen dit standaard — en voor kleinere bedrijven is het net zo relevant.
+
+## Meer lezen
+
+- [Controleer beschikbaarheid voor .nl, .com en meer](/)
+- [Goedkoopste domeinnaam registreren in 2026](/blog/goedkoopste-domeinnaam-registreren)
+- [Vergelijk alle registrars](/registrars)
+- [Domeinnaam kiezen: de beste tips](/blog/beste-domeinnaam-kiezen)
     `.trim(),
   },
   {
@@ -97,6 +185,8 @@ zoals .shop voor webshops of .io voor tech-startups.
     publishedAt: '2026-03-01',
     updatedAt: '2026-04-01',
     tags: ['2026', 'strategie', 'SEO'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&auto=format&fit=crop',
     content: `
 In 2026 is het kiezen van een domeinnaam belangrijker dan ooit. Met duizenden nieuwe extensies
 en een volle .nl-ruimte moet je slim te werk gaan.
@@ -128,6 +218,63 @@ Voor het opbouwen van een sterk merk is brandable beter op de lange termijn.
 
 Goede domeinen stijgen in waarde. Als je een generieke keyword-domein kunt registreren
 (zoals fietsenwinkel.nl of webdesignbureau.nl), kan dat een slimme investering zijn.
+
+## Tip 1: AI-tools gebruiken voor naamgeneratie
+
+Eén van de grootste uitdagingen bij het kiezen van een domeinnaam is creativiteit: alle simpele namen lijken al bezet. Hier helpen AI-tools enorm. Onze eigen AI-naamgenerator kan op basis van jouw trefwoorden, branche en gewenste extensie honderden unieke suggesties genereren die je zelf nooit zo snel zou bedenken.
+
+Het werkt simpel: voer je kernwoorden in, geef aan of je een beschrijvende of brandable naam wilt, en de generator produceert directe suggesties inclusief beschikbaarheidscheck. Dit bespaart uren handmatig zoeken en opent mogelijkheden die je anders had gemist.
+
+## Tip 2: Controleer merkenrechtelijke conflicten
+
+Een beschikbare domeinnaam betekent niet automatisch dat je hem ook mag gebruiken. Als de naam lijkt op een geregistreerd handelsmerk, kan de merkhouder juridisch optreden — ook als jij het domein eerder registreerde. De Europese EUIPO-merkencheck is hiervoor het standaard hulpmiddel.
+
+Onze domeinchecker voert deze controle automatisch mee uit. Je ziet direct of jouw gewenste naam conflicten oplevert met bestaande Europese of Benelux-merken. Dit voorkomt dure juridische procedures achteraf en geeft je de zekerheid dat je naam écht van jou kan zijn.
+
+## Tip 3: Denk aan de toekomst van jouw bedrijf
+
+Kies een naam die ook werkt als jouw bedrijf groeit of van richting verandert. "Kapsalon Den Haag" werkt prima zolang je één vestiging hebt in Den Haag, maar zodra je uitbreidt of verhuist, klopt de naam niet meer. Een naam als "StijlStudio" is flexibeler en schaalt mee.
+
+Denk ook aan internationale ambities. Als je plannen hebt om ooit buiten Nederland actief te worden, kies dan bij voorkeur een naam zonder specifiek Nederlandse verwijzingen en registreer ook de .com-variant. Het is eenvoudiger om vanaf het begin breed te registreren dan later een rebranding door te voeren.
+
+## Tip 4: Test de naam op uitspelbaarheid
+
+Dit is een van de meest onderschatte checks: zeg de naam hardop. Vervolgens vraag je iemand die hem nog niet kent om hem op te schrijven. Als ze hem fout schrijven — zelfs kleine fouten zoals dubbele letters of een verkeerde klinker — verlies je potentieel bezoekers aan dat verkeerd getypte adres.
+
+Vermijd namen met letters die in het Nederlands voor meerdere klanken kunnen staan, zoals "c" (kan klinken als "k" of "s"), of combinaties die door autocorrect worden aangepast. Een naam die makkelijk gespeld wordt, zorgt voor minder verloren bezoekers en een betere directe-verkeer statistiek.
+
+## Tip 5: Controleer social media beschikbaarheid
+
+Je domeinnaam en je social media accounts moeten bij voorkeur identiek zijn. Als jouw website fietsgigant.nl heet maar @fietsgigant al bezet is op Instagram en LinkedIn, bouw je twee afzonderlijke identiteiten op — wat verwarrend is voor je publiek en nadelig voor je merk.
+
+Controleer daarom voor je definitief kiest of de naam beschikbaar is op Instagram, LinkedIn, TikTok en eventueel Facebook. Tools als Namecheckr of KnowEm controleren tientallen platforms tegelijk. Consistentie in naam is cruciaal voor herkenbaarheid en maakt het makkelijker om gevonden te worden.
+
+## Tip 6: Kijk verder dan .nl en .com
+
+In 2026 zijn nieuwe domeineindingen volwassen geworden. Extensies als .shop, .online, .io en .studio worden door zoekmachines gelijk behandeld aan traditionele TLD's en geven je toegang tot namen die op .nl en .com al jarenlang bezet zijn.
+
+Voor specifieke branches kunnen nieuwe extensies zelfs een voordeel zijn: een .shop-domein vertelt bezoekers direct wat ze kunnen verwachten, zonder dat je het woord "shop" in je domeinnaam hoeft te verwerken. Een fotograaf met studio.amsterdam of een softwarebedrijf met tools.io communiceert direct en professioneel.
+
+## Checklist voor 2026
+
+Gebruik onderstaande checklist voordat je jouw domeinnaam definitief registreert:
+
+- Maximaal 15 tekens (excl. extensie)
+- Geen koppeltekens of cijfers
+- Makkelijk uit te spreken én te spellen
+- Controleer op merkenrechtelijke conflicten (EUIPO)
+- Beschikbaar op belangrijkste social media platforms
+- Extensie past bij jouw doelgroep (.nl voor Nederland, .com voor internationaal)
+- Zowel .nl als .com geregistreerd voor merkbescherming
+- Automatische verlenging ingesteld
+- Transferlock geactiveerd bij je registrar
+
+## Meer lezen
+
+- [Controleer direct of jouw domeinnaam beschikbaar is](/)
+- [.nl of .com? Lees het vergelijkingsartikel](/blog/nl-vs-com-domein)
+- [Gebruik onze gratis AI-naamgenerator](/naam-generator)
+- [Alle domeinextensies vergeleken](/blog/domein-extensies-vergelijken)
     `.trim(),
   },
   {
@@ -138,6 +285,8 @@ Goede domeinen stijgen in waarde. Als je een generieke keyword-domein kunt regis
     publishedAt: '2026-01-10',
     updatedAt: '2026-04-01',
     tags: ['beginners', 'uitleg', 'basis'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop',
     content: `
 Als je een website wilt beginnen, heb je een domeinnaam nodig. Maar wat is dat precies?
 
@@ -175,6 +324,13 @@ TLD staat voor Top-Level Domain. De meest bekende zijn .nl, .com en .be.
 4. Koppel de domeinnaam aan jouw website of hosting
 
 Een domeinnaam kost gemiddeld €6–15 per jaar, afhankelijk van de extensie.
+
+## Meer lezen
+
+- [Check de beschikbaarheid van jouw domein](/)
+- [Domeinnaam registreren: de goedkoopste opties](/blog/goedkoopste-domeinnaam-registreren)
+- [Domeinnaam en hosting: wat is het verschil?](/blog/domeinnaam-en-hosting-verschil)
+- [Beveilig jouw domein met de juiste instellingen](/blog/domeinnaam-beveiliging-tips)
     `.trim(),
   },
   {
@@ -185,6 +341,8 @@ Een domeinnaam kost gemiddeld €6–15 per jaar, afhankelijk van de extensie.
     publishedAt: '2026-04-01',
     updatedAt: '2026-04-13',
     tags: ['registrar', 'prijs', 'vergelijking'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&auto=format&fit=crop',
     content: `
 Een domeinnaam hoeft niet duur te zijn. In Nederland zijn er tientallen registrars waar je terecht kunt,
 maar de prijsverschillen zijn soms verrassend groot. Wij vergelijken de populairste opties.
@@ -229,6 +387,13 @@ Voor de gemiddelde Nederlandse ondernemer is **Antagonist** of **TransIP** de be
 solide prijs, goede Nederlandse service en geen verborgen kosten.
 
 Gebruik onze vergelijkingstool om direct te zien welke registrar vandaag het gunstigst is voor jouw domeinnaam.
+
+## Meer lezen
+
+- [Vergelijk alle registrars en hun tarieven](/registrars)
+- [Check direct de beschikbaarheid van jouw domein](/)
+- [Domeinnaam kiezen: de beste tips](/blog/beste-domeinnaam-kiezen)
+- [Wat is het verschil tussen domeinnaam en hosting?](/blog/domeinnaam-en-hosting-verschil)
     `.trim(),
   },
   {
@@ -239,6 +404,8 @@ Gebruik onze vergelijkingstool om direct te zien welke registrar vandaag het gun
     publishedAt: '2026-04-02',
     updatedAt: '2026-04-13',
     tags: ['webshop', 'e-commerce', 'tips'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop',
     content: `
 Je webshop begint met een goede domeinnaam. Het is het eerste wat potentiële klanten zien,
 en het heeft direct invloed op vertrouwen, herkenbaarheid en je positie in Google.
@@ -286,6 +453,13 @@ Dit werkt goed voor middelgrote webshops.
 ✓ Social media handles beschikbaar?
 
 Gebruik onze gratis domeinchecker om alle opties in één klik te controleren.
+
+## Meer lezen
+
+- [Controleer direct of jouw domeinnaam beschikbaar is](/)
+- [.nl of .com? Lees het vergelijkingsartikel](/blog/nl-vs-com-domein)
+- [Gebruik onze gratis AI-naamgenerator](/naam-generator)
+- [Alle domeinextensies vergeleken](/blog/domein-extensies-vergelijken)
     `.trim(),
   },
   {
@@ -296,6 +470,8 @@ Gebruik onze gratis domeinchecker om alle opties in één klik te controleren.
     publishedAt: '2026-04-03',
     updatedAt: '2026-04-13',
     tags: ['verhuizen', 'registrar', 'handleiding'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&auto=format&fit=crop',
     content: `
 Een domeinnaam verhuizen klinkt technisch, maar is goed te doen als je de stappen weet.
 Je verhuist vaak om een betere prijs, betere service of betere tools bij een andere registrar.
@@ -342,6 +518,13 @@ Voor .com betaal je soms één jaar registratie vooruit (dit verlengt je domein 
 - Verhuiz nooit vlak voor je verlengingsdatum
 - Sla je EPP-code veilig op
 - Zet WHOIS-bescherming tijdelijk uit tijdens de verhuizing
+
+## Meer lezen
+
+- [Controleer beschikbaarheid voor .nl, .com en meer](/)
+- [Goedkoopste domeinnaam registreren in 2026](/blog/goedkoopste-domeinnaam-registreren)
+- [Vergelijk alle registrars](/registrars)
+- [Domeinnaam kiezen: de beste tips](/blog/beste-domeinnaam-kiezen)
     `.trim(),
   },
   {
@@ -352,6 +535,8 @@ Voor .com betaal je soms één jaar registratie vooruit (dit verlengt je domein 
     publishedAt: '2026-04-04',
     updatedAt: '2026-04-13',
     tags: ['subdomein', 'uitleg', 'SEO'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop',
     content: `
 Je hebt vast weleens een adres gezien als *shop.bedrijf.nl* of *blog.bedrijf.nl*.
 Dit zijn subdomeinen. Maar wanneer gebruik je ze, en wat zijn de voor- en nadelen?
@@ -398,6 +583,13 @@ Grote bedrijven met aparte teams en systemen kiezen vaker voor subdomeinen.
 
 Je maakt een subdomein aan via het DNS-dashboard van je registrar of hosting.
 Voeg een A-record of CNAME toe met de naam van het subdomein (bijv. "shop") en wijs het naar je server.
+
+## Meer lezen
+
+- [Check de beschikbaarheid van jouw domein](/)
+- [Domeinnaam registreren: de goedkoopste opties](/blog/goedkoopste-domeinnaam-registreren)
+- [Domeinnaam en hosting: wat is het verschil?](/blog/domeinnaam-en-hosting-verschil)
+- [Beveilig jouw domein met de juiste instellingen](/blog/domeinnaam-beveiliging-tips)
     `.trim(),
   },
   {
@@ -408,6 +600,8 @@ Voeg een A-record of CNAME toe met de naam van het subdomein (bijv. "shop") en w
     publishedAt: '2026-04-05',
     updatedAt: '2026-04-13',
     tags: ['creativiteit', 'naamgenerator', 'tips'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&auto=format&fit=crop',
     content: `
 De perfecte domeinnaam is beschikbaar, makkelijk te onthouden en past bij je merk.
 Maar hoe kom je op goede ideeën? Hier zijn 10 bewezen technieken.
@@ -466,6 +660,13 @@ Controleer altijd:
 - Is de naam vrij op Instagram en andere socials?
 
 Gebruik onze gratis merknaamcheck voor alles in één klik.
+
+## Meer lezen
+
+- [Controleer direct of jouw domeinnaam beschikbaar is](/)
+- [.nl of .com? Lees het vergelijkingsartikel](/blog/nl-vs-com-domein)
+- [Gebruik onze gratis AI-naamgenerator](/naam-generator)
+- [Alle domeinextensies vergeleken](/blog/domein-extensies-vergelijken)
     `.trim(),
   },
   {
@@ -476,6 +677,8 @@ Gebruik onze gratis merknaamcheck voor alles in één klik.
     publishedAt: '2026-04-06',
     updatedAt: '2026-04-13',
     tags: ['SSL', 'beveiliging', 'beginners'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop',
     content: `
 Als je een website hebt, heb je een SSL-certificaat nodig. Zonder SSL toont Google Chrome een
 waarschuwing "Niet veilig" bij jouw website — en dat kost bezoekers en vertrouwen.
@@ -521,6 +724,13 @@ Zorg dat je SSL-certificaat geldig is voor jouw domeinnaam én voor www.jouwdome
 Stel daarna een redirect in van http naar https, zodat bezoekers altijd de beveiligde versie zien.
 
 Test je certificaat gratis via SSL Labs (ssllabs.com/ssltest).
+
+## Meer lezen
+
+- [Check de beschikbaarheid van jouw domein](/)
+- [Domeinnaam registreren: de goedkoopste opties](/blog/goedkoopste-domeinnaam-registreren)
+- [Domeinnaam en hosting: wat is het verschil?](/blog/domeinnaam-en-hosting-verschil)
+- [Beveilig jouw domein met de juiste instellingen](/blog/domeinnaam-beveiliging-tips)
     `.trim(),
   },
   {
@@ -531,6 +741,8 @@ Test je certificaat gratis via SSL Labs (ssllabs.com/ssltest).
     publishedAt: '2026-04-07',
     updatedAt: '2026-04-13',
     tags: ['parkeren', 'domeinnaam', 'strategie'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?w=800&auto=format&fit=crop',
     content: `
 Je hebt een domeinnaam geregistreerd, maar je website is nog niet klaar — of je wilt de naam
 gewoon veiligstellen voor de toekomst. Dan parkeer je hem.
@@ -573,6 +785,13 @@ geen parking.
 ## Hoeveel kost het parkeren?
 
 Parkeren zelf kost niets extra — je betaalt alleen de normale jaarlijkse registratiekosten.
+
+## Meer lezen
+
+- [Controleer beschikbaarheid voor .nl, .com en meer](/)
+- [Goedkoopste domeinnaam registreren in 2026](/blog/goedkoopste-domeinnaam-registreren)
+- [Vergelijk alle registrars](/registrars)
+- [Domeinnaam kiezen: de beste tips](/blog/beste-domeinnaam-kiezen)
     `.trim(),
   },
   {
@@ -583,6 +802,8 @@ Parkeren zelf kost niets extra — je betaalt alleen de normale jaarlijkse regis
     publishedAt: '2026-04-08',
     updatedAt: '2026-04-13',
     tags: ['extensies', 'TLD', 'vergelijking'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&auto=format&fit=crop',
     content: `
 Er zijn meer dan 1.500 domeinextensies beschikbaar — van .nl en .com tot .pizza en .amsterdam.
 Welke kies je? We vergelijken de meest gebruikte extensies.
@@ -636,6 +857,13 @@ Moderne extensies die na 2012 zijn geïntroduceerd:
 Registreer altijd zowel .nl als .com als ze beschikbaar zijn.
 Redirect de secundaire extensie naar je primaire domein. Kost je €10–15 extra per jaar,
 maar voorkomt dat bezoekers verloren gaan of concurrenten je naam kapen.
+
+## Meer lezen
+
+- [Controleer beschikbaarheid voor .nl, .com en meer](/)
+- [Goedkoopste domeinnaam registreren in 2026](/blog/goedkoopste-domeinnaam-registreren)
+- [Vergelijk alle registrars](/registrars)
+- [Domeinnaam kiezen: de beste tips](/blog/beste-domeinnaam-kiezen)
     `.trim(),
   },
   {
@@ -646,6 +874,8 @@ maar voorkomt dat bezoekers verloren gaan of concurrenten je naam kapen.
     publishedAt: '2026-04-09',
     updatedAt: '2026-04-13',
     tags: ['verkopen', 'domeinwaarde', 'investering'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&auto=format&fit=crop',
     content: `
 Sommige domeinnamen zijn duizenden of zelfs miljoenen euro's waard. Maar hoe weet je wat
 jouw domein waard is, en hoe verkoop je het?
@@ -700,6 +930,13 @@ Let op: tools zijn een indicatie, niet een garantie.
 
 Na verkoop verhuist het domein via een EPP-code naar de koper.
 Bij grote bedragen gebruiken kopers en verkopers een notaris of escrow.
+
+## Meer lezen
+
+- [Controleer beschikbaarheid voor .nl, .com en meer](/)
+- [Goedkoopste domeinnaam registreren in 2026](/blog/goedkoopste-domeinnaam-registreren)
+- [Vergelijk alle registrars](/registrars)
+- [Domeinnaam kiezen: de beste tips](/blog/beste-domeinnaam-kiezen)
     `.trim(),
   },
   {
@@ -710,6 +947,8 @@ Bij grote bedragen gebruiken kopers en verkopers een notaris of escrow.
     publishedAt: '2026-04-10',
     updatedAt: '2026-04-13',
     tags: ['hosting', 'beginners', 'uitleg'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&auto=format&fit=crop',
     content: `
 Als je voor het eerst een website wilt maken, kom je al snel twee begrippen tegen:
 domeinnaam en hosting. Ze worden vaak door elkaar gehaald, maar zijn totaal verschillend.
@@ -770,6 +1009,13 @@ Wel handig: als alles bij één partij staat, is het beheer eenvoudiger.
 6. Activeer een gratis SSL-certificaat
 
 Gebruik onze gratis domeinchecker om te beginnen.
+
+## Meer lezen
+
+- [Check de beschikbaarheid van jouw domein](/)
+- [Domeinnaam registreren: de goedkoopste opties](/blog/goedkoopste-domeinnaam-registreren)
+- [Domeinnaam en hosting: wat is het verschil?](/blog/domeinnaam-en-hosting-verschil)
+- [Beveilig jouw domein met de juiste instellingen](/blog/domeinnaam-beveiliging-tips)
     `.trim(),
   },
   {
@@ -780,6 +1026,8 @@ Gebruik onze gratis domeinchecker om te beginnen.
     publishedAt: '2026-04-13',
     updatedAt: '2026-04-13',
     tags: ['domeincheck', 'RDAP', 'WHOIS', 'beginners'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop',
     content: `
 Voordat je een domeinnaam kunt registreren, moet je weten of die nog beschikbaar is.
 Maar hoe werkt dat precies? En waarom geven verschillende tools soms verschillende resultaten?
@@ -823,6 +1071,13 @@ CheckJouwDomein.nl checkt automatisch 50+ extensies tegelijk — in één zoekop
 ## Direct checken
 
 Voer je gewenste naam in onze zoekbalk in en zie binnen seconden welke extensies nog vrij zijn.
+
+## Meer lezen
+
+- [Check de beschikbaarheid van jouw domein](/)
+- [Domeinnaam registreren: de goedkoopste opties](/blog/goedkoopste-domeinnaam-registreren)
+- [Domeinnaam en hosting: wat is het verschil?](/blog/domeinnaam-en-hosting-verschil)
+- [Beveilig jouw domein met de juiste instellingen](/blog/domeinnaam-beveiliging-tips)
     `.trim(),
   },
   {
@@ -833,6 +1088,8 @@ Voer je gewenste naam in onze zoekbalk in en zie binnen seconden welke extensies
     publishedAt: '2026-04-13',
     updatedAt: '2026-04-13',
     tags: ['.be', 'België', 'registreren'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop',
     content: `
 Het .be domein is de officiële landcode-extensie voor België en een van de meest gebruikte
 domeinen in de Benelux. Of je nu een Belgisch bedrijf bent of je wilt richten op de Belgische markt —
@@ -875,6 +1132,60 @@ Stuur .be bezoekers door naar een Belgische landingspagina voor betere conversie
 ## Direct .be checken
 
 Gebruik onze domeinchecker en filter op .be om direct te zien of jouw gewenste naam vrij is.
+
+## Wie kan een .be domein registreren?
+
+Een groot voordeel van het .be domein is dat iedereen het kan registreren — ongeacht nationaliteit of woonplaats. Je hebt geen Belgisch adres, btw-nummer of bedrijfsregistratie nodig. Dit maakt .be aantrekkelijk voor Nederlandse ondernemers die zich willen richten op de Belgische markt, of voor internationale bedrijven die in de Benelux actief zijn.
+
+Dit is een verschil met sommige andere ccTLD's die strengere eisen stellen. Het .nl-domein vereist bijvoorbeeld geen Nederlandse vestiging, maar sommige andere landcodes (zoals .de of .fr) kennen wel restricties. Bij .be staat de deur dus volledig open.
+
+## Hoeveel kost een .be domein in 2026?
+
+Een .be domein behoort tot de goedkoopste ccTLD's in Europa. De gemiddelde prijs in 2026 ligt tussen de €4 en €8 per jaar, wat goedkoper is dan zowel .nl (gemiddeld €6–10/jaar) als .com (gemiddeld €10–14/jaar). Dit maakt .be een aantrekkelijke keuze als je ook voor merkbescherming aanvullende extensies wilt registreren.
+
+| Extensie | Gemiddelde prijs/jaar |
+|----------|-----------------------|
+| .be | €4–8 |
+| .nl | €6–10 |
+| .com | €10–14 |
+| .eu | €7–12 |
+
+Controleer altijd de verlengingsprijs: bij sommige registrars is het eerste jaar goedkoper dan de verlenging. De registrars TransIP en Antagonist bieden stabiele prijzen zonder grote prijssprongen bij verlenging.
+
+## Hoe registreer je een .be domein stap voor stap?
+
+Het registreren van een .be domein verloopt in vijf eenvoudige stappen:
+
+**Stap 1:** Controleer de beschikbaarheid via onze domeinchecker. Voer jouw gewenste naam in en selecteer de .be extensie.
+
+**Stap 2:** Kies een geaccrediteerde registrar. Zorg dat de registrar is goedgekeurd door DNS.be — de officiële beheerder van .be domeinen. Bekende opties zijn TransIP, Mijn.host en Antagonist.
+
+**Stap 3:** Maak een account aan bij de gekozen registrar en vul je contactgegevens in. Je hebt geen Belgisch adres nodig.
+
+**Stap 4:** Rond de betaling af. Je betaalt meteen voor het eerste registratiejaar. Stel direct automatische verlenging in zodat je het domein niet per ongeluk verliest.
+
+**Stap 5:** Activeer de transferlock en stel je DNS-instellingen in om het domein te koppelen aan jouw website of hostingpakket.
+
+## .be domein vs .nl domein: wanneer kies je welke?
+
+Als je uitsluitend gericht bent op de Nederlandse markt, is .nl de logische keuze: het geeft het meeste vertrouwen bij Nederlandse bezoekers en heeft de sterkste geografische SEO-waarde voor Google.nl. Voor Belgische klanten geldt hetzelfde voor .be: een Belgische ondernemer of een bedrijf dat primair in België actief is, doet er goed aan .be als hoofddomein te gebruiken.
+
+Bedien je zowel Nederland als België? Dan is de slimste aanpak beide extensies te registreren. Gebruik .nl als je primaire domein als Nederland je grootste markt is, en redirect .be naar een specifieke Belgische landingspagina. Zo geef je Belgische bezoekers een lokaal gevoel zonder twee aparte websites te hoeven beheren.
+
+Voor ondernemers die internationaal denken maar ook de Benelux willen bedienen, biedt .com de meeste flexibiliteit — aangevuld met .nl en .be voor regionale merkbescherming.
+
+## Wat is DNS.be?
+
+DNS.be is de officiële registry die verantwoordelijk is voor het beheer van alle .be domeinnamen. Het is de Belgische tegenhanger van het Nederlandse SIDN, dat .nl-domeinen beheert. DNS.be stelt de regels vast voor .be-registraties, beheert de centrale database en accrediteert registrars die .be-domeinen mogen verkopen.
+
+DNS.be staat bekend om zijn technische betrouwbaarheid en strikte kwaliteitseisen voor geaccrediteerde registrars. Dit zorgt ervoor dat .be-domeinen een hoge uptime en veiligheid hebben. Wanneer je een .be-domein registreert via een erkende registrar, weet je dat het beheer in goede handen is bij een professionele, non-profit organisatie vergelijkbaar met SIDN in Nederland.
+
+## Meer lezen
+
+- [Controleer beschikbaarheid voor .nl, .com en meer](/)
+- [Goedkoopste domeinnaam registreren in 2026](/blog/goedkoopste-domeinnaam-registreren)
+- [Vergelijk alle registrars](/registrars)
+- [Domeinnaam kiezen: de beste tips](/blog/beste-domeinnaam-kiezen)
     `.trim(),
   },
   {
@@ -885,6 +1196,8 @@ Gebruik onze domeinchecker en filter op .be om direct te zien of jouw gewenste n
     publishedAt: '2026-04-13',
     updatedAt: '2026-04-13',
     tags: ['beveiliging', 'transferlock', 'DNSSEC', '2FA'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&auto=format&fit=crop',
     content: `
 Je domeinnaam is een waardevol bedrijfsonderdeel. Verlies je hem, dan verlies je ook je e-mail,
 je website en je online identiteit. Hier zijn de belangrijkste beveiligingsmaatregelen.
@@ -937,6 +1250,13 @@ Stel automatische verlenging in én zorg dat je betaalgegevens actueel zijn.
 3. Schakel een advocaat in als het domein commercieel waardevol is
 
 Met de juiste maatregelen is je domein goed beschermd. Controleer vandaag nog je instellingen.
+
+## Meer lezen
+
+- [Check de beschikbaarheid van jouw domein](/)
+- [Domeinnaam registreren: de goedkoopste opties](/blog/goedkoopste-domeinnaam-registreren)
+- [Domeinnaam en hosting: wat is het verschil?](/blog/domeinnaam-en-hosting-verschil)
+- [Beveilig jouw domein met de juiste instellingen](/blog/domeinnaam-beveiliging-tips)
     `.trim(),
   },
   {
@@ -947,6 +1267,8 @@ Met de juiste maatregelen is je domein goed beschermd. Controleer vandaag nog je
     publishedAt: '2026-04-13',
     updatedAt: '2026-04-13',
     tags: ['ZZP', 'freelancer', 'tips', 'branding'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&auto=format&fit=crop',
     content: `
 Als ZZP'er of freelancer is je website je digitale visitekaartje. De domeinnaam die je kiest
 bepaalt hoe professioneel je overkomt — en of klanten je online kunnen vinden.
@@ -997,6 +1319,13 @@ Een .nl-domein voor je ZZP kost gemiddeld **€3–7 per jaar**. Dat is minder d
 een van de beste investeringen voor je bedrijf.
 
 Start je domeincheck nu en vind de perfecte naam voor jouw ZZP-bedrijf.
+
+## Meer lezen
+
+- [Controleer direct of jouw domeinnaam beschikbaar is](/)
+- [.nl of .com? Lees het vergelijkingsartikel](/blog/nl-vs-com-domein)
+- [Gebruik onze gratis AI-naamgenerator](/naam-generator)
+- [Alle domeinextensies vergeleken](/blog/domein-extensies-vergelijken)
     `.trim(),
   },
   {
@@ -1007,6 +1336,8 @@ Start je domeincheck nu en vind de perfecte naam voor jouw ZZP-bedrijf.
     publishedAt: '2026-04-13',
     updatedAt: '2026-04-13',
     tags: ['AI', 'naamgenerator', 'tools', 'creatief'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&auto=format&fit=crop',
     content: `
 Een goede bedrijfsnaam bedenken is moeilijk. De meeste korte, pakkende namen zijn al bezet.
 Een AI-domeinnaamgenerator helpt je door in seconden honderden creatieve combinaties te genereren
@@ -1056,6 +1387,13 @@ Probeer het nu: ga naar de [AI Naamgenerator](/naam-generator) en voer jouw sect
 4. Registreer bij je favoriete registrar
 
 Met de juiste tool vind je in minder dan 5 minuten de perfecte domeinnaam.
+
+## Meer lezen
+
+- [Probeer onze AI-naamgenerator gratis](/naam-generator)
+- [Check beschikbaarheid van jouw domeinnaam](/)
+- [De beste domeinnaam kiezen voor jouw bedrijf](/blog/beste-domeinnaam-kiezen)
+- [Domeinnamen in bulk checken](/bulk-check)
     `.trim(),
   },
   {
@@ -1066,6 +1404,8 @@ Met de juiste tool vind je in minder dan 5 minuten de perfecte domeinnaam.
     publishedAt: '2026-04-13',
     updatedAt: '2026-04-13',
     tags: ['startup', 'branding', 'tips', 'merk'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&auto=format&fit=crop',
     content: `
 De domeinnaam van je startup is een van de belangrijkste beslissingen in de beginfase.
 Het is je merknaam, je e-mailadres en je eerste indruk — alles tegelijk.
@@ -1120,6 +1460,13 @@ Registreer minimaal 3 varianten (.com, .nl, .io) voor circa €25–40 per jaar 
 Voor een startup is dat verwaarloosbaar — de domeinnaam is een van je goedkoopste merkbeslissingen.
 
 Begin nu met checken via onze gratis domeinchecker.
+
+## Meer lezen
+
+- [Controleer direct of jouw domeinnaam beschikbaar is](/)
+- [.nl of .com? Lees het vergelijkingsartikel](/blog/nl-vs-com-domein)
+- [Gebruik onze gratis AI-naamgenerator](/naam-generator)
+- [Alle domeinextensies vergeleken](/blog/domein-extensies-vergelijken)
     `.trim(),
   },
   {
@@ -1130,6 +1477,8 @@ Begin nu met checken via onze gratis domeinchecker.
     publishedAt: '2026-04-13',
     updatedAt: '2026-04-13',
     tags: ['WHOIS', 'RDAP', 'eigenaar', 'uitleg'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&auto=format&fit=crop',
     content: `
 Wil je weten van wie een domeinnaam is? Of wanneer een domein verloopt?
 Dan gebruik je een WHOIS-zoekopdracht. We leggen uit hoe het werkt en wat je kunt verwachten.
@@ -1184,6 +1533,13 @@ Ga naar lookup.icann.org
 Let op: een WHOIS-resultaat zegt niet altijd dat een domein beschikbaar is.
 Sommige domeinen hebben een WHOIS-vermelding maar zijn technisch verlopen.
 Gebruik altijd een real-time RDAP-check voor de definitieve beschikbaarheidsstatus.
+
+## Meer lezen
+
+- [Check de beschikbaarheid van jouw domein](/)
+- [Domeinnaam registreren: de goedkoopste opties](/blog/goedkoopste-domeinnaam-registreren)
+- [Domeinnaam en hosting: wat is het verschil?](/blog/domeinnaam-en-hosting-verschil)
+- [Beveilig jouw domein met de juiste instellingen](/blog/domeinnaam-beveiliging-tips)
     `.trim(),
   },
   {
@@ -1194,6 +1550,8 @@ Gebruik altijd een real-time RDAP-check voor de definitieve beschikbaarheidsstat
     publishedAt: '2026-04-13',
     updatedAt: '2026-04-13',
     tags: ['verlengen', 'verloopdatum', 'beheer', 'tips'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&auto=format&fit=crop',
     content: `
 Elk jaar vergeten duizenden bedrijfseigenaren hun domeinnaam te verlengen.
 Het gevolg: website offline, e-mail weg, en soms verlies je de naam voor altijd.
@@ -1249,6 +1607,13 @@ Registreer je domein voor 2 of 5 jaar tegelijk. Voordelen:
 - Google ziet langetermijnregistraties als positief SEO-signaal
 
 Gebruik onze domeinchecker om snel te zien welke van jouw domeinen binnenkort verlopen.
+
+## Meer lezen
+
+- [Vergelijk alle registrars en hun tarieven](/registrars)
+- [Check direct de beschikbaarheid van jouw domein](/)
+- [Domeinnaam kiezen: de beste tips](/blog/beste-domeinnaam-kiezen)
+- [Wat is het verschil tussen domeinnaam en hosting?](/blog/domeinnaam-en-hosting-verschil)
     `.trim(),
   },
 ];

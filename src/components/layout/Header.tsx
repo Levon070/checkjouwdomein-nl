@@ -66,6 +66,7 @@ export default function Header() {
           <NavLink href="/registrars" icon={<GridIcon />} label="Registrars" />
           <NavLink href="/bulk-check" icon={<ListIcon />} label="Bulk" />
           <NavLink href="/blog" icon={<BookIcon />} label="Blog" />
+          <NavLink href="/over-ons" icon={<InfoIcon />} label="Over ons" />
 
           <div style={{ width: 1, height: 20, background: 'rgba(0,0,0,0.08)', margin: '0 6px', flexShrink: 0 }} />
 
@@ -202,6 +203,16 @@ function BookIcon() {
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
       <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+    </svg>
+  );
+}
+
+function InfoIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="16" x2="12" y2="12" />
+      <line x1="12" y1="8" x2="12.01" y2="8" />
     </svg>
   );
 }

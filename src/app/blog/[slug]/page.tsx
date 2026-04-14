@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getBlogPost, BLOG_POSTS } from '@/lib/blog-content';
 import JsonLd from '@/components/seo/JsonLd';
 
@@ -51,7 +52,8 @@ export default async function BlogPostPage({ params }: Props) {
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
-    author: { '@type': 'Organization', name: 'CheckJouwDomein.nl' },
+    author: { '@type': 'Person', name: post.author ?? 'Redactie CheckJouwDomein.nl' },
+    ...(post.image ? { image: post.image } : {}),
     publisher: {
       '@type': 'Organization',
       name: 'CheckJouwDomein.nl',
@@ -69,7 +71,40 @@ export default async function BlogPostPage({ params }: Props) {
     ],
   };
 
-  // Convert markdown-like content to HTML with design system styling
+  const faqLines = post.content.split('\n');
+  const faqItems: Array<{ question: string; answer: string }> = [];
+  for (let i = 0; i < faqLines.length; i++) {
+    const line = faqLines[i];
+    if (line.startsWith('## ') && line.includes('?')) {
+      const question = line.slice(3).trim();
+      const answerParts: string[] = [];
+      for (let j = i + 1; j < faqLines.length && !faqLines[j].startsWith('## '); j++) {
+        const al = faqLines[j].trim();
+        if (al && !al.startsWith('**')) answerParts.push(al.replace(/^- /, ''));
+      }
+      const answer = answerParts.slice(0, 3).join(' ').trim();
+      if (answer.length > 20) faqItems.push({ question, answer });
+    }
+  }
+
+  const faqSchema = faqItems.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  } : null;
+
+  const related = BLOG_POSTS
+    .filter(p => p.slug !== post.slug && p.tags.some(t => post.tags.includes(t)))
+    .slice(0, 3)
+    .concat(
+      BLOG_POSTS.filter(p => p.slug !== post.slug && !post.tags.some(t => p.tags.includes(t)))
+    )
+    .slice(0, 3);
+
   const htmlContent = post.content
     .split('\n')
     .map((line) => {
@@ -85,9 +120,9 @@ export default async function BlogPostPage({ params }: Props) {
     <>
       <JsonLd data={articleSchema} />
       <JsonLd data={breadcrumbSchema} />
+      {faqSchema && <JsonLd data={faqSchema} />}
 
       <div className="container mx-auto px-5 py-12 max-w-2xl">
-        {/* Breadcrumb */}
         <nav className="text-sm mb-8 flex items-center gap-2 flex-wrap" style={{ color: 'var(--text-subtle)' }}>
           <Link href="/" className="link-muted">Home</Link>
           <span>/</span>
@@ -104,6 +139,10 @@ export default async function BlogPostPage({ params }: Props) {
           ))}
         </div>
 
+        <p className="text-sm mb-2" style={{ color: 'var(--text-subtle)' }}>
+          Door {post.author ?? 'Redactie CheckJouwDomein.nl'}
+        </p>
+
         <h1 className="type-heading mb-3" style={{ color: 'var(--text)', fontSize: 'clamp(1.75rem, 4vw, 2.25rem)' }}>
           {post.title}
         </h1>
@@ -111,9 +150,43 @@ export default async function BlogPostPage({ params }: Props) {
           Gepubliceerd: {post.publishedAt} · Bijgewerkt: {post.updatedAt}
         </p>
 
+        {post.image && (
+          <Image
+            src={post.image}
+            alt={post.title}
+            width={800}
+            height={400}
+            className="rounded-xl w-full object-cover mb-8"
+            style={{ aspectRatio: '2/1' }}
+          />
+        )}
+
         <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
 
-        {/* CTA */}
+        {related.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-base font-bold mb-4" style={{ color: 'var(--text)', letterSpacing: '-0.01em' }}>
+              Lees ook
+            </h2>
+            <div className="grid grid-cols-1 gap-3">
+              {related.map(r => (
+                <Link
+                  key={r.slug}
+                  href={`/blog/${r.slug}`}
+                  className="section-alt p-4 rounded-xl flex items-center justify-between gap-3 group"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <div>
+                    <p className="text-sm font-semibold" style={{ color: 'var(--text)' }}>{r.title}</p>
+                    <p className="text-xs mt-0.5" style={{ color: 'var(--text-subtle)' }}>{r.description.slice(0, 80)}…</p>
+                  </div>
+                  <span style={{ color: 'var(--primary)', flexShrink: 0 }}>→</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="section-alt mt-14 p-8 text-center">
           <p className="type-label mb-2">Aan de slag</p>
           <h2 className="text-xl font-bold mb-3" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
