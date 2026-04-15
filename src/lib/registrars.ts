@@ -39,7 +39,7 @@ const buildTemblitUrl = (_domain: string) =>
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const buildStratoUrl = (_domain: string) =>
-  `https://acn.strato.nl/aff_c?offer_id=5&aff_id=1400`;
+  `https://acn.strato.nl/aff_c?offer_id=5&aff_id=1400&url_id=47`;
 
 // ─── FEATURE TEMPLATES ───────────────────────────────────────────────────────
 

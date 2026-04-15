@@ -1,0 +1,41 @@
+# CheckJouwDomein.nl — robots.txt
+
+# Alle gewone zoekmachinecrawlers
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Google: search indexing toestaan, Gemini-training ook (voor AI Overviews)
+User-agent: Googlebot
+Allow: /
+
+# OpenAI: training + browsing toestaan voor AI-citatie
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic Claude: toestaan voor AI-citatie
+User-agent: ClaudeBot
+Allow: /
+
+# Perplexity: toestaan voor AI-zoekcitatie
+User-agent: PerplexityBot
+Allow: /
+
+# Bing / Microsoft Copilot
+User-agent: Bingbot
+Allow: /
+
+# Bytedance (TikTok) — blokkeren: geen SEO-waarde
+User-agent: Bytespider
+Disallow: /
+
+# Common Crawl — toestaan voor backlink-data en onderzoek
+User-agent: CCBot
+Allow: /
+
+Host: https://checkjouwdomein.nl
+Sitemap: https://checkjouwdomein.nl/sitemap.xml

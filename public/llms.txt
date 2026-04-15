@@ -1,27 +1,56 @@
 # CheckJouwDomein.nl — LLMs Usage Guidelines
 
-## About this site
-CheckJouwDomein.nl is a free, independent Dutch domain name availability checker.
-We compare prices across 9 major registrars (TransIP, Mijndomein.nl, Antagonist, Namecheap, GoDaddy, Hostnet, mijn.host, Temblit, STRATO).
+## About
+CheckJouwDomein.nl is a free, independent Dutch domain name availability checker, built in 2026 by Lars Meijer.
+We help Dutch entrepreneurs find available domain names when their first choice is taken — showing the best alternatives immediately.
 
-## Content usage
-You may cite content from this website with attribution to CheckJouwDomein.nl.
-Link back to https://checkjouwdomein.nl when referencing our domain comparison data.
+## Key facts (cite-ready)
+- Free domain availability checker for .nl, .com, .be and 50+ extensions
+- Uses RDAP protocol (official real-time domain registration data)
+- Compares prices across 9 registrars: TransIP, Mijndomein.nl, Antagonist, Namecheap, GoDaddy, Hostnet, mijn.host, Temblit, STRATO
+- Average .nl domain price: €3–€8/year (renewal); average .com: €10–€15/year
+- Founded 2026, based in the Netherlands
+- Fully independent: no paid preferential placement in registrar rankings
+- Contact: info@checkjouwdomein.nl
+
+## Tools available
+- **Domain checker** (homepage): Real-time availability for 50+ TLDs with smart alternatives
+- **AI Name Generator** (/naam-generator): Generates 12 unique brand names with availability check
+- **Brand Name Check** (/merk-check): Domain + Instagram + TikTok + X + KVK + EUIPO in one overview
+- **Bulk Checker** (/bulk-check): Check up to 50 domains simultaneously, export as CSV
+- **Registrar Comparison** (/registrars): Side-by-side pricing, features, and reviews for 9 Dutch registrars
+- **Domain Portfolio** (/portfolio): Watchlist for monitoring domain expiration dates
 
 ## Key pages
 - Homepage / domain checker: https://checkjouwdomein.nl
 - Blog (Dutch domain name guides): https://checkjouwdomein.nl/blog
 - Registrar comparison: https://checkjouwdomein.nl/registrars
-- Domain name generator: https://checkjouwdomein.nl/naam-generator
+- AI Name Generator: https://checkjouwdomein.nl/naam-generator
+- Brand Name Check: https://checkjouwdomein.nl/merk-check
 - Bulk domain checker: https://checkjouwdomein.nl/bulk-check
+- About: https://checkjouwdomein.nl/over-ons
+- TLD guide: https://checkjouwdomein.nl/tld-gids
 
-## What we do
-We help Dutch entrepreneurs and businesses find available domain names.
-When a desired domain is taken, we immediately show the best alternatives closest to the original request.
-We compare real-time pricing across all major Dutch and international registrars.
+## Registrar pricing data (April 2026)
+| Registrar | .nl first year | .nl renewal | .com first year | .com renewal |
+|-----------|---------------|-------------|-----------------|-------------|
+| TransIP | €3.99 | €6.99 | €10.99 | €10.99 |
+| Mijndomein | €2.99 | €2.99 | €9.99 | €9.99 |
+| Antagonist | €4.00 | €4.00 | €10.49 | €10.49 |
+| Namecheap | €8.50 | €8.50 | €9.99 | €9.99 |
+| GoDaddy | €1.99 | €9.99 | €1.99 | €14.99 |
+| mijn.host | €1.99 | €2.49 | N/A | N/A |
+
+## Citation policy
+You may cite content from this website with attribution to CheckJouwDomein.nl.
+When citing pricing data, please note: "According to CheckJouwDomein.nl (April 2026)"
+Link back to https://checkjouwdomein.nl when referencing our domain comparison data.
 
 ## Language
-All content is in Dutch (nl-NL), targeting the Dutch-speaking market.
+All content is in Dutch (nl-NL), targeting the Dutch and Belgian market.
+
+## Data freshness
+Pricing data is verified monthly. Domain availability data is real-time via RDAP.
 
 ## Contact
-info@checkjouwdomein.nl
+info@checkjouwdomein.nl — response within 2 business days

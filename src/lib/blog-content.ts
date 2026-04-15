@@ -1694,6 +1694,218 @@ Gebruik onze domeinchecker om snel te zien welke van jouw domeinen binnenkort ve
 - [Wat is het verschil tussen domeinnaam en hosting?](/blog/domeinnaam-en-hosting-verschil)
     `.trim(),
   },
+  {
+    slug: 'merknaam-bedenken-technieken',
+    title: 'Merknaam bedenken: 10 bewezen technieken voor ondernemers',
+    description: 'Hoe bedenk je een sterke merknaam die je kunt beschermen? Ontdek 10 bewezen technieken inclusief AI-tools, woordcombinaties en merkstrategie.',
+    publishedAt: '2026-04-10',
+    updatedAt: '2026-04-14',
+    tags: ['merknaam', 'tips', 'naamgenerator', 'branding'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&auto=format&fit=crop',
+    content: `
+Een goede merknaam is de basis van elk succesvol bedrijf. Maar hoe kom je tot die perfecte naam? Hier zijn 10 bewezen technieken die professionele merkstrategen gebruiken.
+
+## 1. Beschrijvende namen met een twist
+
+Begin met wat je doet en voeg een creatief element toe. "Dropbox" beschrijft letterlijk een doos voor bestanden. "Netflix" combineert "internet" met "flicks" (films). Zoek naar woorden die je kernactiviteit omschrijven en combineer ze met een onverwacht element.
+
+**Werkt goed voor:** webshops, dienstverleners, tech-startups.
+
+## 2. Samengestelde woorden (portmanteau)
+
+Combineer twee bestaande woorden tot één nieuw woord. "Instagram" = instant + telegram. "Pinterest" = pin + interest. "Spotify" = spot + identify. Schrijf vijf kernwoorden die jouw bedrijf beschrijven, en combineer ze twee voor twee.
+
+**Tip:** Controleer altijd of het nieuwe woord in een andere taal iets ongewensts betekent.
+
+## 3. Persoonsnamen als merk
+
+Merken als "Ben & Jerry's", "Rituals" (van klantbelevenis, niet een naam) en talloze advocaten- en architectenbureaus gebruiken namen van mensen. Dit geeft een persoonlijk karakter en is makkelijk te beschermen als merk, maar schaalbaar zijn ze minder goed.
+
+## 4. Geografische namen
+
+Lokale ondernemers bouwen vertrouwen op door een plaatsnaam te gebruiken: "Amsterdam Cheese Company", "Utrecht Wedding Photography". Let op: geografische namen zijn moeilijk als merk te registreren bij het EUIPO.
+
+## 5. Afkortingen en acroniemen
+
+Denk aan IBM, KLM, ABN AMRO. Afkortingen werken goed voor professionele dienstenbedrijven. Nadeel: ze zijn moeilijk te onthouden als je ze niet uitlegt. Gebruik ze alleen als de uitgeschreven versie te lang of te complex is.
+
+## 6. AI-naamgenerator gebruiken
+
+Onze <a href="/naam-generator" style="color:var(--primary)">AI naamgenerator</a> combineert jouw sector, kernwoorden en gewenste stijl tot 12 unieke merknaamideeën — inclusief directe domeinbeschikbaarheidscheck. Ideaal als startpunt voor brainstorming. Genereer meerdere sets en noteer de namen die je aanspreken.
+
+## 7. Klankanalyse: hard vs. zacht
+
+Klinkers en medeklinkers hebben een merkpsychologisch effect. Harde klanken (k, t, p) klinken stoer en direct: "Kodak", "Tic Tac". Zachte klanken (l, m, n) klinken vriendelijk: "Luna", "Milka". Kies klanken die passen bij de emotie die je wilt oproepen.
+
+## 8. Domeinnaam-first denken
+
+Draai het om: ga niet een naam bedenken en dan kijken of het domein beschikbaar is, maar zoek naar beschikbare domeinen die goed klinken. Gebruik onze domeinchecker om op keywords te zoeken — beschikbare alternatieven verschijnen automatisch.
+
+## 9. Concurrentieanalyse
+
+Analyseer de namen van je 10 directe concurrenten. Welke patronen zie je? Welk klankprofiel is dominant? Ga dan bewust de andere kant op. Als alle concurrenten lange, beschrijvende namen hebben, kies dan voor een korte, abstracte naam die opvalt.
+
+## 10. Taalcheck en merkbescherming
+
+Voordat je een naam definitief kiest, doe je drie checks:
+- **Taalbetekenis:** Betekent de naam iets in het Engels, Duits of Frans? Vraag het aan een native speaker.
+- **Domein:** Beschikbaar op .nl én .com? Gebruik onze <a href="/" style="color:var(--primary)">domeinchecker</a>.
+- **Merk:** Vrij in het EUIPO-merkenregister? Gebruik onze <a href="/merk-check" style="color:var(--primary)">merknaamcheck</a>.
+
+## Welke techniek werkt het beste?
+
+Er is geen universeel antwoord. Techniek 2 (portmanteau) en techniek 6 (AI-generator) leveren de meeste unieke namen op. Technieken 1 en 3 geven de meest herkenbare namen. Combineer altijd meerdere technieken en maak een shortlist van 10 kandidaten voordat je een keuze maakt.
+
+## Meer lezen
+
+- <a href="/naam-generator" style="color:var(--primary)">AI naamgenerator — genereer namen in 30 seconden</a>
+- <a href="/merk-check" style="color:var(--primary)">Merknaamcheck — domein, social, KVK & EUIPO</a>
+- <a href="/blog/beste-domeinnaam-kiezen" style="color:var(--primary)">De beste domeinnaam kiezen voor jouw bedrijf</a>
+    `.trim(),
+  },
+  {
+    slug: 'domeinnaam-kopen-van-andere-partij',
+    title: 'Domeinnaam kopen van een andere partij: complete gids 2026',
+    description: 'Is jouw gewenste domeinnaam al bezet maar wil je hem toch kopen? Lees hoe je contact legt, onderhandelt en een domein veilig overdraagt.',
+    publishedAt: '2026-04-08',
+    updatedAt: '2026-04-14',
+    tags: ['domeinnaam', 'kopen', 'overdracht', 'tips'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&auto=format&fit=crop',
+    content: `
+De perfecte domeinnaam is bezet. Maar de eigenaar gebruikt de site nauwelijks — of het domein is zelfs compleet leeg. Kun je het kopen? Ja, vaak wel. Zo doe je dat.
+
+## Stap 1: Is het domein echt bezet?
+
+Controleer eerst of het domein actief in gebruik is of alleen geregistreerd ("geparkeerd"). Gebruik onze <a href="/" style="color:var(--primary)">domeinchecker</a> om de status te zien. Een geparkeerd domein is makkelijker te kopen dan een actief gebruikte website.
+
+Controleer ook de verloopdatum via WHOIS of onze checker. Domeinen die bijna verlopen worden soms niet verlengd — dan kun je het domein direct registreren zodra het vrijkomt.
+
+## Stap 2: Eigenaar achterhalen
+
+Via het WHOIS-register kun je de eigenaar opzoeken. Steeds meer eigenaren gebruiken WHOIS-privacy, waardoor hun gegevens verborgen zijn. In dat geval:
+- Ga naar de website (als die bestaat) en zoek contactgegevens
+- Gebruik het contactformulier op de site
+- Stuur een e-mail naar info@ of contact@ op het domein
+- Zoek de eigenaar op LinkedIn via de bedrijfsnaam
+
+## Stap 3: Het eerste contact
+
+Schrijf een zakelijke, vriendelijke e-mail. Vermeldt NIET hoe belangrijk het domein voor jou is — dat versterkt de onderhandelingspositie van de verkoper. Een goede openingszin: "Ik ben geïnteresseerd in de aankoop van [domein.nl]. Bent u bereid dit te verkopen, en zo ja, voor welk bedrag?"
+
+Verwacht geen reactie? Stuur een follow-up na 2 weken. Veel eigenaren controleren hun domein-e-mail zelden.
+
+## Stap 4: Onderhandelen over de prijs
+
+Domeinnamen worden verhandeld voor bedragen variërend van €50 tot miljoenen euro's. Factoren die de prijs bepalen:
+- Lengte en memorabiliteit (korter = duurder)
+- Zoekvolume voor het keyword in de naam
+- Leeftijd van het domein (oudere domeinen hebben SEO-waarde)
+- Of er een actieve website op draait
+
+Start met een bod dat 30-50% onder jouw maximumbudget ligt. Zo houd je ruimte voor tegenbiedingen.
+
+## Stap 5: Veilige overdracht regelen
+
+Doe dit NOOIT zonder escrow-dienst. Gebruik:
+- **Escrow.com** — internationale standaard voor domeinoverdrachten
+- **Sedo Escrow** — gespecialiseerd in domeintransfers
+- **Via een registrar** — sommige registrars faciliteren bemiddelde overdrachten
+
+De escrow-dienst houdt het geld vast totdat het domein succesvol is overgedragen. Zo zijn zowel koper als verkoper beschermd.
+
+## Wat als de eigenaar niet reageert?
+
+Dan heb je drie opties:
+1. **Wachten tot het domein verloopt** — stel een alert in via onze portfolio-tracker
+2. **Backorder plaatsen** — sommige registrars bieden een backorder-service aan
+3. **Alternatief kiezen** — gebruik onze domeinchecker om de beste beschikbare alternatieven te vinden
+
+## Kosten van een domeinaankoop
+
+Naast de aankoopprijs betaal je:
+- Escrow-kosten: 1-3% van de aankoopprijs
+- Transfer-kosten: €0-€10 afhankelijk van de registrar
+- Eventueel: advocaatkosten bij hoge bedragen (>€5.000 is dit aan te raden)
+
+## Meer lezen
+
+- <a href="/blog/domeinnaam-verkopen" style="color:var(--primary)">Domeinnaam verkopen: hoe werkt het?</a>
+- <a href="/blog/domeinnaam-verhuizen" style="color:var(--primary)">Domeinnaam verhuizen naar een andere registrar</a>
+- <a href="/registrars" style="color:var(--primary)">Registrars vergelijken</a>
+    `.trim(),
+  },
+  {
+    slug: 'rdap-vs-whois-uitleg',
+    title: 'RDAP vs WHOIS: waarom moderne domeincheck beter is',
+    description: 'Wat is RDAP en waarom is het beter dan WHOIS? Lees hoe realtime domeindata werkt en waarom CheckJouwDomein.nl RDAP gebruikt voor de nauwkeurigste resultaten.',
+    publishedAt: '2026-04-05',
+    updatedAt: '2026-04-14',
+    tags: ['domeinnaam', 'technisch', 'RDAP', 'WHOIS'],
+    author: 'Redactie CheckJouwDomein.nl',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop',
+    content: `
+Als je controleert of een domeinnaam beschikbaar is, wil je een betrouwbaar antwoord. Maar niet alle domain checkers zijn even nauwkeurig. Het verschil zit in het protocol dat ze gebruiken: WHOIS of RDAP.
+
+## Wat is WHOIS?
+
+WHOIS is een protocol uit 1982 dat al decennialang wordt gebruikt om domeinregistratiedata op te vragen. Je stelt een vraag ("is dit domein bezet?") en je krijgt een tekstantwoord terug. Simpel, maar verouderd.
+
+**Problemen met WHOIS:**
+- Geen gestandaardiseerd formaat — elke registrar geeft anders geformatteerde data terug
+- Lagere betrouwbaarheid — niet alle registrars updaten WHOIS realtime
+- Geen API-standaard — moeilijk te verwerken door software
+- GDPR-problemen — veel eigenaarinformatie wordt verborgen
+
+## Wat is RDAP?
+
+RDAP (Registration Data Access Protocol) is de opvolger van WHOIS, ontwikkeld door <a href="https://www.icann.org" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">ICANN</a>. Het werkt via een standaard REST API en geeft gestructureerde JSON-data terug.
+
+**Voordelen van RDAP:**
+- Realtime data rechtstreeks van de officiële domeinregisters
+- Gestandaardiseerd JSON-formaat — eenvoudig te verwerken
+- Ondersteuning voor internationalisation (IDN-domeinen)
+- GDPR-compliant door gebouwde privacymechanismen
+- Hogere betrouwbaarheid dan WHOIS
+
+## Waarom CheckJouwDomein.nl RDAP gebruikt
+
+Onze domeinchecker vraagt beschikbaarheidsdata direct op bij de officiële registers:
+- **SIDN** voor .nl domeinen (<a href="https://www.sidn.nl" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">sidn.nl</a>)
+- **Verisign** voor .com en .net
+- **DNS.be** voor .be domeinen
+- **IANA** voor overige extensies
+
+Dit betekent dat onze resultaten realtime zijn. Als een .nl-domein net vrijgekomen is, zie jij dat binnen seconden — niet pas na een vertraging van uren of dagen zoals bij sommige andere checkers.
+
+## Verschil in de praktijk
+
+| | WHOIS | RDAP |
+|---|---|---|
+| Dataformaat | Platte tekst | Gestructureerd JSON |
+| Betrouwbaarheid | Matig | Hoog |
+| Snelheid | Traag | Snel |
+| Realtime | Niet altijd | Ja |
+| Standaard | Verouderd | Moderne IETF-standaard |
+| Privacy | Beperkt | GDPR-compliant |
+
+## Praktische gevolgen voor jou
+
+Gebruik je een domeinchecker die nog op WHOIS draait, dan kun je onjuiste resultaten krijgen:
+- Een beschikbaar domein wordt als "bezet" getoond (false negative)
+- Een net vrijgekomen domein is nog niet zichtbaar
+- Inconsistente resultaten bij dezelfde zoekopdracht
+
+Bij CheckJouwDomein.nl controleren we via RDAP, waardoor je altijd de actuele situatie ziet. Zo weet je zeker dat je geen domein mist dat net beschikbaar is gekomen.
+
+## Meer lezen
+
+- <a href="/blog/domeinnaam-beschikbaarheid-checken" style="color:var(--primary)">Domeinnaam beschikbaarheid checken: zo werkt het</a>
+- <a href="/blog/whois-opzoeken" style="color:var(--primary)">WHOIS opzoeken: wie is de eigenaar van een domeinnaam?</a>
+- <a href="/" style="color:var(--primary)">Probeer onze gratis RDAP-gebaseerde domeinchecker</a>
+    `.trim(),
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

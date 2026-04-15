@@ -413,6 +413,66 @@ function MerkCheckContent() {
             ))}
           </div>
         </div>
+
+        {/* SEO Content */}
+        <div className="mt-16 space-y-12" style={{ borderTop: '1px solid var(--border)', paddingTop: '3rem' }}>
+
+          <section>
+            <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
+              Waarom een merknaamcheck uitvoeren?
+            </h2>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, marginBottom: '1rem' }}>
+              Een merknaam kiezen zonder check is een risico. Bedrijven die later ontdekken dat hun naam al als Europees merk geregistreerd staat, kunnen gedwongen worden hun naam te wijzigen — inclusief alle kosten voor herbranding, nieuwe domeinen, nieuwe visitekaartjes en nieuwe social media profielen.
+            </p>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, marginBottom: '1rem' }}>
+              De merknaamcheck van CheckJouwDomein.nl controleert in één overzicht alle plekken waar je naam uniek moet zijn: het domeinregister, sociale media, de Kamer van Koophandel en het Europees handelsmerkenregister (EUIPO). Dit zijn de vier pijlers van een sterke merkpositie.
+            </p>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8 }}>
+              Heb je nog geen naam? Gebruik dan eerst onze{' '}
+              <a href="/naam-generator" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>AI naamgenerator</a>{' '}
+              om unieke merknaamideeën te genereren, inclusief directe beschikbaarheidscheck.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
+              Wat betekent elk onderdeel van de check?
+            </h2>
+            <div className="space-y-4">
+              {[
+                { title: 'Domeinnaam (.nl, .com, .be)', desc: 'Checkt of jouw merknaam beschikbaar is als domeinnaam in de meest relevante extensies via het officiële RDAP-protocol. Beschikbaar = je kunt het direct registreren bij een registrar.' },
+                { title: 'Instagram, TikTok & X/Twitter', desc: 'Controleert of de username beschikbaar is op de drie grootste sociale mediaplatformen. Consistente branding over alle kanalen verhoogt herkenbaarheid en vertrouwen.' },
+                { title: 'KVK handelsnaam', desc: 'Zoekt in het KVK-register of de naam al door een ander bedrijf in Nederland gebruikt wordt. Een identieke handelsnaam is niet verboden maar kan juridische discussies opleveren.' },
+                { title: 'EUIPO trademark', desc: 'Controleert het Europees Merkenbureau (EUIPO) op geregistreerde handelsmerken. Een ingeschreven merk geeft de houder exclusief recht op gebruik in alle EU-landen. Een conflict met een geregistreerd merk kan leiden tot een gedwongen naamswijziging.' },
+              ].map(({ title, desc }) => (
+                <div key={title} className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                  <h3 className="font-semibold text-sm mb-2" style={{ color: 'var(--text)' }}>{title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>{desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold mb-6" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
+              Veelgestelde vragen
+            </h2>
+            <div className="space-y-4">
+              {[
+                { q: 'Hoe weet ik of mijn merknaam beschermd is?', a: 'Via de EUIPO-check zie je direct of de naam als Europees handelsmerk staat geregistreerd. Is de naam vrij? Dan kun je zelf een aanvraag indienen via euipo.europa.eu. Een merkinschrijving geldt voor 10 jaar en is verlengbaar.' },
+                { q: 'Wat als de naam al bezet is als domein maar vrij als merk?', a: 'Dan kun je de naam eventueel nog als merk beschermen, maar heb je een domeinprobleem. Overweeg dan een variatie of andere extensie. Gebruik onze domeinchecker voor alternatieven.' },
+                { q: 'Hoe snel is de check klaar?', a: 'De merknaamcheck duurt 3-10 seconden. We bevragen tegelijkertijd het RDAP-protocol (domeinen), de social media platforms, het KVK-register en de EUIPO-database.' },
+                { q: 'Is de check 100% betrouwbaar?', a: 'We gebruiken officiële databronnen (RDAP, EUIPO API). Social media beschikbaarheid is een benadering — platforms wijzigen soms handles. Voor juridische zekerheid raden we altijd aan een merkengemachtigde te raadplegen voordat je een merk inschrijft.' },
+              ].map(({ q, a }) => (
+                <div key={q} className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                  <h3 className="font-semibold text-sm mb-2" style={{ color: 'var(--text)' }}>{q}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>{a}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+        </div>
       </div>
     </div>
   );

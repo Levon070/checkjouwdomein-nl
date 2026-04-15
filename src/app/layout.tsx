@@ -57,6 +57,21 @@ const webAppSchema = {
   inLanguage: 'nl-NL',
 };
 
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'CheckJouwDomein.nl',
+  url: 'https://checkjouwdomein.nl',
+  logo: 'https://checkjouwdomein.nl/favicon.svg',
+  description: 'Gratis, onafhankelijke domeinnaam checker voor de Nederlandse en Belgische markt',
+  email: 'info@checkjouwdomein.nl',
+  foundingDate: '2026',
+  founder: { '@type': 'Person', name: 'Lars Meijer', url: 'https://checkjouwdomein.nl/over-ons' },
+  areaServed: ['NL', 'BE'],
+  inLanguage: 'nl-NL',
+  sameAs: ['https://checkjouwdomein.nl/over-ons'],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = headers().get('x-pathname') ?? '';
   const isAdmin = pathname.startsWith('/admin');
@@ -64,12 +79,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="nl" dir="ltr">
       <head>
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
         <meta name="google-adsense-account" content="ca-pub-8874800268655239" />
         <meta name="google-site-verification" content="1WSyANqeH-UJ4CcE14u5c--GGgFtTUkfIhg4csRB6hI" />
         <link rel="alternate" hrefLang="nl-NL" href="https://checkjouwdomein.nl" />
         <link rel="alternate" hrefLang="nl-BE" href="https://checkjouwdomein.nl" />
         <link rel="alternate" hrefLang="x-default" href="https://checkjouwdomein.nl" />
         <JsonLd data={webAppSchema} />
+        <JsonLd data={organizationSchema} />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         {isAdmin ? (

@@ -503,6 +503,91 @@ export default function NaamGeneratorPage() {
             ))}
           </div>
         </div>
+
+        {/* SEO Content — static, server-rendered */}
+        <div className="mt-16 space-y-12" style={{ borderTop: '1px solid var(--border)', paddingTop: '3rem' }}>
+
+          <section>
+            <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
+              Hoe werkt de AI naamgenerator?
+            </h2>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, marginBottom: '1rem' }}>
+              De AI naamgenerator van CheckJouwDomein.nl combineert jouw sector, kernwoorden en gewenste stijl tot 12 unieke merknaamideeën. Elke naam wordt direct gecontroleerd op beschikbaarheid als .nl, .com en .eu domein via het officiële RDAP-protocol — de actuele standaard voor domeinregistratiedata.
+            </p>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, marginBottom: '1rem' }}>
+              Het verschil met een gewone naamgenerator: wij houden rekening met klankbaarheid (klinkt de naam prettig?), spelbaarheid (weet je hoe je hem schrijft als je hem hoort?) en merkstrategie (past de naam bij jouw doelgroep?). Namen die slecht scoren op deze criteria worden automatisch uitgefilterd.
+            </p>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8 }}>
+              Vind je geen naam die je aanspreekt? Klik op &ldquo;Genereer andere namen&rdquo; voor een nieuwe set resultaten. Je kunt ook individuele namen verfijnen door erop te klikken — de AI genereert dan variaties op die specifieke naam.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
+              Wat maakt een sterke merknaam?
+            </h2>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, marginBottom: '1rem' }}>
+              Een goede merknaam is meer dan een leuke klank. De meest succesvolle merknamen voldoen aan vijf criteria:
+            </p>
+            <ul style={{ paddingLeft: '1.25rem', marginBottom: '1rem' }}>
+              {[
+                'Kort — maximaal 12 tekens. Denk aan bol.com, Coolblue, Picnic.',
+                'Uniek — onderscheidt je van concurrenten en is makkelijk te beschermen als merk.',
+                'Uitsprekbaar — iedereen zegt het op dezelfde manier; geen verwarring aan de telefoon.',
+                'Spelbaar — als je de naam hoort, weet je hoe je hem schrijft.',
+                'Domein beschikbaar — bij voorkeur .nl én .com, zodat je beide kunt vastleggen.',
+              ].map((item) => (
+                <li key={item} style={{ color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '0.4rem', listStyleType: 'disc' }}>{item}</li>
+              ))}
+            </ul>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8 }}>
+              Namen met koppeltekens (mijn-bakkerij.nl) zien er minder professioneel uit en worden vaker misgespeld. Cijfers zijn ook af te raden: &ldquo;bakker2.nl&rdquo; roept vragen op (is er een &ldquo;bakker1&rdquo;?). Onze generator filtert dit automatisch weg.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
+              Na de naamgenerator: bescherm jouw merknaam
+            </h2>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, marginBottom: '1rem' }}>
+              Heb je een naam gevonden die je bevalt? Doe dan direct deze drie dingen:
+            </p>
+            <ol style={{ paddingLeft: '1.25rem', marginBottom: '1rem' }}>
+              {[
+                'Registreer het domein — minimaal .nl, bij voorkeur ook .com. Gebruik de registrar-links naast elke naam.',
+                'Controleer het merkenregister — gebruik onze merknaamcheck om te zien of de naam al als Europees merk (EUIPO) geregistreerd is.',
+                'Claim sociale media — leg je naam vast op Instagram, TikTok en LinkedIn voordat iemand anders dat doet.',
+              ].map((item, i) => (
+                <li key={i} style={{ color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '0.4rem' }}>{item}</li>
+              ))}
+            </ol>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8 }}>
+              Wil je alles in één keer checken? Onze{' '}
+              <a href="/merk-check" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>merknaamcheck</a>{' '}
+              combineert domeinbeschikbaarheid, sociale media, KVK-handelsnaam en EUIPO-trademark in één overzicht.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold mb-6" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
+              Veelgestelde vragen
+            </h2>
+            <div className="space-y-4">
+              {[
+                { q: 'Is de AI naamgenerator gratis?', a: 'Ja, volledig gratis. Je hebt geen account of betaalgegevens nodig. We verdienen onze inkomsten via affiliate-links naar registrars — alleen wanneer jij via onze site een domein registreert.' },
+                { q: 'Hoeveel namen genereert de tool?', a: 'De generator maakt 12 unieke merknamen per generatie. Ben je niet tevreden, klik dan op "Genereer andere namen" voor een nieuwe reeks. Elke generatie is anders.' },
+                { q: 'Kan ik een naam zonder .nl of .com toch gebruiken?', a: 'Ja. Hoewel wij .nl en .com aanraden voor Nederlandse bedrijven, kun je ook kiezen voor .eu, .io, .shop of andere extensies. In onze domeinchecker kun je alle 50+ extensies vergelijken.' },
+                { q: 'Wat als de naam die ik mooi vind al bezet is?', a: 'Klik op de naam voor variaties, of probeer een andere stijl in de generator. Je kunt ook onze hoofddomeinchecker gebruiken: voer je gewenste naam in en wij tonen direct de beste beschikbare alternatieven.' },
+              ].map(({ q, a }) => (
+                <div key={q} className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                  <h3 className="font-semibold text-sm mb-2" style={{ color: 'var(--text)' }}>{q}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>{a}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+        </div>
       </div>
     </div>
   );

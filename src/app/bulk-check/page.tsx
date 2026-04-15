@@ -247,6 +247,66 @@ export default function BulkCheckPage() {
         </div>
       )}
     </div>
+
+      {/* SEO Content */}
+      <div className="container mx-auto px-5 max-w-3xl pb-16">
+        <div className="mt-12 space-y-10" style={{ borderTop: '1px solid var(--border)', paddingTop: '2.5rem' }}>
+
+          <section>
+            <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
+              Wanneer gebruik je een bulk domein check?
+            </h2>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, marginBottom: '1rem' }}>
+              De bulk domein check is ontworpen voor situaties waarbij je niet één maar tientallen domeinen tegelijk wilt controleren. Typische gebruiksscenarios:
+            </p>
+            <ul style={{ paddingLeft: '1.25rem', marginBottom: '1rem' }}>
+              {[
+                'Je hebt een shortlist van 20 potentiële bedrijfsnamen en wilt in één keer zien welke domeinen nog beschikbaar zijn.',
+                'Je bent domeinhandelaar en wilt snel de waarde van een portfolio inschatten.',
+                'Je wilt meerdere extensies van één naam tegelijk checken (.nl, .com, .be, .io, .shop).',
+                'Je beheert domeinen voor meerdere klanten en wilt snel de status van een lijst controleren.',
+              ].map((item) => (
+                <li key={item} style={{ color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '0.4rem', listStyleType: 'disc' }}>{item}</li>
+              ))}
+            </ul>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8 }}>
+              Je kunt maximaal 50 domeinen per keer controleren. Plak je lijst met één domein per regel (bijv. bakker.nl, bakker.com) of gescheiden door komma&apos;s.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
+              Hoe werkt de bulk check technisch?
+            </h2>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, marginBottom: '1rem' }}>
+              Onze bulk checker controleert 8 domeinen tegelijkertijd via het RDAP-protocol (Registration Data Access Protocol). RDAP is de opvolger van WHOIS en biedt gestandaardiseerde, machine-leesbare data direct van de officiële domeinregisters (SIDN voor .nl, Verisign voor .com, DNS.be voor .be, IANA voor andere extensies).
+            </p>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8 }}>
+              Omdat we parallel werken, is ook een lijst van 50 domeinen binnen 15-30 seconden afgerond. De resultaten kun je exporteren als CSV voor gebruik in een spreadsheet.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold mb-6" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
+              Veelgestelde vragen
+            </h2>
+            <div className="space-y-4">
+              {[
+                { q: 'Hoeveel domeinen kan ik tegelijk controleren?', a: 'Maximaal 50 domeinen per bulk check. Heb je meer domeinen? Verdeel ze in meerdere batches.' },
+                { q: 'In welk formaat moet ik de domeinen invoeren?', a: 'Één domein per regel (inclusief extensie, bijv. bakker.nl) of gescheiden door komma\'s. Domeinen zonder extensie worden overgeslagen.' },
+                { q: 'Kan ik de resultaten exporteren?', a: 'Ja. Na de check kun je de resultaten downloaden als CSV-bestand. Handig voor rapportages of om door te sturen naar een klant.' },
+                { q: 'Is de bulk check gratis?', a: 'Ja, volledig gratis en zonder registratie. Voor individuele domeinchecks met meer details zoals prijsvergelijking en score-indicator, gebruik onze hoofdchecker op de homepage.' },
+              ].map(({ q, a }) => (
+                <div key={q} className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                  <h3 className="font-semibold text-sm mb-2" style={{ color: 'var(--text)' }}>{q}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>{a}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+        </div>
+      </div>
     </div>
   );
 }
