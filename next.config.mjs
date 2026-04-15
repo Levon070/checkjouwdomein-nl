@@ -17,7 +17,7 @@ const nextConfig = {
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
           { key: 'X-DNS-Prefetch-Control', value: 'on' },
-          { key: 'X-IndexNow-Key', value: 'a2f3b4c5d6e7f8a9b0c1d2e3f4a5b6c7' },
+          { key: 'X-IndexNow-Key', value: '1599240bb98b49239cd039bdf8ecabca' },
           { key: 'Content-Security-Policy-Report-Only', value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com; img-src 'self' data: https://images.unsplash.com https://checkjouwdomein.nl; connect-src 'self' https:; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'none'" },
         ],
       },

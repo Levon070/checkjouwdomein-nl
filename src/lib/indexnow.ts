@@ -3,7 +3,7 @@
  * Gebruik: await submitToIndexNow(['https://checkjouwdomein.nl/blog/nieuwe-post']);
  */
 
-const INDEXNOW_KEY = 'a2f3b4c5d6e7f8a9b0c1d2e3f4a5b6c7';
+const INDEXNOW_KEY = '1599240bb98b49239cd039bdf8ecabca';
 const INDEXNOW_HOST = 'checkjouwdomein.nl';
 const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow';
 
