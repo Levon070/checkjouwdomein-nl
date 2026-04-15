@@ -4,7 +4,14 @@ import JsonLd from '@/components/seo/JsonLd';
 export const metadata: Metadata = {
   title: 'Bulk Domein Check — Controleer 50 Domeinen Tegelijk',
   description: 'Controleer tientallen domeinnamen tegelijk op beschikbaarheid. Plak een lijst met keywords of domeinen en ontvang direct resultaten. Gratis, export als CSV.',
-  alternates: { canonical: 'https://checkjouwdomein.nl/bulk-check' },
+  alternates: {
+    canonical: 'https://checkjouwdomein.nl/bulk-check',
+    languages: {
+      'nl-NL': 'https://checkjouwdomein.nl/bulk-check',
+      'nl-BE': 'https://checkjouwdomein.nl/bulk-check',
+      'x-default': 'https://checkjouwdomein.nl/bulk-check',
+    },
+  },
   openGraph: {
     title: 'Bulk Domein Check — 50 Domeinen Tegelijk | CheckJouwDomein.nl',
     description: 'Controleer tot 50 domeinen tegelijk via RDAP. Gratis, geen account nodig, exporteer als CSV.',

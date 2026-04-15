@@ -4,7 +4,14 @@ import JsonLd from '@/components/seo/JsonLd';
 export const metadata: Metadata = {
   title: 'AI Naamgenerator — Genereer Unieke Merknamen',
   description: 'Laat AI 12 unieke merknamen genereren op basis van jouw sector en stijl. Inclusief directe domeincheck op .nl en .com. Gratis, geen account nodig.',
-  alternates: { canonical: 'https://checkjouwdomein.nl/naam-generator' },
+  alternates: {
+    canonical: 'https://checkjouwdomein.nl/naam-generator',
+    languages: {
+      'nl-NL': 'https://checkjouwdomein.nl/naam-generator',
+      'nl-BE': 'https://checkjouwdomein.nl/naam-generator',
+      'x-default': 'https://checkjouwdomein.nl/naam-generator',
+    },
+  },
   openGraph: {
     title: 'AI Naamgenerator — Genereer Unieke Merknamen | CheckJouwDomein.nl',
     description: 'Laat AI 12 unieke merknamen genereren. Inclusief directe .nl en .com beschikbaarheidscheck.',

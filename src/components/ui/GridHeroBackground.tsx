@@ -91,9 +91,13 @@ export function GridHeroBackground({
       });
     };
 
+    const FRAME_INTERVAL = 1000 / 30; // ~33ms = 30fps cap
+
     const animate = (now: number) => {
+      animRef.current = requestAnimationFrame(animate);
       const dt = now - lastTime;
-      lastTime = now;
+      if (dt < FRAME_INTERVAL) return; // skip frame, not enough time passed
+      lastTime = now - (dt % FRAME_INTERVAL); // keep timing accurate
 
       for (let i = lights.length - 1; i >= 0; i--) {
         const l = lights[i];
@@ -104,9 +108,7 @@ export function GridHeroBackground({
       }
 
       if (Math.random() < 0.018 && lights.length < 7) lights.push(createLight());
-
       draw();
-      animRef.current = requestAnimationFrame(animate);
     };
 
     resize();

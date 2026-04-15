@@ -15,6 +15,18 @@ import { AnimatedUnderline } from '@/components/text/AnimatedUnderline';
 import { TextScramble } from '@/components/text/TextScramble';
 import { Marquee } from '@/components/ui/Marquee';
 
+const webAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'CheckJouwDomein.nl',
+  url: 'https://checkjouwdomein.nl',
+  description: 'Gratis domein beschikbaarheid checker voor .nl, .com en meer',
+  applicationCategory: 'UtilityApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+  inLanguage: 'nl-NL',
+};
+
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -90,6 +102,7 @@ export default function HomePage() {
 
   return (
     <>
+      <JsonLd data={webAppSchema} />
       <JsonLd data={websiteSchema} />
       <JsonLd data={faqSchema} />
       <SearchHero />

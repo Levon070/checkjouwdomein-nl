@@ -4,7 +4,14 @@ import JsonLd from '@/components/seo/JsonLd';
 export const metadata: Metadata = {
   title: 'Merknaamcheck — Domein, Social, KVK & EUIPO in één overzicht',
   description: 'Check in één overzicht of jouw merknaam beschikbaar is als domeinnaam, social media handle, KVK-handelsnaam én Europees handelsmerk (EUIPO). Gratis.',
-  alternates: { canonical: 'https://checkjouwdomein.nl/merk-check' },
+  alternates: {
+    canonical: 'https://checkjouwdomein.nl/merk-check',
+    languages: {
+      'nl-NL': 'https://checkjouwdomein.nl/merk-check',
+      'nl-BE': 'https://checkjouwdomein.nl/merk-check',
+      'x-default': 'https://checkjouwdomein.nl/merk-check',
+    },
+  },
   openGraph: {
     title: 'Merknaamcheck — Alles in één overzicht | CheckJouwDomein.nl',
     description: 'Domein + Instagram + TikTok + KVK + EUIPO — check alles tegelijk. Gratis, geen account nodig.',

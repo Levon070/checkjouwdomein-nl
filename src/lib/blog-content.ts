@@ -670,7 +670,7 @@ Voeg een A-record of CNAME toe met de naam van het subdomein (bijv. "shop") en w
     `.trim(),
   },
   {
-    slug: 'domeinnaam-ideeën-genereren',
+    slug: 'domeinnaam-ideeen-genereren',
     title: '10 manieren om een creatieve domeinnaam te bedenken',
     description:
       'Vastzit bij het bedenken van een domeinnaam? Gebruik deze 10 bewezen technieken om originele en beschikbare domeinnamen te vinden.',
