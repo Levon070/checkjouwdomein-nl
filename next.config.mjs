@@ -18,6 +18,7 @@ const nextConfig = {
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
           { key: 'X-DNS-Prefetch-Control', value: 'on' },
           { key: 'X-IndexNow-Key', value: '1599240bb98b49239cd039bdf8ecabca' },
+          { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
           { key: 'Content-Security-Policy-Report-Only', value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com; img-src 'self' data: https://images.unsplash.com https://checkjouwdomein.nl; connect-src 'self' https:; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'none'" },
         ],
       },

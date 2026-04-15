@@ -252,16 +252,16 @@ export default function HomePage() {
           style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2">
-            {/* Photo side — CSS background avoids next/image fill positioning edge-cases */}
-            <div
-              style={{
-                minHeight: 300,
-                background: `linear-gradient(135deg, rgba(79,70,229,0.4) 0%, rgba(6,182,212,0.2) 100%), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=80') center/cover no-repeat`,
-                display: 'flex',
-                alignItems: 'flex-end',
-                padding: '24px',
-              }}
-            >
+            {/* Photo side */}
+            <div style={{ minHeight: 300, position: 'relative', display: 'flex', alignItems: 'flex-end', padding: '24px' }}>
+              <Image
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=80"
+                alt="Team van CheckJouwDomein.nl"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(79,70,229,0.4) 0%, rgba(6,182,212,0.2) 100%)' }} />
               <div className="text-white">
                 <div className="text-4xl font-black" style={{ letterSpacing: '-0.04em' }}>🇳🇱</div>
                 <div className="text-sm font-semibold mt-1" style={{ color: 'rgba(255,255,255,0.9)' }}>Gemaakt voor Nederland & België</div>
