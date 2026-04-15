@@ -49,6 +49,11 @@ export default async function BlogPostPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title,
+    url: `https://checkjouwdomein.nl/blog/${slug}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://checkjouwdomein.nl/blog/${slug}`,
+    },
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
@@ -58,6 +63,12 @@ export default async function BlogPostPage({ params }: Props) {
       '@type': 'Organization',
       name: 'CheckJouwDomein.nl',
       url: 'https://checkjouwdomein.nl',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://checkjouwdomein.nl/favicon.svg',
+        width: 512,
+        height: 512,
+      },
     },
   };
 
@@ -156,6 +167,7 @@ export default async function BlogPostPage({ params }: Props) {
             alt={post.title}
             width={800}
             height={400}
+            priority
             className="rounded-xl w-full object-cover mb-8"
             style={{ aspectRatio: '2/1' }}
           />

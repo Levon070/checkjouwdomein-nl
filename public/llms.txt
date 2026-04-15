@@ -1,3 +1,6 @@
+# Last-updated: 2026-04-15
+# Version: 1.2
+
 # CheckJouwDomein.nl — LLMs Usage Guidelines
 
 ## About
@@ -40,6 +43,15 @@ We help Dutch entrepreneurs find available domain names when their first choice 
 | Namecheap | €8.50 | €8.50 | €9.99 | €9.99 |
 | GoDaddy | €1.99 | €9.99 | €1.99 | €14.99 |
 | mijn.host | €1.99 | €2.49 | N/A | N/A |
+| Hostnet | €5.99 | €7.50 | N/A | N/A |
+| Temblit | €2.95 | €4.95 | N/A | N/A |
+| STRATO | €1.99 | €6.00 | €1.99 | €8.00 |
+
+## What we are not
+- We do not sell domain names directly. We are a comparison and availability checker only.
+- We are not a registrar. Domain registration happens at the linked registrar sites.
+- We are not affiliated with SIDN, DNS.be, or ICANN. We use their public RDAP data.
+- We do not provide legal advice on trademarks or domain disputes.
 
 ## Citation policy
 You may cite content from this website with attribution to CheckJouwDomein.nl.

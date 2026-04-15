@@ -27,7 +27,14 @@ export const metadata: Metadata = {
   description:
     'Controleer gratis of jouw domeinnaam beschikbaar is. Bekijk .nl, .com, .be en meer. Vergelijk prijzen bij TransIP, Mijndomein en andere registrars.',
   keywords: ['domein check', 'domeinnaam beschikbaar', 'domein registreren', 'domeinnaam zoeken', 'domein checker'],
-  alternates: { canonical: 'https://checkjouwdomein.nl' },
+  alternates: {
+    canonical: 'https://checkjouwdomein.nl',
+    languages: {
+      'nl-NL': 'https://checkjouwdomein.nl',
+      'nl-BE': 'https://checkjouwdomein.nl',
+      'x-default': 'https://checkjouwdomein.nl',
+    },
+  },
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
     shortcut: '/favicon.svg',
@@ -69,7 +76,7 @@ const organizationSchema = {
   founder: { '@type': 'Person', name: 'Lars Meijer', url: 'https://checkjouwdomein.nl/over-ons' },
   areaServed: ['NL', 'BE'],
   inLanguage: 'nl-NL',
-  sameAs: ['https://checkjouwdomein.nl/over-ons'],
+  sameAs: [],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -84,9 +91,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
         <meta name="google-adsense-account" content="ca-pub-8874800268655239" />
         <meta name="google-site-verification" content="1WSyANqeH-UJ4CcE14u5c--GGgFtTUkfIhg4csRB6hI" />
-        <link rel="alternate" hrefLang="nl-NL" href="https://checkjouwdomein.nl" />
-        <link rel="alternate" hrefLang="nl-BE" href="https://checkjouwdomein.nl" />
-        <link rel="alternate" hrefLang="x-default" href="https://checkjouwdomein.nl" />
         <JsonLd data={webAppSchema} />
         <JsonLd data={organizationSchema} />
       </head>

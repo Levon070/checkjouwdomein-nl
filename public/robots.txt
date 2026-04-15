@@ -21,6 +21,13 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: anthropic-ai
+Allow: /
+
+# OpenAI SearchBot: toestaan voor AI-zoekcitatie
+User-agent: OAI-SearchBot
+Allow: /
+
 # Perplexity: toestaan voor AI-zoekcitatie
 User-agent: PerplexityBot
 Allow: /

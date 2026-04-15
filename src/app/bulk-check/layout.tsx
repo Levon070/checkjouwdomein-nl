@@ -48,6 +48,22 @@ const faqSchema = {
       name: 'Hoe voer ik een lijst met domeinen in?',
       acceptedAnswer: { '@type': 'Answer', text: 'Plak je domeinen in het tekstvak — één domein per regel of gescheiden door komma\'s. Vergeet de extensie niet: typ bakker.nl in plaats van alleen bakker. Domeinen zonder geldige extensie worden overgeslagen.' },
     },
+    {
+      '@type': 'Question',
+      name: 'Kan ik de resultaten exporteren?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Ja. Na de check kun je de resultaten downloaden als CSV-bestand. Handig voor rapportages of om door te sturen naar een klant.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is de bulk check gratis?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Ja, volledig gratis en zonder registratie. Voor individuele domeinchecks met meer details zoals prijsvergelijking en score-indicator, gebruik onze hoofdchecker op de homepage.",
+      },
+    },
   ],
 };
 

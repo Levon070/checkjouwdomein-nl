@@ -34,18 +34,6 @@ const softwareSchema = {
   provider: { '@type': 'Organization', name: 'CheckJouwDomein.nl', url: 'https://checkjouwdomein.nl' },
 };
 
-const howToSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: 'Hoe genereer je een unieke merknaam met AI?',
-  description: 'Gebruik de AI naamgenerator van CheckJouwDomein.nl om in 3 stappen unieke merknamen te vinden voor jouw bedrijf.',
-  totalTime: 'PT2M',
-  step: [
-    { '@type': 'HowToStep', position: 1, name: 'Vul je sector in', text: 'Typ de sector of type bedrijf in het invoerveld, bijvoorbeeld "bakkerij" of "webshop".' },
-    { '@type': 'HowToStep', position: 2, name: 'Kies een stijl', text: 'Selecteer de gewenste stijl: professioneel, speels, modern, lokaal of internationaal.' },
-    { '@type': 'HowToStep', position: 3, name: 'Genereer en check', text: 'Klik op "Genereer namen". De AI genereert 12 unieke merknamen en checkt direct de beschikbaarheid op .nl, .com en .eu.' },
-  ],
-};
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -79,7 +67,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={softwareSchema} />
-      <JsonLd data={howToSchema} />
       <JsonLd data={faqSchema} />
       {children}
     </>

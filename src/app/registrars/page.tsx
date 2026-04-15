@@ -170,12 +170,38 @@ export default function RegistrarsPage() {
           text: 'Voor een Nederlands bedrijf is .nl de primaire keuze. Registreer ook .com als je naam populair is — om te voorkomen dat concurrenten die inpikken. .be is relevant bij activiteiten in België. Meer extensies dan nodig kopen is zelden zinvol.',
         },
       },
+      {
+        '@type': 'Question',
+        name: 'Wat is WHOIS-privacy en heb ik het nodig?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'WHOIS-privacy verbergt je naam, adres en contactgegevens in het publieke WHOIS-register. Zonder dit zijn je gegevens voor iedereen zichtbaar, wat kan leiden tot spam en privacy-problemen. TransIP, Antagonist en Namecheap bieden dit gratis aan. GoDaddy rekent er extra voor.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Waarom is GoDaddy goedkoop maar toch niet aanbevolen?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'GoDaddy biedt vaak lage introductiekorting (soms €1,99 voor het eerste jaar), maar de verlengingsprijs kan 4-6× hoger zijn. Daarnaast kost WHOIS-privacy extra en is er geen gratis SSL. Voor Nederlanders is TransIP of Antagonist vaak een betere keuze.',
+        },
+      },
+    ],
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://checkjouwdomein.nl' },
+      { '@type': 'ListItem', position: 2, name: 'Domein Registrars', item: 'https://checkjouwdomein.nl/registrars' },
     ],
   };
 
   return (
     <>
       <JsonLd data={schemaFaq} />
+      <JsonLd data={breadcrumbSchema} />
 
       {/* Hero */}
       <section

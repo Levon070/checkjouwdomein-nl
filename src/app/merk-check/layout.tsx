@@ -58,6 +58,38 @@ const faqSchema = {
       name: 'Is de merknaamcheck gratis?',
       acceptedAnswer: { '@type': 'Answer', text: 'Ja, volledig gratis. Geen account, geen betaalgegevens nodig. CheckJouwDomein.nl verdient via affiliate-commissies wanneer je een domein registreert via onze links.' },
     },
+    {
+      '@type': 'Question',
+      name: 'Hoe weet ik of mijn merknaam beschermd is?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Via de EUIPO-check zie je direct of de naam als Europees handelsmerk staat geregistreerd. Is de naam vrij? Dan kun je zelf een aanvraag indienen via euipo.europa.eu. Een merkinschrijving geldt voor 10 jaar en is verlengbaar.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Wat als de naam al bezet is als domein maar vrij als merk?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Dan kun je de naam eventueel nog als merk beschermen, maar heb je een domeinprobleem. Overweeg dan een variatie of andere extensie. Gebruik onze domeinchecker voor alternatieven.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Hoe snel is de merknaamcheck klaar?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'De merknaamcheck duurt 3-10 seconden. We bevragen tegelijkertijd het RDAP-protocol (domeinen), de social media platforms, het KVK-register en de EUIPO-database.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is de merknaamcheck 100% betrouwbaar?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'We gebruiken officiële databronnen (RDAP, EUIPO API). Social media beschikbaarheid is een benadering — platforms wijzigen soms handles. Voor juridische zekerheid raden we altijd aan een merkengemachtigde te raadplegen voordat je een merk inschrijft.',
+      },
+    },
   ],
 };
 
