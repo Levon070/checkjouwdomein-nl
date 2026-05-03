@@ -31,7 +31,7 @@ export default function AdSenseUnit({ slot, format = 'responsive', className }: 
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client="ca-pub-JOUW_PUBLISHER_ID"
+        data-ad-client="ca-pub-8874800268655239"
         data-ad-slot={slot}
         data-ad-format={format === 'responsive' ? 'auto' : undefined}
         data-full-width-responsive={format === 'responsive' ? 'true' : undefined}

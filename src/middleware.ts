@@ -3,7 +3,7 @@ import { parseUserAgent } from '@/lib/ua-parser';
 import { hashIpEdge, trackPageViewEdge } from '@/lib/analytics-edge';
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon|robots|sitemap|og|icons|images).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon|robots|sitemap|og|icons|images|ads|llms|1599240bb98b49239cd039bdf8ecabca).*)'],
 };
 
 const RV_COOKIE = 'cjd_rv'; // returning visitor cookie
